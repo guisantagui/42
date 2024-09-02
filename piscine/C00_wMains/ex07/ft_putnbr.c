@@ -31,7 +31,7 @@ void	ft_putnbr(int nb)
 		divisor *= 10;
 	}
 
-	while (divisor > 0)
+while (divisor > 0)
 	{
 		digit = nb / divisor;
 		digitC = int_2_char(digit);

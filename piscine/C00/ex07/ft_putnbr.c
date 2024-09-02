@@ -1,5 +1,4 @@
 #include <unistd.h>
-#include <limits.h>
 
 void	ft_putchar(char c)
 {
@@ -17,9 +16,9 @@ void	ft_putchar(char c)
 
 void	ft_putnbr(int nb)
 {
-	if(nb <= INT_MAX && nb >= INT_MIN)
+	if(nb <= 2147483647 && nb >= -2147483648)
 	{
-		if(nb == INT_MIN)
+		if(nb == -2147483648)
 		{
 			ft_putchar('-');
 			ft_putchar('2');
@@ -28,7 +27,8 @@ void	ft_putnbr(int nb)
 		else if (nb < 0)
 		{
 			ft_putchar('-');
-			ft_putnbr(-nb);
+			nb = -nb;
+                	ft_putnbr(nb);
 		}	
 
 		else if (nb > 9)
