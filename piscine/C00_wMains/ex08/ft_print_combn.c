@@ -17,34 +17,58 @@ void	ft_putchar(char c)
 	write(1, &c, 1);
 }
 
-char	int_2_char(int n)
+void	ft_putnbr(int nb)
 {
-	char c;
+	if(nb <= 2147483647 && nb >= -2147483648)
+	{
+		if(nb == -2147483648)
+		{
+			ft_putchar('-');
+			ft_putchar('2');
+			ft_putnbr(147483648);
+		}
+		else if (nb < 0)
+		{
+			ft_putchar('-');
+			nb = -nb;
+                	ft_putnbr(nb);
+		}	
 
-	c = n + '0';
-	return(c);
+		else if (nb > 9)
+		{
+			ft_putnbr(nb / 10);
+			ft_putnbr(nb % 10);
+		}
+		else{
+			ft_putchar(nb + '0');
+		}
+	}
+	
+}
+
+void create_combs(int n, int comb, int pos)
+{
+	int i;
+	i = 0;
+	if (pos == n)
+	{
+		ft_putnbr(n);
+	}
+
+	while (i <= 9)
+	{
+		create_combs(n, comb * 10 + i, pos + 1);
+		if (pos == n - 1 && i < 9)
+		{
+			ft_putchar(',');
+			ft_putchar(' ');
+		}
+	}
 }
 
 void	ft_print_combn(int n)
 {
-	int num;
-	int count;
-	char nOut;
-
-	count = 0;
-	while (count < n)
-	{
-		num = 0 + count;
-		while (num < 10 - count)
-		{
-			nOut = int_2_char(num);
-			ft_putchar(nOut);
-			num++;
-		}
-		ft_putchar(',');
-		ft_putchar(' ');
-		count++;
-	}
+	create_combs(n, 0, 0);
 }
 
 int 	main()
