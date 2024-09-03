@@ -22,7 +22,7 @@ void	write_comb(int n1, int n2, int n3)
 	ft_putchar(n1 + '0');
 	ft_putchar(n2 + '0');
 	ft_putchar(n3 + '0');
-	if (!(num1 == 7 && num2 == 8 && num3 == 9))
+	if (!(n1 == 7 && n2 == 8 && n3 == 9))
 	{
 		ft_putchar(',');
 		ft_putchar(' ');
