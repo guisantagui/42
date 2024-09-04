@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_print_combn.c                                   :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: gsantama <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/02 18:37:41 by gsantama          #+#    #+#             */
-/*   Updated: 2024/09/02 18:43:13 by gsantama         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include <unistd.h>
 
 void	ft_putchar(char c)
@@ -17,64 +5,103 @@ void	ft_putchar(char c)
 	write(1, &c, 1);
 }
 
-void	ft_putnbr(int nb)
+int*	init_array(int n)
 {
-	if(nb <= 2147483647 && nb >= -2147483648)
-	{
-		if(nb == -2147483648)
-		{
-			ft_putchar('-');
-			ft_putchar('2');
-			ft_putnbr(147483648);
-		}
-		else if (nb < 0)
-		{
-			ft_putchar('-');
-			nb = -nb;
-                	ft_putnbr(nb);
-		}	
+	static int	arr_i[1000];
+	int	i;
 
-		else if (nb > 9)
-		{
-			ft_putnbr(nb / 10);
-			ft_putnbr(nb % 10);
-		}
-		else{
-			ft_putchar(nb + '0');
-		}
-	}
-	
-}
-
-void create_combs(int n, int comb, int pos)
-{
-	int i;
 	i = 0;
-	if (pos == n)
+	while (i < n)
 	{
-		ft_putnbr(n);
+		arr_i[i] = i;
+		i++;
 	}
+	return(arr_i);
+}
 
-	while (i <= 9)
+int*    finl_array(int n)
+{
+        static int      arr_f[1000];
+        int     i;
+
+        i = 0;
+        while (n > 0)
+        {
+                arr_f[i] = 10 - n;
+                i++;
+		n--;
+        }
+        return(arr_f);
+}
+
+void	update_array(int arr_i[], int arr_f[], int arr_t[], int n)
+{
+	int	p;
+
+	p = n - 1;
+	while (p > 0)
 	{
-		create_combs(n, comb * 10 + i, pos + 1);
-		if (pos == n - 1 && i < 9)
+		if (arr_t[p] > arr_f[p])
 		{
-			ft_putchar(',');
-			ft_putchar(' ');
+			arr_t[p - 1] = arr_i[p - 1] + 1;
+			arr_i[p] = arr_i[p] + 1;
+			arr_t[p] = arr_i[p];
 		}
 	}
 }
 
-void	ft_print_combn(int n)
+void	w_comma_spac(int arr1[], int arr2[], int n)
 {
-	create_combs(n, 0, 0);
+	int	i;
+	int	count;
+
+	i = 0;
+	count = 1;
+	while (i < n)
+	{
+		if (arr1[i] == arr2[i])
+		{
+			count++;
+		}
+		i++;
+	}
+	if (count != n)
+	{
+		ft_putchar(',');
+		ft_putchar(' ');
+	}
+}
+
+void	ft_putarr(int arr[], int n)
+{
+	int	i;
+
+	i = 0;
+	while (i < n)
+	{
+		ft_putchar(arr[i] + '0');
+		i++;
+	}
 }
 
 int 	main()
 {
-	int numero;
+	int	numero;
+	int*	array_i;
+	int*	array_f;
+	int    array_t[1000];
 
 	numero = 4;
-	ft_print_combn(numero);
+	array_i = init_array(numero);
+	array_t = array_f;
+	array_t[3] +=;
+	array_t[2] -=;
+	array_f = finl_array(numero);
+	update_array(array_i, array_f,array_t, numero);
+	ft_putarr(array_i, numero);
+	w_comma_spac(array_i, array_t, numero);
+	ft_putarr(array_t, numero);
+	w_comma_spac(array_t, array_f, numero);
+	ft_putarr(array_f, numero);
+	//ft_print_combn(numero);
 }
