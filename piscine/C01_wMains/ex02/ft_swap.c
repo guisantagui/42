@@ -36,12 +36,17 @@ void	ft_swap(int *a, int *b)
 {
 	int	t;
 
-	t = a;
-	*a = b;
+	t = *a;
+	*a = *b;
 	*b = t;
 }
 
 int	main()
 {
-	i;
+	int n1 = 14;
+	int n2 = 25;
+	ft_swap(&n1, &n2);
+	ft_putnbr(n1);
+	ft_putchar(' ');
+	ft_putnbr(n2);
 }
