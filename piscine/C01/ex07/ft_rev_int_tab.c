@@ -1,17 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_rev_int_tab.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gsantama <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/05 18:17:47 by gsantama          #+#    #+#             */
+/*   Updated: 2024/09/05 18:37:21 by gsantama         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 void	ft_rev_int_tab(int *tab, int size)
 {
 	int	i;
-	int	tab_rev[size];
+	int	t;
 
 	i = 0;
-	while (i < size)
+	while (i < size / 2)
 	{
-		tab_rev[i] = tab[size - 1 - i];
-		i++;
-	}
-	i = 0;
-	while (i < size){
-		tab[i] = tab_rev[i];
+		t = tab[i];
+		tab[i] = tab[size - 1 - i];
+		tab[size - 1 - i] = t;
 		i++;
 	}
 }
