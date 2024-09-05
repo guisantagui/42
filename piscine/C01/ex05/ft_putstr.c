@@ -14,11 +14,3 @@ void	ft_putstr(char *str)
 		ft_putchar(str[i++]);	
 	}
 }
-
-int	main(void)
-{
-	char *cuerda;
-
-	cuerda = "cuerda";
-	ft_putstr(cuerda);
-}
