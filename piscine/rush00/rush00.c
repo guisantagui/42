@@ -90,10 +90,10 @@ void rush(int n_col, int n_row, int style)
 		vert_mid = 'B';
 		edge_mid = ' ';
 		vert1_first = 'A';
-		vert2_first = 'C';
+		vert2_first = 'A';
 		edge_first = 'B';
 		vert1_last = 'C';
-		vert2_last = 'A';
+		vert2_last = 'C';
 	}
 	else if (style == 4)
 	{
