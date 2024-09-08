@@ -1,56 +1,67 @@
-/* ************************************************************************** */
+/* ****************************************j == n_col - 1********************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rush00.c                                           :+:      :+:    :+:   */
+/*   rush04.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gsantama <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 16:45:23 by gsantama          #+#    #+#             */
-/*   Updated: 2024/09/08 17:27:05 by gsantama         ###   ########.fr       */
+/*   Updated: 2024/09/08 17:24:21 by gsantama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 void	ft_putchar(char c);
 
-void	print_row_1(int n_col, int is_top_end)
+void	print_row_4(int n_col, int is_top, int is_end)
 {
-	int	j;
+	int     j;
 
 	j = 0;
 	while (j < n_col)
 	{
-		if (is_top_end == 0)
+		if (is_top == 0 && is_end == 0)
 		{
 			if (j == 0 | j == n_col - 1)
-				ft_putchar('|');
+				ft_putchar('B');
 			else
 				ft_putchar(' ');
 		}
-		else
+		else if (is_top == 1)
 		{
-			if (j == 0 | j == n_col -1)
-				ft_putchar('o');
+			if (j == 0)
+				ft_putchar('A');
+			else if (j == n_col - 1)
+				ft_putchar('C');
 			else
-				ft_putchar('-');
+				ft_putchar('B');
 		}
+		else if (is_end == 1)
+			if (j == 0)
+				ft_putchar('C');
+			else if (j == n_col - 1)
+				ft_putchar('A');
+			else
+				ft_putchar('B');
 		j++;
 	}
 	ft_putchar('\n');
 }
 
-void	rush00(int x, int y)
+void	rush04(int x, int y)
 {
-	int	i;
+	int     i;
 
 	if (x >= 0 && y >= 0)
 	{
 		i = 0;
 		while (i < y)
 		{
-			if (i == 0 | i == y - 1)
-				print_row_1(x, 1);
+			if (i == 0)
+				print_row_4(x, 1, 0);
+			else if (i == y - 1)
+				print_row_4(x, 0, 1);
 			else
-				print_row_1(x, 0);
+				print_row_4(x, 0, 0);
 			i++;
 		}
 	}

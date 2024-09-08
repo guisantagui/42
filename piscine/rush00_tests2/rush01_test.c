@@ -1,44 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rush00.c                                           :+:      :+:    :+:   */
+/*   rush01_test.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gsantama <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/08 16:45:23 by gsantama          #+#    #+#             */
-/*   Updated: 2024/09/08 17:27:05 by gsantama         ###   ########.fr       */
+/*   Created: 2024/09/08 17:28:27 by gsantama          #+#    #+#             */
+/*   Updated: 2024/09/08 18:04:43 by gsantama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 void	ft_putchar(char c);
 
-void	print_row_1(int n_col, int is_top_end)
+void	print_row_2(int n_col, int row_idx, int n_row)
 {
 	int	j;
+	char	v1;
+	char	v2;
+	char	mid;
 
 	j = 0;
 	while (j < n_col)
 	{
-		if (is_top_end == 0)
-		{
-			if (j == 0 | j == n_col - 1)
-				ft_putchar('|');
-			else
-				ft_putchar(' ');
-		}
+		if ((row_idx == 0 && j == 0) | (row_idx == n_row - 1 && j == n_col - 1)) 
+			ft_putchar('/');
+		else if (row_idx < n_row - 1 && row_idx > 0 & j < n_col - 1 && j > 0)
+			ft_putchar(' ');
+		else if (j == 0 | j == n_col - 1 && row_idx != 0 && row_idx != n_row - 1)
+			ft_putchar('*');
+		else if (row_idx == 0 | row_idx == n_row - 1 && j != 0 && j != n_col - 1)
+			ft_putchar('*');
 		else
-		{
-			if (j == 0 | j == n_col -1)
-				ft_putchar('o');
-			else
-				ft_putchar('-');
-		}
+			ft_putchar('\\');
 		j++;
 	}
 	ft_putchar('\n');
 }
 
-void	rush00(int x, int y)
+void	rush01(int x, int y)
 {
 	int	i;
 
@@ -47,10 +46,7 @@ void	rush00(int x, int y)
 		i = 0;
 		while (i < y)
 		{
-			if (i == 0 | i == y - 1)
-				print_row_1(x, 1);
-			else
-				print_row_1(x, 0);
+			print_row_2(x, i, y);
 			i++;
 		}
 	}

@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: gsantama <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/08 16:45:23 by gsantama          #+#    #+#             */
-/*   Updated: 2024/09/08 17:27:05 by gsantama         ###   ########.fr       */
+/*   Created: 2024/09/08 16:26:38 by gsantama          #+#    #+#             */
+/*   Updated: 2024/09/08 17:04:13 by gsantama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 void	ft_putchar(char c);
 
-void	print_row_1(int n_col, int is_top_end)
+void	print_row(int n_col, int is_top_end)
 {
 	int	j;
 
@@ -22,23 +22,25 @@ void	print_row_1(int n_col, int is_top_end)
 		if (is_top_end == 0)
 		{
 			if (j == 0 | j == n_col - 1)
-				ft_putchar('|');
+				ft_putchar('B');
 			else
 				ft_putchar(' ');
 		}
 		else
 		{
-			if (j == 0 | j == n_col -1)
-				ft_putchar('o');
+			if (j == 0)
+				ft_putchar('A');
+			else if (j == n_col - 1)
+				ft_putchar('C');
 			else
-				ft_putchar('-');
+				ft_putchar('B');
 		}
 		j++;
 	}
 	ft_putchar('\n');
 }
 
-void	rush00(int x, int y)
+void	rush(int x, int y)
 {
 	int	i;
 
@@ -48,9 +50,9 @@ void	rush00(int x, int y)
 		while (i < y)
 		{
 			if (i == 0 | i == y - 1)
-				print_row_1(x, 1);
+				print_row(x, 1);
 			else
-				print_row_1(x, 0);
+				print_row(x, 0);
 			i++;
 		}
 	}
