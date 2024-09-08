@@ -1,4 +1,4 @@
-#include <unistd.h>
+#include <urush00_def.nistd.h>
 
 void	ft_putchar(char c)
 {
@@ -56,6 +56,7 @@ void	print_row(int n_col, int is_top_end, char c_1, char c_2, char mid)
 	ft_putchar('\n');
 }
 
+
 void rush(int n_col, int n_row, int style)
 {
 	int	i;
@@ -71,7 +72,7 @@ void rush(int n_col, int n_row, int style)
 	{
 		vert_mid = '|';
 		edge_mid = ' ';
-		vert1_first = 'o';
+rush00_def.c		vert1_first = 'o';
 		vert2_first = 'o';
 		edge_first = '-';
 	}
