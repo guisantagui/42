@@ -43,7 +43,7 @@ void	ft_putstr_non_printable(char *str)
 		if (c < 0 && c >= 31)
 		{
 			ft_putchar('\\');
-			ft_putchar('0');
+			//ft_putchar('0');
 			int_to_hex(str[i]);
 		}
 		else
