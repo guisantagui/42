@@ -16,20 +16,22 @@ void    ft_putstr(char *str)
         }
 }
 
-unsigned int ft_strlcpy(char *dest, char *src, unsigned int size)
+unsigned int    ft_strlcpy(char *dest, char *src, unsigned int size)
 {
-	unsigned int	i;
+        unsigned int    i;
 
-	i = 0;
-	while (src[i] != '\0' && i < size - 1)
-	{
-		dest[i] = src[i];
-		i++;
-	}
-	while (src[i])
-		i++;
-	return (i);
+        i = 0;
+        while (src[i] != '\0' && i < size - 1)
+        {
+                dest[i] = src[i];
+                i++;
+        }
+        dest[i] = '\0';
+        while (src[i])
+                i++;
+        return (i);
 }
+
 
 int     main(void)
 {
@@ -38,6 +40,7 @@ int     main(void)
 	int	str1Len;
 
         str1Len = ft_strlcpy(str2, str1, 20);
-        ft_putstr(str2);
+        ft_putstr(&str2[0]);
 	
 }
+

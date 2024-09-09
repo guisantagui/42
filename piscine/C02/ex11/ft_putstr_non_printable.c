@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_putstr_non_printable.c                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gsantama <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/09 20:04:26 by gsantama          #+#    #+#             */
+/*   Updated: 2024/09/09 20:05:46 by gsantama         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <unistd.h>
 
 void	ft_putchar(char c)
@@ -21,15 +33,11 @@ char	*ft_strcpy(char *dest, char *src)
 
 void	int_to_hex(int n)
 {
-	char hex[16];
+	char	hex[16];
 
-	ft_strcpy(hex, "0123456789ABCDEF");
-	if (n >= 16)
-	{
-		int_to_hex(n / 16);
-	}
-	else
-		ft_putchar(hex[n % 16]);
+	ft_strcpy(hex, "0123456789abcdef");
+	ft_putchar(hex[n / 16]);
+	ft_putchar(hex[n % 16]);
 }
 
 void	ft_putstr_non_printable(char *str)
@@ -39,11 +47,9 @@ void	ft_putstr_non_printable(char *str)
 	i = 0;
 	while (str[i])
 	{
-		unsigned char	c = (unsigned char)str[i];
-		if (c < 0 && c >= 31)
+		if (str[i] >= 0 && str[i] <= 31)
 		{
 			ft_putchar('\\');
-			ft_putchar('0');
 			int_to_hex(str[i]);
 		}
 		else
@@ -52,12 +58,4 @@ void	ft_putstr_non_printable(char *str)
 		}
 		i++;
 	}
-}
-
-int	main()
-{
-	char str[24] = "Coucou\ntu vas bien ?";
-
-	ft_putstr_non_printable(str);
-	return (0);
 }

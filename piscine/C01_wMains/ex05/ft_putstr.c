@@ -19,6 +19,6 @@ int	main(void)
 {
 	char *cuerda;
 
-	cuerda = "cuerda";
+	cuerda = "Coucou\ntu vas bien ?";
 	ft_putstr(cuerda);
 }
