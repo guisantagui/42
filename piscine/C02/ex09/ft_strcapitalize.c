@@ -1,21 +1,3 @@
-#include <unistd.h>
-
-void	ft_putchar(char c)
-{
-	write(1, &c, 1);
-}
-
-void	ft_putstr(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i] != '\0')
-	{
-		ft_putchar(str[i++]);
-	}
-}
-
 char	*ft_strcapitalize(char *str)
 {
 	int	i;
@@ -36,11 +18,4 @@ char	*ft_strcapitalize(char *str)
 		i++;
 	}
 	return (str);
-}
-
-int	main(void)
-{
-	char	str1[20] = "HELLO";
-	ft_strcapitalize(str1);
-	ft_putstr(str1);
 }
