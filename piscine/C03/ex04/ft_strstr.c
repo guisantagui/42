@@ -6,7 +6,7 @@
 /*   By: gsantama <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 17:54:03 by gsantama          #+#    #+#             */
-/*   Updated: 2024/09/10 18:18:08 by gsantama         ###   ########.fr       */
+/*   Updated: 2024/09/10 18:22:05 by gsantama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,20 +21,20 @@ char	*substr_chk(char *str, char *to_find, int pos)
 	f_match = pos;
 	i = 0;
 	while (str[pos] == to_find[i] && to_find[i] != '\0' && str[pos] != '\0')
-                        {
-                                i++;
-                                pos++;
-                        }
-                        if (to_find[i] == '\0')
-                                return (str + f_match);
-                        else
-                                return (NULL);
+	{
+		i++;
+		pos++;
+	}
+	if (to_find[i] == '\0')
+		return (str + f_match);
+	else
+		return (NULL);
 }
 
 char	*ft_strstr(char *str, char *to_find)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
 	char	*p_out;
 
 	i = 0;
