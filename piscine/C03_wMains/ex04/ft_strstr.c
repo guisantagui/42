@@ -9,6 +9,8 @@ char	*ft_strstr(char *str, char *to_find)
 
 	i = 0;
 	j = 0;
+	if (to_find[i] == '\0')
+		return (str);
 	while (str[j] != '\0')
 	{
 		if (str[j] == to_find[i])
