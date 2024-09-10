@@ -1,5 +1,5 @@
-#include <unistd.h>
-#include <stdio.h>
+//#include <unistd.h>
+//#include <stdio.h>
 
 int	ft_strcmp(char *s1, char *s2)
 {
@@ -11,7 +11,7 @@ int	ft_strcmp(char *s1, char *s2)
 	return (s1[i] - s2[i]);
 }
 
-int	main()
+/*int	main()
 {
 	char s1[20] = "Hola";
 	char s2[20] = "HOla";
@@ -22,4 +22,4 @@ int	main()
 	printf("%d\n", ft_strcmp(s1, s2));
 	printf("%d\n", ft_strcmp(s2, s3));
 	printf("%d\n", ft_strcmp(s3, s4));
-}
+}*/
