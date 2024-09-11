@@ -1,5 +1,5 @@
 #include <unistd.h>
-#include <stdio.h>
+//#include <stdio.h>
 
 void	ft_putchar(char c)
 {
@@ -71,7 +71,7 @@ void	ft_putnbr_base(int nbr, char *base)
 			{
 				ft_putchar('-');
 				ft_putnbr_base(-(nbr / b), base);
-				ft_putchar(base[-(nbr % b)]);
+				//ft_putchar(base[-(nbr % b)]);
 			}
 			else
 				ft_putchar('-');
@@ -83,7 +83,7 @@ void	ft_putnbr_base(int nbr, char *base)
 	}
 }
 
-int	main()
+/*int	main()
 {
 	int number = 20;
 	printf("Number %d in base %s\n", number, "01");
@@ -116,4 +116,4 @@ int	main()
 	printf("Number %d in base %s\n", number, "01");
         ft_putnbr_base(number, "01");
         ft_putchar('\n');
-}
+}*/
