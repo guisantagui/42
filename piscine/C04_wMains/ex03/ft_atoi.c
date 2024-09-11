@@ -35,7 +35,7 @@ int	atoi_cust(char *num)
 
 	num_len = 0;
 	dix_mult = 1;
-	while (num[num_len])
+	while (num[num_len] && is_num(num[num_len]) == 1)
 		num_len++;
 	while (num_len > 1)
 	{
@@ -44,8 +44,8 @@ int	atoi_cust(char *num)
 	}
 	if (num_len == 0)
 		return (0);
-	if (*num == '-')
-		return (-atoi_cust(num + 1));
+	//if (*num == '-')
+	//	return (-atoi_cust(num + 1));
 	else
 		return (*num - '0') * dix_mult + atoi_cust(num + 1);
 }
@@ -58,19 +58,19 @@ int ft_atoi(char *str)
 
 	sign = get_num_ptr_sign(str, &i);
 	res = atoi_cust(str + i);
-	printf("ft_atoi: %d\n", res);
 	res *= sign;
 	return (res);
 }
 
 int main(void)
 {
-	char str[] = "  -++--++--1992";
+	char str[] = "  -++--++--1992abc";
 	int     i;
 	int	sign = get_num_ptr_sign(str, &i);
 	printf("String: %s\n", str + i);
 	printf("Sign: %d\n", sign);
-	int res = atoi_cust(str);
+	//int res = atoi_cust(str + i);
+	int res = ft_atoi(str);
 	//int res2 = atoi(str);
 	printf("Res1: %d\n", res);
 	//printf("Res2: %d\n", res2);
