@@ -32,6 +32,7 @@ int	atoi_cust(char *num)
 	int	num_len;
         int	num_int;
 	int	dix_mult;
+	char	out;
 
 	num_len = 0;
 	dix_mult = 1;
@@ -47,10 +48,13 @@ int	atoi_cust(char *num)
 	//if (*num == '-')
 	//	return (-atoi_cust(num + 1));
 	else
-		return (*num - '0') * dix_mult + atoi_cust(num + 1);
+	{
+		out = *num - '0';
+		return (out * dix_mult + atoi_cust(num + 1));
+	}
 }
 
-int ft_atoi(char *str)
+int	ft_atoi(char *str)
 {
 	int	i;
 	int	sign;

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_putnbr_base.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gsantama <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/12 18:37:15 by gsantama          #+#    #+#             */
+/*   Updated: 2024/09/12 18:42:35 by gsantama         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <unistd.h>
 //#include <stdio.h>
 
@@ -11,7 +23,7 @@ int	ft_strlen(char *str)
 	int	i;
 
 	i = 0;
-	while(str[i])
+	while (str[i])
 		i++;
 	return (i);
 }
@@ -26,14 +38,14 @@ int	has_dups(char *str)
 	h_dups = 0;
 	while (str[i] != '\0' && h_dups == 0)
 	{
-		j = i + 1;;
+		j = i + 1;
 		while (str[j])
 		{
 			if (str[i] == str[j])
 				h_dups = 1;
 			j++;
 		}
-		i++;	
+		i++;
 	}
 	return (h_dups);
 }
@@ -47,11 +59,11 @@ int	base_valid(char *base)
 	is_val = 1;
 	i = 0;
 	base_len = ft_strlen(base);
-	if(base_len < 2 || has_dups(base) == 1)
+	if (base_len < 2 || has_dups(base) == 1)
 		is_val = 0;
-	while(base[i] != '\0' && is_val == 1)
+	while (base[i] != '\0' && is_val == 1)
 	{
-		if(base[i] == '+' || base[i] == '-')
+		if (base[i] == '+' || base[i] == '-')
 			is_val = 0;
 		i++;
 	}
@@ -71,11 +83,12 @@ void	ft_putnbr_base(int nbr, char *base)
 			{
 				ft_putchar('-');
 				ft_putnbr_base(-(nbr / b), base);
-				//ft_putchar(base[-(nbr % b)]);
 			}
 			else
+			{
 				ft_putchar('-');
 				nbr *= -1;
+			}
 		}
 		if (nbr >= b)
 			ft_putnbr_base(nbr / b, base);
