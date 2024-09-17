@@ -40,24 +40,10 @@ int	ft_strcmp(char *s1, char *s2)
 	return (s1[i] - s2[i]);
 }
 
-char	*ft_strcpy(char *dest, char *src)
-{
-	int	i;
-
-	i = 0;
-	while (src[i])
-	{
-		dest[i] = src[i];
-		i++;
-	}
-	dest[i] = '\0';
-	return (dest);
-}
-
 void	ft_sort_str_tab(char **tab, int size)
 {
 	int	i;
-	int	t[];
+	char	*t;
 	int	n_changes;
 
 	n_changes = 1;
@@ -69,9 +55,9 @@ void	ft_sort_str_tab(char **tab, int size)
 		{
 			if (ft_strcmp(tab[i], tab[i + 1]) > 0)
 			{
-				ft_strcpy(t, tab[i]);
-				ft_strcpy(tab[i], tab[i + 1]);
-				ft_strcpy(tab[i + 1], t);
+				t = tab[i];
+				tab[i] = tab[i + 1];
+				tab[i + 1] = t;
 				n_changes++;
 			}
 			i++;
@@ -84,6 +70,7 @@ int	main(int argc, char **argv)
 	int	i;
 
 	i = 1;
+	ft_sort_str_tab(argv + i, argc - 1);
 	while (i < argc)
 	{
 		ft_putstr(argv[i]);
