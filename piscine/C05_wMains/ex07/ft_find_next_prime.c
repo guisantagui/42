@@ -1,19 +1,24 @@
 #include <stdio.h>
 
-int	ft_is_prime(int nb)
+int	is_prime_help(int nb, int div)
 {
-	static int	div = 2;
 	if (nb < 2)
 		return (0);
 	else if (nb == div)
-	{
-		div = 2;
 		return (1);
-	}
 	else if (nb % div == 0)
 		return (0);
-	div += 1;
-	return (ft_is_prime(nb));
+	else
+		return (is_prime_help(nb, div + 1));
+
+}
+
+int	ft_is_prime(int nb)
+{
+	int     div;
+
+	div = 2;
+	return (is_prime_help(nb, div));
 }
 
 int	ft_find_next_prime(int nb)
