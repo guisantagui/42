@@ -1,4 +1,4 @@
-#include <stdio.h>
+//#include <stdio.h>
 
 int	ft_is_prime(int nb)
 {
@@ -15,7 +15,7 @@ int	ft_is_prime(int nb)
 	div += 1;
 	return (ft_is_prime(nb));
 }
-
+/*
 int	main()
 {
 	int n1 = 3;
@@ -27,3 +27,4 @@ int	main()
 	printf("%d: %d\n", n3, ft_is_prime(n3));
 	printf("%d: %d\n", n4, ft_is_prime(n4));
 }
+*/

@@ -1,4 +1,4 @@
-#include <stdio.h>
+//#include <stdio.h>
 
 int	ft_sqrt(int nb)
 {
@@ -19,7 +19,7 @@ int	ft_sqrt(int nb)
 		return (ft_sqrt(nb));
 	}
 }
-
+/*
 int	main()
 {
 	int	num = 26;
@@ -31,3 +31,4 @@ int	main()
 	printf ("sqrt(%d) = %d\n", num2, ft_sqrt(num2));
 	printf ("sqrt(%d) = %d\n", num3, ft_sqrt(num3));
 }
+*/
