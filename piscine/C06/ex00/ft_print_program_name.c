@@ -1,40 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_iterative_factorial.c                           :+:      :+:    :+:   */
+/*   ft_print_program_name.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gsantama <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/17 19:35:37 by gsantama          #+#    #+#             */
-/*   Updated: 2024/09/17 19:35:39 by gsantama         ###   ########.fr       */
+/*   Created: 2024/09/17 20:08:47 by gsantama          #+#    #+#             */
+/*   Updated: 2024/09/17 20:14:28 by gsantama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include <stdio.h>
+#include <unistd.h>
 
-int	ft_iterative_factorial(int nb)
+void	ft_putchar(char c)
 {
-	int	result;
+	write(1, &c, 1);
+}
 
-	if (nb < 0)
-		return (0);
-	else
+void	ft_putstr(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
 	{
-		result = 1;
-		while (nb > 1)
-		{
-			result *= nb;
-			nb--;
-		}
-		return (result);
+		ft_putchar(str[i]);
+		i++;
 	}
+	ft_putchar('\n');
 }
-/*
-int	main(void)
+
+int	main(int argc, char **argv)
 {
-	printf("Factorial of %d:\n", 5);
-	printf("%d\n", ft_iterative_factorial(5));
-	printf("Factorial of %d:\n", -5);
-        printf("%d\n", ft_iterative_factorial(-5));
+	(void)argc;
+	ft_putstr(argv[0]);
 }
-*/

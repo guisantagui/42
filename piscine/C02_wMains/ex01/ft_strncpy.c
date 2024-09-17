@@ -33,6 +33,6 @@ int     main(void)
 {
         char    str1[20] = "hola caracola";
         char    str2[20];
-        ft_strncpy(str2, str1, 17);
+        ft_strncpy(str2, str1, 6);
         ft_putstr(str2);
 }

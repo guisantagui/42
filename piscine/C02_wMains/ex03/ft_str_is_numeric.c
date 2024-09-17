@@ -23,8 +23,11 @@ int     main()
 {
         char    str1[20] = "1992";
         char    str2[20] = "H0l4 C4r4cu10";
+	char    str3[20] = "";
         int     is_alph1 = ft_str_is_numeric(str1);
         int     is_alph2 = ft_str_is_numeric(str2);
+	int     is_alph3 = ft_str_is_numeric(str3);
         ft_putchar(is_alph1 + '0');
         ft_putchar(is_alph2 + '0');
+	ft_putchar(is_alph3 + '0');
 }
