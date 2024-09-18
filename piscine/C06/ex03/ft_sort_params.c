@@ -6,7 +6,7 @@
 /*   By: gsantama <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 20:27:03 by gsantama          #+#    #+#             */
-/*   Updated: 2024/09/17 20:52:41 by gsantama         ###   ########.fr       */
+/*   Updated: 2024/09/18 18:51:30 by gsantama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ int	ft_strcmp(char *s1, char *s2)
 
 void	ft_sort_str_tab(char **tab, int size)
 {
-	int	i;
+	int		i;
 	char	*t;
-	int	n_changes;
+	int		n_changes;
 
 	n_changes = 1;
 	while (n_changes != 0)

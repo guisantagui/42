@@ -15,7 +15,7 @@ char	*ft_strdup(char *src)
 {
 	char	*out;
 
-	out = (char*)malloc(ft_strlen(src));
+	out = (char*)malloc(ft_strlen(src) * sizeof(char));
 	out = src;
 	return (out);
 }

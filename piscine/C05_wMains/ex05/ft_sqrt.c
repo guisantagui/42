@@ -28,8 +28,12 @@ int	main()
 	int     num1 = 25;
 	int     num2 = 16;
 	int     num3 = 100;
+	int	num4 = -4;
+	int	num5 = 2147483647;
 	printf ("sqrt(%d) = %d\n", num, ft_sqrt(num));
 	printf ("sqrt(%d) = %d\n", num1, ft_sqrt(num1));
 	printf ("sqrt(%d) = %d\n", num2, ft_sqrt(num2));
 	printf ("sqrt(%d) = %d\n", num3, ft_sqrt(num3));
+	printf ("sqrt(%d) = %d\n", num4, ft_sqrt(num4));
+	printf ("sqrt(%d) = %d\n", num5, ft_sqrt(num5));
 }
