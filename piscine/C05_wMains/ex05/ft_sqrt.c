@@ -1,5 +1,24 @@
 #include <stdio.h>
 
+int	ft_sqrt(int nb)
+{
+	int	i;
+	if (nb < 0 || nb > 2147395600)
+		return (0);
+	else
+	{
+		i = 0;
+		while (i * i <= nb)
+		{
+			if (i * i == nb)
+				return (i);
+			else
+			i++;
+		}
+		return (0);
+	}
+}
+/*
 int	sqrt_help(int nb, int g)
 {
 	if (nb < 0 || nb > 2147395600)
@@ -8,10 +27,9 @@ int	sqrt_help(int nb, int g)
 		return (nb);
 	if (g * g == nb)
 		return (g);
-	else if (g * g < nb && (g + 1) * (g + 1) > nb)
+	if (g * g < nb && (g + 1) * (g + 1) > nb)
 		return (0);
-	else
-		return(sqrt_help(nb, (g + nb / g) / 2));
+	return(sqrt_help(nb, (g + nb / g) / 2));
 }
 
 int	ft_sqrt(int nb)
@@ -21,7 +39,7 @@ int	ft_sqrt(int nb)
 	g = nb / 2;
 	return (sqrt_help(nb, g));
 }
-
+*/
 int	main()
 {
 	int	num = 26;

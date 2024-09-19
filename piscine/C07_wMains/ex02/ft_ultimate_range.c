@@ -3,14 +3,16 @@
 
 int	ft_ultimate_range(int **range, int min, int max)
 {
-	int     i;
+	int 	i;
 
-	*range = (int*)malloc((max - min) * sizeof(int));
+	if (min >= max)
+	{
+		*range = 0;
+		return (0);
+	*range = (int *)malloc((max - min) * sizeof(int));
 	if (!*range)
 		return (-1);
 	i = 0;
-	if (min >= max)
-		return (0);
 	while (min + i < max)
 	{
 		(*range)[i] = min + i;
@@ -22,7 +24,7 @@ int	ft_ultimate_range(int **range, int min, int max)
 int	main()
 {
 	int     min = 20;
-	int     max = 155;
+	int     max = 20;
 	int     i = 0;
 	int     *arr;
 	int size = ft_ultimate_range(&arr, min, max);
@@ -33,4 +35,6 @@ int	main()
 		printf("%d\n", arr[i]);
 		i++;
 	}
+	if (arr == 0)
+		printf("Pointer is null\n");
 }
