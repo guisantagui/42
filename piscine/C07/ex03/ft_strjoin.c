@@ -1,6 +1,6 @@
-#include <stdio.h>
+//#include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
+//#include <unistd.h>
 
 int	ft_strlen(char *str)
 {
@@ -10,11 +10,6 @@ int	ft_strlen(char *str)
 	while (str[i])
 		i++;
 	return (i);
-}
-
-void	ft_putchar(char c)
-{
-	write(1, &c, 1);
 }
 
 int	get_tot_len(int size, char **strs, char *sep)
@@ -82,7 +77,7 @@ char	*ft_strjoin(int size, char **strs, char *sep)
 	joined[tot_len] = '\0';
 	return (joined);
 }
-
+/*
 int	main()
 {
 	char *strings[] = {
@@ -95,3 +90,4 @@ int	main()
 	char *joined = ft_strjoin(5, strings, sep);
 	printf("%s\n", joined);
 }
+*/
