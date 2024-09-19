@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gsantama <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/19 18:48:57 by gsantama          #+#    #+#             */
+/*   Updated: 2024/09/19 18:57:45 by gsantama         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 //#include <stdio.h>
 #include <stdlib.h>
 //#include <unistd.h>
@@ -35,46 +47,45 @@ char	*get_joined(int pointLen)
 {
 	char	*joined;
 
-	joined = (char*)malloc(pointLen * sizeof(char));
+	joined = (char *)malloc(pointLen * sizeof(char));
 	return (joined);
 }
 
-char	*ft_strjoin(int size, char **strs, char *sep)
+void	concat_to_str(char *joined, char **strs, char *sep, int size)
 {
-	char	*joined;
 	int	tot_len;
 	int	i;
 	int	j;
 	int	k;
 
-	tot_len = get_tot_len(size, strs, sep);
-	joined = get_joined(tot_len + 1);
-	if (!joined)
-		return (0);
 	tot_len = 0;
 	i = 0;
 	while (i < size)
 	{
 		j = 0;
 		while (strs[i][j])
-		{
-			joined[tot_len] = strs[i][j];
-			j++;
-			tot_len++;
-		}
+			joined[tot_len++] = strs[i][j++];
 		if (i < size - 1)
 		{
 			k = 0;
 			while (sep[k])
-			{
-				joined[tot_len] = sep[k];
-				k++;
-				tot_len++;
-			}
+				joined[tot_len++] = sep[k++];
 		}
 		i++;
 	}
 	joined[tot_len] = '\0';
+}
+
+char	*ft_strjoin(int size, char **strs, char *sep)
+{
+	char	*joined;
+	int		tot_len;
+
+	tot_len = get_tot_len(size, strs, sep);
+	joined = get_joined(tot_len + 1);
+	if (!joined)
+		return (0);
+	concat_to_str(joined, strs, sep, size);
 	return (joined);
 }
 /*
