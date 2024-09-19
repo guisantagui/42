@@ -44,6 +44,39 @@ char	*get_joined(int pointLen)
 	return (joined);
 }
 
+void	concat_to_str(char *joined, char **strs, char *sep, int size)
+{
+	int	tot_len;
+	int	i;
+	int	j;
+	int	k;
+
+	tot_len = 0;
+	i = 0;
+	while (i < size)
+	{
+		j = 0;
+		while (strs[i][j])
+		{
+			joined[tot_len] = strs[i][j];
+			j++;
+			tot_len++;
+		}
+		if (i < size - 1)
+		{
+			k = 0;
+			while (sep[k])
+			{
+				joined[tot_len] = sep[k];
+				k++;
+				tot_len++;
+			}
+		}
+		i++;
+	}
+	joined[tot_len] = '\0';
+}
+
 char	*ft_strjoin(int size, char **strs, char *sep)
 {
 	char	*joined;
