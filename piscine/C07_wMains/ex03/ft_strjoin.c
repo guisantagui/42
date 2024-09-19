@@ -1,3 +1,7 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+
 int	ft_strlen(char *str)
 {
 	int	i;
@@ -6,6 +10,11 @@ int	ft_strlen(char *str)
 	while (str[i])
 		i++;
 	return (i);
+}
+
+void	ft_putchar(char c)
+{
+	write(1, &c, 1);
 }
 
 char	*ft_strjoin(int size, char **strs, char *sep)
@@ -25,30 +34,40 @@ char	*ft_strjoin(int size, char **strs, char *sep)
 	else
 	{
 		tot_len = 0;
-		sep_len = 0;
+		sep_len = ft_strlen(sep);
 		i = 0;
-		j = 0;
-		k = 0;
 		while (i < size)
 		{
-			tot_len += ft_strlen((*strs)[i]);
+			tot_len += ft_strlen(strs[i]);
+			if (i < size - 1)
+				tot_len += sep_len;
 			i++;
 		}
-		tot_len++;
-		sep_len = ft_strlen(sep);
-		joined = (char*)malloc((tot_len + (size - 1) * sep_len) * sizeof(char));
+		joined = (char*)malloc((tot_len + 1) * sizeof(char));
+		if (!joined)
+			return (0);
 		tot_len = 0;
+		i = 0;
 		while (i < size)
 		{
-			while (j < ft_strlen((*strs)[i]))
+			j = 0;
+			ft_putchar(i + '0');
+			ft_putchar('\n');
+			while (strs[i][j])
 			{
-				joined[tot_len] = (*strs)[i][j];
+				//ft_putchar(i + '0');
+				//ft_putchar('\n');
+				//ft_putchar(j + '0');
+				//ft_putchar('\n');
+				joined[tot_len] = strs[i][j];
+				//ft_putchar(strs[i][j]);
 				j++;
 				tot_len++;
 			}
 			if (i < size - 1)
 			{
-				while (k < sep_len)
+				k = 0;
+				while (sep[k])
 				{
 					joined[tot_len] = sep[k];
 					k++;
@@ -60,4 +79,17 @@ char	*ft_strjoin(int size, char **strs, char *sep)
 		joined[tot_len] = '\0';
 	}
 	return (joined);
+}
+
+int	main()
+{
+	char *strings[] = {
+		"Hello",
+		"World",
+		"This",
+		"Is",
+		"C"};
+	char *sep = ", ";
+	char *joined = ft_strjoin(5, strings, sep);
+	printf("%s\n", joined);
 }
