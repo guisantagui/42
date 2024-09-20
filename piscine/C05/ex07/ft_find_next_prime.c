@@ -5,31 +5,27 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: gsantama <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/17 22:28:18 by gsantama          #+#    #+#             */
-/*   Updated: 2024/09/17 22:29:08 by gsantama         ###   ########.fr       */
+/*   Created: 2024/09/20 17:56:47 by gsantama          #+#    #+#             */
+/*   Updated: 2024/09/20 17:58:00 by gsantama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 //#include <stdio.h>
-
-int	is_prime_help(int nb, int div)
-{
-	if (nb < 2)
-		return (0);
-	else if (nb == div)
-		return (1);
-	else if (nb % div == 0)
-		return (0);
-	else
-		return (is_prime_help(nb, div + 1));
-}
 
 int	ft_is_prime(int nb)
 {
 	int	div;
 
 	div = 2;
-	return (is_prime_help(nb, div));
+	if (nb < 2 || nb == 2147483647)
+		return (0);
+	while (div <= nb / div)
+	{
+		if (nb % div == 0)
+			return (0);
+		div++;
+	}
+	return (1);
 }
 
 int	ft_find_next_prime(int nb)

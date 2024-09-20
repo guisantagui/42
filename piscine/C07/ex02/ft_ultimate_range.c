@@ -6,7 +6,7 @@
 /*   By: gsantama <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 19:39:35 by gsantama          #+#    #+#             */
-/*   Updated: 2024/09/19 22:42:10 by gsantama         ###   ########.fr       */
+/*   Updated: 2024/09/20 18:15:33 by gsantama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	ft_ultimate_range(int **range, int min, int max)
 	}
 	*range = (int *)malloc((max - min) * sizeof(int));
 	if (!*range)
-                return (-1);
+		return (-1);
 	i = 0;
 	while (min + i < max)
 	{
