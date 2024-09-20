@@ -7,16 +7,13 @@ int	ft_is_prime(int nb)
 	div = 2;
 	if (nb < 2 || nb == 2147483647)
 		return (0);
-	while (div <= nb)
+	while (div <= nb / div)
 	{
-		if (nb == div)
-			return (1);
-		else if (nb % div == 0)
+		if (nb % div == 0)
 			return (0);
-		else
-			div++;
+		div++;
 	}
-	return (0);
+	return (1);
 }
 /*
 int	is_prime_help(int nb, int div)
