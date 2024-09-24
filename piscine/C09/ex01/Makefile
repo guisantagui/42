@@ -2,23 +2,26 @@ NAME = libft.a
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 RM = rm -f
-MY_SOURCES = $(shell find ./srcs -name '*.c')
-MY_OBJECTS = $(MY_SOURCES:.c=.o)
-HEADERS = -I includes
+SRCDIR = srcs
+SRCS = $(shell find $(SRCDIR) -name '*.c')
+OBJS = $(SRCS:.c=.o)
 LIBC = ar rcs
-LIBR = ranlib
+HEADERS = -I includes
+
+all: $(NAME)
+
+$(NAME): $(OBJS)
+	$(LIBC) $(NAME) $(OBJS)
 
 .c.o:
 	$(CC) $(CFLAGS) $(HEADERS) -c $< -o $@
 
-$(NAME): $(MY_OBJECTS)
-	$(LIBC) $(NAME) $(MY_OBJECTS)
-	$(LIBR) $(NAME)
-
 clean:
-	$(RM) $(MY_OBJECTS)
+	$(RM) $(OBJS)
 
 fclean: clean
 	$(RM) $(NAME)
 
 re: fclean all
+
+.PHONY: all clean fclean re

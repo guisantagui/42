@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include <stdlib.h>
-//#include <stdio.h>
+#include <stdio.h>
 
 int	is_sep(char c, char *charset)
 {
@@ -38,13 +38,15 @@ int	word_count(char *str, char *charset)
 		i++;
 	while (str[i])
 	{
-		while (is_sep(str[i], charset) == 1)
-			i++;
-		if (str[i] != '\0')
+		if (is_sep(str[i], charset) == 0)
 		{
 			count++;
-			while (is_sep(str[i], charset) == 0)
+			while (str[i] && (is_sep(str[i], charset) == 0))
 				i++;
+		}
+		else
+		{
+			i++;
 		}
 	}
 	return (count);
@@ -87,6 +89,8 @@ char	**ft_split(char *str, char *charset)
 
 	word_num = word_count(str, charset);
 	split = (char **)malloc((word_num + 1) * sizeof(char *));
+	if (!split)
+		return (NULL);
 	i = 0;
 	w_idx = 0;
 	while (str[i] && (w_idx < word_num))
@@ -94,13 +98,15 @@ char	**ft_split(char *str, char *charset)
 		while (is_sep(str[i], charset) == 1)
 			i++;
 		i = alloc_word(&split[w_idx], str, i, charset);
+		if (!split[w_idx])
+			return (NULL);
 		if (str[i] != '\0')
 			w_idx++;
 	}
 	split[word_num] = 0;
 	return (split);
 }
-/*
+
 int	main(int argc, char **argv)
 {
 	if (argc == 3)
@@ -119,4 +125,4 @@ int	main(int argc, char **argv)
 	}
 	else
 		printf("\n");
-}*/
+}
