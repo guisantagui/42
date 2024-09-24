@@ -1,16 +1,4 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_show_tab.c                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: gsantama <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/23 20:31:23 by gsantama          #+#    #+#             */
-/*   Updated: 2024/09/23 20:31:25 by gsantama         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#include "ft_stock_str.h"
+include "ft_stock_str.h"
 #include <unistd.h>
 
 void	ft_putchar(char c)
@@ -54,7 +42,7 @@ void	ft_show_tab(struct s_stock_str *par)
 	int	i;
 
 	i = 0;
-	while (par[i].size != 0)
+	while (par[i].str != 0)
 	{
 		ft_putstr(par[i].str);
 		ft_putnbr(par[i].size);
