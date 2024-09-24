@@ -1,5 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gsantama <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/24 21:11:30 by gsantama          #+#    #+#             */
+/*   Updated: 2024/09/24 21:14:14 by gsantama         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdlib.h>
-#include <stdio.h>
+//#include <stdio.h>
 
 int	is_sep(char c, char *charset)
 {
@@ -68,10 +80,10 @@ int	alloc_word(char **word, char *str, int pos, char *charset)
 
 char	**ft_split(char *str, char *charset)
 {
-	int	word_num;
+	int		word_num;
 	char	**split;
-	int	i;
-	int	w_idx;
+	int		i;
+	int		w_idx;
 
 	word_num = word_count(str, charset);
 	split = (char **)malloc((word_num + 1) * sizeof(char *));
@@ -88,7 +100,7 @@ char	**ft_split(char *str, char *charset)
 	split[word_num] = 0;
 	return (split);
 }
-
+/*
 int	main(int argc, char **argv)
 {
 	if (argc == 3)
@@ -107,4 +119,4 @@ int	main(int argc, char **argv)
 	}
 	else
 		printf("\n");
-}
+}*/
