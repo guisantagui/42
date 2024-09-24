@@ -54,16 +54,16 @@ struct s_stock_str	*free_prev(t_stock_str *stock, int pos)
 	return (0);
 }
 
-struct s_stock_str	*ft_strs_to_tab(int c, char **av)
+struct s_stock_str	*ft_strs_to_tab(int ac, char **av)
 {
 	int			i;
 	t_stock_str	*stock;
 
 	i = 0;
-	stock = (t_stock_str *)malloc((c + 1) * sizeof(t_stock_str));
+	stock = (t_stock_str *)malloc((ac + 1) * sizeof(t_stock_str));
 	if (stock == 0)
 		return (0);
-	while (i < c)
+	while (i < ac)
 	{
 		stock[i].size = ft_strlen(av[i]);
 		stock[i].str = (char *)malloc((stock[i].size + 1) * sizeof(char));
