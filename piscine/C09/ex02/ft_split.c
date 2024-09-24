@@ -70,6 +70,8 @@ int	alloc_word(char **word, char *str, int pos, char *charset)
 	len = strlen_til_sep(str + pos, charset);
 	c_idx = 0;
 	*word = (char *)malloc((len + 1) * sizeof(char));
+	if (!*word)
+		return -1;
 	while (is_sep(str[pos], charset) == 0 && str[pos] != '\0')
 	{
 		(*word)[c_idx] = str[pos];
@@ -98,7 +100,7 @@ char	**ft_split(char *str, char *charset)
 		while (is_sep(str[i], charset) == 1)
 			i++;
 		i = alloc_word(&split[w_idx], str, i, charset);
-		if (!split[w_idx])
+		if (i == -1)
 			return (NULL);
 		if (str[i] != '\0')
 			w_idx++;
