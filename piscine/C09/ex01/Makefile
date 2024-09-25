@@ -9,7 +9,6 @@ SRCS = srcs/ft_putchar.c \
        srcs/ft_strcmp.c
 OBJS = $(SRCS:.c=.o)
 LIBC = ar rcs
-HEADERS = -I includes
 
 all: $(NAME)
 
@@ -17,7 +16,7 @@ $(NAME): $(OBJS)
 	$(LIBC) $(NAME) $(OBJS)
 
 .c.o:
-	$(CC) $(CFLAGS) $(HEADERS) -c $< -o $@
+	$(CC) $(CFLAGS) -I includes -c $< -o $@
 
 clean:
 	$(RM) $(OBJS)
