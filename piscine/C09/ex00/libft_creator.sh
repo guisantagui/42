@@ -8,4 +8,3 @@ MY_OBJECTS=$(echo "$MY_SOURCES" | sed 's/\.c/\.o/g')
 
 gcc -Werror -Wextra -Wall -c $MY_SOURCES
 ar rcs $NAME $MY_OBJECTS
-rm *.o
