@@ -2,18 +2,20 @@
 #include <string.h>
 #include <stdio.h>
 
-int	ft_any(char **tab, int(*f)(char*))
+int	ft_count_if(char **tab, int(*f)(char*))
 {
 	int	i;
+	int	count;
 
 	i = 0;
+	count = 0;
 	while (tab[i] != 0)
 	{
 		if (f(tab[i]) != 0)
-			return (1);
+			count++;
 		i++;
 	}
-	return (0);
+	return (count);
 }
 
 int	has_char(char *str)
@@ -22,7 +24,7 @@ int	has_char(char *str)
 	char	c;
 
 	i = 0;
-	c = 'H';
+	c = 'a';
 	while (str[i])
 	{
 		if (str[i] == c)
@@ -41,5 +43,5 @@ int	main()
 	tab[3] = strdup("quepasa");
 	tab[4] = strdup("aquiestamos");
 	tab[5] = 0;
-	printf("%d\n", ft_any(tab, has_char));
+	printf("%d\n", ft_count_if(tab, has_char));
 }
