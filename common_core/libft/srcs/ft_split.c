@@ -1,3 +1,6 @@
+#include <stdio.h>
+#include <stdlib.h>
+
 static int	strlen_til_sep(char const *s, char c)
 {
 	int	i;
@@ -13,6 +16,8 @@ static int	word_count(char const *s, char c)
 	int	i;
 	int	count;
 
+	if (!s)
+		return (0);
 	i = 0;
 	count = 0;
 	while (s[i] == c)
@@ -22,11 +27,14 @@ static int	word_count(char const *s, char c)
 		if (s[i] != c)
 		{
 			count++;
-			while (s[i] && s[i] != c)
+			while (s[i] && (s[i] != c))
 				i++;
 		}
 		else
-			i++;
+		{
+			while (s[i] == c)
+				i++;
+		}
 	}
 	return (count);
 }
@@ -51,6 +59,18 @@ static int	alloc_word(char **word, char const *str, int pos, char c)
 	return (pos);
 }
 
+void	free_arr(char **arr, int len)
+{
+	int	i;
+
+	while (i < len)
+	{
+		free(arr[i]);
+		i++;
+	}
+	free(arr);
+}
+
 char    **ft_split(char const *s, char c)
 {
     int		word_num;
@@ -60,7 +80,7 @@ char    **ft_split(char const *s, char c)
 
 	word_num = word_count(s, c);
 	split = (char **)malloc((word_num + 1) * sizeof(char *));
-	if (!split)
+	if (!s || !split)
 		return (NULL);
 	i = 0;
 	w_idx = 0;
@@ -72,10 +92,30 @@ char    **ft_split(char const *s, char c)
 		{
 			i = alloc_word(&split[w_idx], s, i, c);
 			if (i == -1)
+			{
+				free_arr(split, w_idx);
 				return (NULL);
+			}
 			w_idx++;
 		}
 	}
 	split[word_num] = 0;
 	return (split);
+}
+
+int	main(int argc, char **argv)
+{
+	if (argc == 3)
+	{
+		int	i;
+		char	**split;
+
+		split = ft_split(argv[1], argv[2][0]);
+		i = 0;
+		while (split[i] != 0)
+		{
+			printf("%s\n", split[i]);
+			i++;
+		}
+	}
 }
