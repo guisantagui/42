@@ -14,103 +14,65 @@
 //#include <stdlib.h>
 #include "libft.h"
 
-static int	strlen_til_sep(char const *s, char c)
+static size_t	word_count(char const *s, char c)
 {
+	size_t	count;
 	int	i;
-
-	i = 0;
-	while (s[i] != '\0' && s[i] != c)
-		i++;
-	return (i);
-}
-
-static int	word_count(char const *s, char c)
-{
-	int	i;
-	int	count;
 
 	if (!s)
 		return (0);
-	i = 0;
 	count = 0;
-	while (s[i] == c)
-		i++;
+	i = 0;
 	while (s[i])
 	{
-		if (s[i] != c)
-		{
+		while (s[i] == c)
+			i++;
+		if (s[i])
 			count++;
-			while (s[i] && (s[i] != c))
-				i++;
-		}
-		else
-		{
-			while (s[i] == c)
-				i++;
-		}
+		while (s[i] && (s[i] != c))
+			i++;
 	}
 	return (count);
 }
 
-static int	alloc_word(char **word, char const *str, int pos, char c)
+static void	free_arr(char **arr, int i)
 {
-	int	len;
-	int	c_idx;
-
-	len = strlen_til_sep(str + pos, c);
-	c_idx = 0;
-	*word = (char *)malloc((len + 1) * sizeof(char));
-	if (!*word)
-		return (-1);
-	while (str[pos] != c && str[pos] != '\0')
-	{
-		(*word)[c_idx] = str[pos];
-		pos++;
-		c_idx++;
-	}
-	(*word)[c_idx] = '\0';
-	return (pos);
-}
-
-static char	**free_arr(char **arr, int len)
-{
-	int	i;
-
-	while (i < len)
-	{
+	while (i-- > 0)
 		free(arr[i]);
-		i++;
-	}
 	free(arr);
-	return (NULL);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	int		word_num;
 	char	**split;
-	int		i;
-	int		w_idx;
+	int	i;
+	size_t	w_len;
 
-	word_num = word_count(s, c);
-	split = (char **)malloc((word_num + 1) * sizeof(char *));
-	if (!s || !split)
+	split = (char **)malloc((word_count(s, c) + 1) * sizeof(char *));
+	if (!split || !s)
 		return (NULL);
 	i = 0;
-	w_idx = 0;
-	while (s[i] && (w_idx < word_num))
+	while (*s)
 	{
-		while (s[i] == c)
-			i++;
-		if (s[i] != '\0')
+		while (*s == c && *s)
+			s++;
+		if (*s)
 		{
-			i = alloc_word(&split[w_idx], s, i, c);
-			if (i == -1)
-				free_arr(split, w_idx);
-			w_idx++;
+			if (!ft_strchr(s, c))
+				w_len = ft_strlen(s);
+			else
+				w_len = ft_strchr(s, c) - s;
+			split[i] = ft_substr(s, 0, w_len);
+			if (!split[i++])
+			{
+				free_arr(split, i);
+				return (NULL);
+			}
+			s += w_len;
 		}
 	}
-	return (split[word_num] = 0, split);
+	split[i] = NULL;
+	return (split);
 }
 /*
 int	main(int argc, char **argv)
