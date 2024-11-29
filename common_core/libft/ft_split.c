@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gsantama <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/29 15:22:09 by gsantama          #+#    #+#             */
+/*   Updated: 2024/11/29 18:28:08 by gsantama         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 //#include <stdio.h>
 //#include <stdlib.h>
 #include "libft.h"
@@ -60,7 +72,7 @@ static int	alloc_word(char **word, char const *str, int pos, char c)
 	return (pos);
 }
 
-void	free_arr(char **arr, int len)
+static char	**free_arr(char **arr, int len)
 {
 	int	i;
 
@@ -70,11 +82,12 @@ void	free_arr(char **arr, int len)
 		i++;
 	}
 	free(arr);
+	return (NULL);
 }
 
-char    **ft_split(char const *s, char c)
+char	**ft_split(char const *s, char c)
 {
-    int		word_num;
+	int		word_num;
 	char	**split;
 	int		i;
 	int		w_idx;
@@ -85,7 +98,7 @@ char    **ft_split(char const *s, char c)
 		return (NULL);
 	i = 0;
 	w_idx = 0;
-    while (s[i] && (w_idx < word_num))
+	while (s[i] && (w_idx < word_num))
 	{
 		while (s[i] == c)
 			i++;
@@ -93,15 +106,11 @@ char    **ft_split(char const *s, char c)
 		{
 			i = alloc_word(&split[w_idx], s, i, c);
 			if (i == -1)
-			{
 				free_arr(split, w_idx);
-				return (NULL);
-			}
 			w_idx++;
 		}
 	}
-	split[word_num] = 0;
-	return (split);
+	return (split[word_num] = 0, split);
 }
 /*
 int	main(int argc, char **argv)

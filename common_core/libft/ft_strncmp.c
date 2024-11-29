@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gsantama <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/29 15:23:29 by gsantama          #+#    #+#             */
+/*   Updated: 2024/11/29 15:54:06 by gsantama         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 //#include <stdio.h>
 //#include <stdlib.h>
@@ -18,7 +30,8 @@ int	main(int argc, char **argv)
 {
 	if (argc == 4)
 	{
-		printf("%s vs %s, n = %s: %d", argv[1], argv[2], argv[3], ft_strncmp(argv[1], argv[2], atoi(argv[3])));
+		printf("%s vs %s, n = %s: %d", argv[1], argv[2], argv[3], 
+		ft_strncmp(argv[1], argv[2], atoi(argv[3])));
 	}
 }
 */

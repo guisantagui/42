@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_lstiter.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gsantama <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/29 15:20:12 by gsantama          #+#    #+#             */
+/*   Updated: 2024/11/29 15:40:06 by gsantama         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
-void    ft_lstiter(t_list *lst, void (*f)(void *))
+void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-    if (!lst || !f)
-        return ;
-    ft_lstiter(lst->next, f);
+	if (!lst || !f)
+		return ;
+	ft_lstiter(lst->next, f);
 	(f)(lst -> content);
 }

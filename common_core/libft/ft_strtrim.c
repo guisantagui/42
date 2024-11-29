@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gsantama <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/29 15:24:08 by gsantama          #+#    #+#             */
+/*   Updated: 2024/11/29 16:02:15 by gsantama         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 //#include <stdio.h>
 //#include <stdlib.h>
@@ -25,7 +37,8 @@ char	*ft_strchr(const char *s, int c)
 	return (0);
 }
 
-size_t	ft_strlcpy(char * restrict dst, const char * restrict src, size_t dstsize)
+size_t	ft_strlcpy(char * restrict dst, const char 
+ * restrict src, size_t dstsize)
 {
 	unsigned int	i;
 
@@ -76,8 +89,8 @@ static int	char_in_str(char c, const char *str)
 */
 char	*ft_strtrim(char const *s1, char const *set)
 {
-	int	i;
-	int	f;
+	int		i;
+	int		f;
 	char	*s2;
 
 	i = 0;

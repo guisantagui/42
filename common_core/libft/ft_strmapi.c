@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gsantama <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/29 15:23:18 by gsantama          #+#    #+#             */
+/*   Updated: 2024/11/29 15:59:19 by gsantama         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 //#include <stdlib.h>
 //#include <stdio.h>
 #include "libft.h"
@@ -14,32 +26,32 @@ size_t ft_strlen(char *str)
 }
 */
 
-static char    incr_by_i(unsigned int i, char c)
+static char	incr_by_i(unsigned int i, char c)
 {
-    char    out;
+	char	out;
 
-    out = c + i;
-    return (out);
+	out = c + i;
+	return (out);
 }
 
-char *ft_strmapi(char const *s, char (*f)(unsigned int, char))
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-    unsigned int    i;
-    size_t          len;
-    char            *out;
+	unsigned int	i;
+	size_t			len;
+	char			*out;
 
-    i = 0;
-    len = ft_strlen((char *)s);
-    out = (char *)malloc((len + 1) * sizeof(char));
+	i = 0;
+	len = ft_strlen((char *)s);
+	out = (char *)malloc((len + 1) * sizeof(char));
 	if (!out)
 		return (NULL);
-    while (i < len)
-    {
-        out[i] = f(i, s[i]);
-        i++;
-    }
-    out[i] = '\0';
-    return (out);
+	while (i < len)
+	{
+		out[i] = f(i, s[i]);
+		i++;
+	}
+	out[i] = '\0';
+	return (out);
 }
 /*
 int main(int argc, char **argv)
