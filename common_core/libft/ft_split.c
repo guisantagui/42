@@ -6,7 +6,7 @@
 /*   By: gsantama <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 15:22:09 by gsantama          #+#    #+#             */
-/*   Updated: 2024/11/29 18:28:08 by gsantama         ###   ########.fr       */
+/*   Updated: 2024/11/30 15:26:15 by gsantama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 static size_t	word_count(char const *s, char c)
 {
 	size_t	count;
-	int	i;
+	int		i;
 
 	if (!s)
 		return (0);
@@ -34,18 +34,19 @@ static size_t	word_count(char const *s, char c)
 	}
 	return (count);
 }
-
+/*
 static void	free_arr(char **arr, int i)
 {
 	while (i-- > 0)
 		free(arr[i]);
 	free(arr);
 }
+*/
 
 char	**ft_split(char const *s, char c)
 {
 	char	**split;
-	int	i;
+	int		i;
 	size_t	w_len;
 
 	split = (char **)malloc((word_count(s, c) + 1) * sizeof(char *));
@@ -62,12 +63,7 @@ char	**ft_split(char const *s, char c)
 				w_len = ft_strlen(s);
 			else
 				w_len = ft_strchr(s, c) - s;
-			split[i] = ft_substr(s, 0, w_len);
-			if (!split[i++])
-			{
-				free_arr(split, i);
-				return (NULL);
-			}
+			split[i++] = ft_substr(s, 0, w_len);
 			s += w_len;
 		}
 	}

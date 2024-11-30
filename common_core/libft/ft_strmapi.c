@@ -6,7 +6,7 @@
 /*   By: gsantama <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 15:23:18 by gsantama          #+#    #+#             */
-/*   Updated: 2024/11/29 15:59:19 by gsantama         ###   ########.fr       */
+/*   Updated: 2024/11/30 18:02:32 by gsantama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ size_t ft_strlen(char *str)
     return (i);
 }
 */
-
+/*
 static char	incr_by_i(unsigned int i, char c)
 {
 	char	out;
@@ -33,6 +33,7 @@ static char	incr_by_i(unsigned int i, char c)
 	out = c + i;
 	return (out);
 }
+*/
 
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
