@@ -6,17 +6,12 @@
 /*   By: gsantama <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 15:22:37 by gsantama          #+#    #+#             */
-/*   Updated: 2024/11/29 15:28:44 by gsantama         ###   ########.fr       */
+/*   Updated: 2024/11/30 18:20:31 by gsantama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 //#include <stdio.h>
 #include "libft.h"
-
-static void	incr_by_i(unsigned int i, char *c)
-{
-	*c = *c + i;
-}
 
 void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 {
