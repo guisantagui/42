@@ -1,4 +1,6 @@
+**/a.out
 common_core/libft/libftTester
+common_core/libft/libft-war-machine
 common_core/libft/*.o
 common_core/libft/libft.a
 .DS_Store

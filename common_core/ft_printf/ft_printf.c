@@ -6,7 +6,7 @@
 /*   By: gsantama <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 19:48:22 by gsantama          #+#    #+#             */
-/*   Updated: 2024/12/01 17:37:40 by gsantama         ###   ########.fr       */
+/*   Updated: 2024/12/01 19:55:55 by gsantama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,30 +31,37 @@ static void	ft_putstr(char *str)
 		ft_putchar(str[i++]);
 }
 
-static void	ft_putnbr(int nb)
+size_t	ft_strlen(const char *str)
 {
-	if (nb <= 2147483647 && nb >= -2147483648)
+	size_t	i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
+}
+
+static void	ft_putnbr_base(int nbr, char *base)
+{
+	int	b;
+
+	b = ft_strlen(base);
+	if (nbr < 0)
 	{
-		if (nb == -2147483648)
+		if (nbr == -2147483648)
 		{
 			ft_putchar('-');
-			ft_putchar('2');
-			ft_putnbr(147483648);
-		}
-		else if (nb < 0)
-		{
-			ft_putchar('-');
-			nb = -nb;
-			ft_putnbr(nb);
-		}
-		else if (nb > 9)
-		{
-			ft_putnbr(nb / 10);
-			ft_putnbr(nb % 10);
+			ft_putnbr_base(-(nbr / b), base);
 		}
 		else
-			ft_putchar(nb + '0');
+		{
+			ft_putchar('-');
+			nbr *= -1;
+		}
 	}
+	if (nbr >= b)
+		ft_putnbr_base(nbr / b, base);
+	write(1, &base[nbr % b], 1);
 }
 
 int	ft_printf(const char *format, ...)
@@ -77,7 +84,17 @@ int	ft_printf(const char *format, ...)
 				ft_putstr(va_arg(args, char *));
 			else if (format[i] == 'c')
 				ft_putchar((char)va_arg(args, int));
-
+			else if (format[i] == 'd')
+				ft_putnbr_base(va_arg(args, int), "0123456789");
+			else if (format[i] == 'x')
+			{
+				printf("Hola\n");
+				int	n = va_arg(args, int);
+				printf("%d\n", n);
+				ft_putnbr_base(n, "0123456789abcdef");
+			}
+			else if (format[i] == 'X')
+				ft_putnbr_base(va_arg(args, int), "0123456789ABCDEF");
 		}
 		i++;
 	}
@@ -86,6 +103,6 @@ int	ft_printf(const char *format, ...)
 
 int	main()
 {
-	printf("%s, %c\n", "Jose", 'J');
-	ft_printf("%s, %c\n", "Jose", 'J');
+	printf("%s, %c, %d, %x, %X\n", "Jose", 'J', 123, -123, 20);
+	ft_printf("%s, %c, %d, %x, %X\n", "Jose", 'J', 123, -123, 20);
 }
