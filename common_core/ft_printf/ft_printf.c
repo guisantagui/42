@@ -15,22 +15,6 @@
 #include <stdio.h>
 
 
-static void	ft_putchar(char c)
-{
-	write(1, &c, 1);
-}
-
-static void	ft_putstr(char *str)
-{
-	int	i;
-
-	if (!str)
-		return ;
-	i = 0;
-	while (str[i])
-		ft_putchar(str[i++]);
-}
-
 size_t	ft_strlen(const char *str)
 {
 	size_t	i;
@@ -38,6 +22,24 @@ size_t	ft_strlen(const char *str)
 	i = 0;
 	while (str[i])
 		i++;
+	return (i);
+}
+
+static int	ft_putchar(char c)
+{
+	write(1, &c, 1);
+	return (1);
+}
+
+static int	ft_putstr(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (!str)
+		return (i);
+	while (str[i])
+		ft_putchar(str[i++]);
 	return (i);
 }
 
@@ -60,9 +62,7 @@ static int	ft_putnbr_base(int nbr, char *base, int sig)
 		num = (unsigned int)nbr;
 	}
 	else
-	{
 		num = (unsigned int)nbr;
-	}
 	if (num >= (unsigned int)b)
 		count += ft_putnbr_base(num / b, base, sig);
 	ft_putchar(base[num % b]);
@@ -96,16 +96,12 @@ static int	ft_putptr(unsigned long p)
 static int      handle_format(char c, va_list *args)
 {
 	int	count;
-	void	*out;
 
+	count = 0;
 	if (c == 's')
-	{
-		out = va_arg(*args, char *);
-		count = ft_strlen(out);
-		ft_putstr(out);
-	}
+		count = ft_putstr(va_arg(*args, char *));
 	else if (c == 'c')
-		ft_putchar((char)va_arg(*args, int));
+		count = ft_putchar((char)va_arg(*args, int));
 	else if (c == 'p')
 		count = ft_putptr((unsigned long)va_arg(*args, void*));
 	else if (c == 'd' || c == 'i')
@@ -117,9 +113,7 @@ static int      handle_format(char c, va_list *args)
 	else if (c == 'X')
 		count = ft_putnbr_base(va_arg(*args, int), "0123456789ABCDEF", 0);
 	else if (c == '%')
-		ft_putchar('%');
-	if (c == 'c' || c == '%')
-		count = 1;
+		count = ft_putchar('%');
 	return (count);
 }
 
