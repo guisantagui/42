@@ -70,7 +70,7 @@ static int	ft_putnbr_base(int nbr, char *base, int sig)
 	return (count);
 }
 
-static int	ft_putptr(unsigned long p)
+static int	ft_putptr_rec(unsigned long p)
 {
 	int	count;
 
@@ -78,9 +78,48 @@ static int	ft_putptr(unsigned long p)
 	if (p == 0)
 		ft_putchar('0');
 	if (p >= 16)
-		count += ft_putptr(p / 16);
+		count += ft_putptr_rec(p / 16);
 	ft_putchar("0123456789abcdef"[p % 16]);
 	count++;
+	return (count);
+}
+
+static int	ft_putptr(unsigned long p)
+{
+	int	count;
+
+	ft_putstr("0x");
+	count = ft_putptr_rec(p) + 2;
+	return (count);
+}
+
+static int      handle_format(char c, va_list *args)
+{
+	int	count;
+	void	*out;
+
+	if (c == 's')
+	{
+		out = va_arg(*args, char *);
+		count = ft_strlen(out);
+		ft_putstr(out);
+	}
+	else if (c == 'c')
+		ft_putchar((char)va_arg(*args, int));
+	else if (c == 'p')
+		count = ft_putptr((unsigned long)va_arg(*args, void*));
+	else if (c == 'd' || c == 'i')
+		count = ft_putnbr_base(va_arg(*args, int), "0123456789", 1);
+	else if (c == 'u')
+		count = ft_putnbr_base(va_arg(*args, unsigned int), "0123456789", 0);
+	else if (c == 'x')
+		count = ft_putnbr_base(va_arg(*args, int), "0123456789abcdef", 0);
+	else if (c == 'X')
+		count = ft_putnbr_base(va_arg(*args, int), "0123456789ABCDEF", 0);
+	else if (c == '%')
+		ft_putchar('%');
+	if (c == 'c' || c == '%')
+		count = 1;
 	return (count);
 }
 
@@ -89,7 +128,6 @@ int	ft_printf(const char *format, ...)
 	va_list	args;
 	int	i;
 	int	p_chars;
-	void	*out;
 
 	va_start(args, format);
 	i = 0;
@@ -104,41 +142,12 @@ int	ft_printf(const char *format, ...)
 		else
 		{
 			i++;
-			if (format[i] == 's')
-			{
-				out = va_arg(args, char *);
-				p_chars += ft_strlen(out);
-				ft_putstr(out);
-			}
-			else if (format[i] == 'c')
-			{
-				p_chars++;
-				ft_putchar((char)va_arg(args, int));
-			}
-			else if (format[i] == 'p')
-			{
-				ft_putstr("0x");
-				p_chars += ft_putptr((unsigned long)va_arg(args, void*)) + 2;
-			}
-			else if (format[i] == 'd' || format[i] == 'i')
-				p_chars += ft_putnbr_base(va_arg(args, int), "0123456789", 1);
-			else if (format[i] == 'u')
-				p_chars += ft_putnbr_base(va_arg(args, unsigned int), "0123456789", 0);
-			else if (format[i] == 'x')
-				p_chars += ft_putnbr_base(va_arg(args, int), "0123456789abcdef", 0);
-			else if (format[i] == 'X')
-				p_chars += ft_putnbr_base(va_arg(args, int), "0123456789ABCDEF", 0);
-			else if (format[i] == '%')
-			{
-				p_chars++;
-				ft_putchar('%');
-			}
+			p_chars += handle_format(format[i], &args);
 		}
 		i++;
 	}
 	return (p_chars);
 }
-
 
 int	main()
 {
