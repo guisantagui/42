@@ -37,7 +37,10 @@ static int	ft_putstr(char *str)
 
 	i = 0;
 	if (!str)
-		return (i);
+	{
+		ft_putstr("(null)");
+		return (6);
+	}
 	while (str[i])
 		ft_putchar(str[i++]);
 	return (i);
@@ -75,8 +78,8 @@ static int	ft_putptr_rec(unsigned long p)
 	int	count;
 
 	count = 0;
-	if (p == 0)
-		ft_putchar('0');
+	//if (p == 0)
+	//	ft_putchar('0');
 	if (p >= 16)
 		count += ft_putptr_rec(p / 16);
 	ft_putchar("0123456789abcdef"[p % 16]);
@@ -147,8 +150,8 @@ int	main()
 {
 	int	a = 10;
 	int	*ptr = &a;
-	printf("%s, %c, %u, %x, %X, %p, %%\n", "Jose", 'J', -123, -123, 20, (void *)ptr);
-	ft_printf("%s, %c, %u, %x, %X, %p, %%\n", "Jose", 'J', -123, -123, 20, (void *)ptr);
+	printf("%s, %c, %u, %x, %X, %p, %%\n", NULL, 'J', -123, -123, 20, 0);
+	ft_printf("%s, %c, %u, %x, %X, %p, %%\n", NULL, 'J', -123, -123, 20, 0);
 	printf("N chars printed: %i\n", ft_putnbr_base(-123, "0123456789", 1));
 	printf("N chars printed: %i\n", ft_putnbr_base(-123, "0123456789abcdef", 0));
 	printf("N chars printed: %i\n", ft_putptr((unsigned long)ptr));

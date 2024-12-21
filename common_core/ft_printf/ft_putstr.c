@@ -7,7 +7,10 @@ int	ft_putstr(char *str)
 
 	i = 0;
 	if (!str)
-		return (i);
+	{
+		ft_putstr("(null)");
+		return (6);
+	}
 	while (str[i])
 		ft_putchar(str[i++]);
 	return (i);
