@@ -22,6 +22,5 @@ int	ft_putchar(char c);
 int	ft_putstr(char *str);
 int	ft_putnbr_base(int nbr, char *base, int sig);
 int	ft_putptr(unsigned long p);
-int	handle_format(char c, va_list *args);
 
 #endif

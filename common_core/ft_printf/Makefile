@@ -6,8 +6,7 @@ SRCS = ft_printf.c \
 	   ft_putchar.c \
 	   ft_putstr.c \
 	   ft_putnbr_base.c \
-	   ft_putptr.c \
-	   handle_format.c
+	   ft_putptr.c
 
 OBJS = ${SRCS:.c=.o}
 
@@ -26,8 +25,8 @@ clean:
 	@cd $(LIBFT_PATH) && make clean
 
 fclean: clean
-	@rm -f $(OBJS)
-	@cd $(LIBFT_PATH) && make clean
+	@rm -f $(OBJS) $(NAME)
+	@cd $(LIBFT_PATH) && make fclean
 
 re: fclean all
 
