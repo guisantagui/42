@@ -25,6 +25,28 @@ void	*ft_calloc(size_t num, size_t size)
 	return (res);
 }
 
+char	*ft_strjoin(char const *s1, char const *s2)
+{
+	int		len_s1;
+	int		len_s2;
+	int		len;
+	char	*joined;
+
+	if (!s1 || !s2)
+		return (NULL);
+	len_s1 = ft_strlen(s1);
+	len_s2 = ft_strlen(s2);
+	len = len_s1 + len_s2;
+	joined = (char *)malloc((len + 1) * sizeof(char));
+	if (!joined)
+		return (NULL);
+	ft_strlcpy(joined, s1, len_s1 + 1);
+	ft_strlcat(joined, s2, len + 1);
+	return (joined);
+}
+
+char	*ft_
+
 /*
 static int	get_line_len(int fd)
 {
@@ -64,7 +86,23 @@ void	ft_putchar(char c)
 	write(1, &c, 1);
 }
 
-char	*read_file()
+char	*read_file(int fd, char *res)
+{
+	int	bytes_read;
+	char	*temp;
+
+	if (!res)
+		res = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
+	bytes_read = 1;
+	while (bytes_read > 1)
+	{
+		bytes_read = read(fd, temp, BUFFER_SIZE);
+		if (bytes_read == -1)
+		{
+
+		}
+	}
+}
 
 void	print_five(int *fd)
 {
