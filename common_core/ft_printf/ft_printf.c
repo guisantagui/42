@@ -6,7 +6,7 @@
 /*   By: gsantama <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 19:48:22 by gsantama          #+#    #+#             */
-/*   Updated: 2024/12/01 19:55:55 by gsantama         ###   ########.fr       */
+/*   Updated: 2025/01/11 15:23:53 by gsantama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	handle_format(char c, va_list *args)
 	else if (c == 'c')
 		count = ft_putchar((char)va_arg(*args, int));
 	else if (c == 'p')
-		count = ft_putptr((unsigned long)va_arg(*args, void*));
+		count = ft_putptr((unsigned long)va_arg(*args, void *));
 	else if (c == 'd' || c == 'i')
 		count = ft_putnbr_base(va_arg(*args, int), "0123456789", 1);
 	else if (c == 'u')
@@ -39,8 +39,8 @@ static int	handle_format(char c, va_list *args)
 int	ft_printf(const char *format, ...)
 {
 	va_list	args;
-	int	i;
-	int	p_chars;
+	int		i;
+	int		p_chars;
 
 	va_start(args, format);
 	i = 0;
