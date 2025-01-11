@@ -3,6 +3,12 @@ common_core/libft/libftTester
 common_core/libft/libft-war-machine
 common_core/libft/*.o
 common_core/libft/libft.a
+common_core/ft_printf/printfTester
+common_core/ft_printf/*.o
+common_core/ft_printf/*.a
+common_core/ft_printf/libft/*.a
+common_core/ft_printf/libft/*.o
+common_core/ft_printf/a.out
 .DS_Store
 common_core/.DS_Store
 common_core/libft/.DS_Store
