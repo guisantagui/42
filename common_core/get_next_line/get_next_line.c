@@ -13,7 +13,7 @@ static char	*read_buffer(int fd)
 {
 	char	*buffer;
 	char	c;
-	char	i;
+	int	i;
 	size_t	bytes_read;
 
 	buffer = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
@@ -43,6 +43,9 @@ char	*get_next_line(int fd)
 	char	*buffer;
 	int	buffer_len;
 
+
+	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
+		return (0);
 	line = read_buffer(fd);
 	buffer_len = ft_strlen(line);
 	while (buffer_len == BUFFER_SIZE)

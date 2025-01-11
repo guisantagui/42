@@ -4,8 +4,6 @@
 # include <unistd.h>
 # include <stdlib.h>
 
-# define BUFFER_SIZE 42
-
 char     *get_next_line(int fd);
 size_t  ft_strlen(const char *str);
 size_t  ft_strlcat(char *dst, const char *src, size_t dstsize);

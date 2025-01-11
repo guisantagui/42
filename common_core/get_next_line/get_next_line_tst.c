@@ -3,7 +3,7 @@
 #include <fcntl.h>
 #include <stdio.h>
 
-#define BUFFER_SIZE 42
+#define BUFFER_SIZE 2
 
 size_t	ft_strlen(const char *str)
 {
@@ -86,12 +86,12 @@ char	*ft_strjoin_free(char const *s1, char const *s2)
 	free((void *)s1);
 	return (joined);
 }
-
+/*
 char	*read_buffer(int fd)
 {
 	char	*buffer;
 	char	c;
-	char	i;
+	int	i;
 	size_t	bytes_read;
 
 	buffer = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
@@ -114,58 +114,55 @@ char	*read_buffer(int fd)
 	buffer[i] = '\0';
 	return (buffer);
 }
+*/
+
+char	read_buffer(int fd)
+{
+	char	*buffer;
+
+	buffer = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
+	read(fd, &buffer, BUFFER_SIZE);
+	buffer[ft_strlen(buffer)] = '\0';
+	return (buffer);
+}
+
+int	has_newline(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '\n')
+			return (1);
+		i++;
+	}
+	return (0);
+}
 
 char	*get_next_line(int fd)
 {
 	char	*line;
 	char	*buffer;
-	int	buffer_len;
+	int	nu_line;
 
-	line = read_buffer(fd);
-	buffer_len = ft_strlen(line);
-	while (buffer_len == BUFFER_SIZE)
+	line = '\0';
+	nu_line = 0;
+
+	while (nu_line == 0)
 	{
 		buffer = read_buffer(fd);
-		line = ft_strjoin_free(line, buffer);
-		buffer_len = ft_strlen(buffer);
+		nu_line = has_newline(buffer);
+		if (nu_line == 1)
+		{
+			line = ft_strjoin_free(line, ft_split(buffer)[0]);
+			
+		}
+		else
+			line = ft_strjoin_free(line, buffer);
 	}
 	return (line);
 }
-
-/*
-static int	get_line_len(int fd)
-{
-	int	len;
-	char	c;
-	size_t	bytes_read;
-
-	len = 0;
-	bytes_read = read(fd, &c, 1);
-	while (bytes_read > 0)
-	{
-		len++;
-		if (c == '\n')
-			break;
-	}
-	return (len);
-}
-
-char	*get_next_line(int fd)
-{
-	int	fd_start;
-	char	*line;
-	int	line_len;
-
-	fd_start = fd;
-	line_len = get_line_len(fd);
-	line = (char *)malloc((sizeof(char) * line_len) + 1);
-	if (line == NULL)
-		return (NULL);
-	read(fd_start, line, line_len);
-	line[line_len] = '\0';
-	return (line);
-}
-*/
 
 int	main()
 {
