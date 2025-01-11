@@ -6,7 +6,7 @@
 /*   By: gsantama <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 15:35:10 by gsantama          #+#    #+#             */
-/*   Updated: 2025/01/11 15:35:13 by gsantama         ###   ########.fr       */
+/*   Updated: 2025/01/11 15:56:21 by gsantama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,15 @@ int	ft_putptr(unsigned long p)
 {
 	int	count;
 
-	ft_putstr("0x");
-	count = ft_putptr_rec(p) + 2;
+	if (p == 0)
+	{
+		ft_putstr("(nil)");
+		count = 5;
+	}
+	else
+	{
+		ft_putstr("0x");
+		count = ft_putptr_rec(p) + 2;
+	}
 	return (count);
 }
