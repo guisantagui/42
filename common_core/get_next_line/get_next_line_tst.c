@@ -143,7 +143,7 @@ int	has_newline(char *str)
 char	*get_next_line(int fd)
 {
 	char	*line;
-	char	*buffer;
+	static char	*buffer;
 	int	nu_line;
 
 	line = '\0';
