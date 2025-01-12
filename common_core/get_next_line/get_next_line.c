@@ -43,55 +43,6 @@ static char	*ft_strchr(const char *s, int c)
 	return (0);
 }
 
-static size_t	word_count(char const *s, char c)
-{
-	size_t	count;
-	int		i;
-
-	if (!s)
-		return (0);
-	count = 0;
-	i = 0;
-	while (s[i])
-	{
-		while (s[i] == c)
-			i++;
-		if (s[i])
-			count++;
-		while (s[i] && (s[i] != c))
-			i++;
-	}
-	return (count);
-}
-
-static char	**ft_split(char const *s, char c)
-{
-	char	**split;
-	int		i;
-	size_t	w_len;
-
-	split = (char **)malloc((word_count(s, c) + 1) * sizeof(char *));
-	if (!split || !s)
-		return (NULL);
-	i = 0;
-	while (*s)
-	{
-		while (*s == c && *s)
-			s++;
-		if (*s)
-		{
-			if (!ft_strchr(s, c))
-				w_len = ft_strlen(s);
-			else
-				w_len = ft_strchr(s, c) - s;
-			split[i++] = ft_substr(s, 0, w_len);
-			s += w_len;
-		}
-	}
-	split[i] = NULL;
-	return (split);
-}
-
 static char	*read_buffer(int fd, int *read_bytes)
 {
 	char	*buffer;
@@ -115,33 +66,39 @@ char	*get_next_line(int fd)
 	char	*line;
 	static char	*buffer;
 	char	*nu_line;
-	int	read_bytes;
+	static int	read_bytes;
+    char    *temp;
 
 	if (fd < 0 || BUFFER_SIZE < 1)
 		return (NULL);
 	line = NULL;
 	nu_line = NULL;
 	if (!buffer)
-	{
+    {
 		buffer = read_buffer(fd, &read_bytes);
-		nu_line = ft_strchr(buffer, '\n');
-	}
-	while (nu_line == 0 && read_bytes == BUFFER_SIZE)
+        if (read_bytes <= 0)
+            return (line);
+    }
+	nu_line = ft_strchr(buffer, '\n');
+	while (!nu_line && read_bytes == BUFFER_SIZE)
 	{
 		line = ft_strjoin_free(line, buffer);
+        free(buffer);
 		buffer = read_buffer(fd, &read_bytes);
+        //printf("buffer: %s\n", buffer);
 		nu_line = ft_strchr(buffer, '\n');
 	}
 	if (nu_line != 0)
 	{
-		line = ft_strjoin_free(line, ft_split(buffer, '\n')[0]);
-		line = ft_strjoin_free(line, "\n");
-		buffer = ft_split(buffer, '\n')[1];
+        line = ft_strjoin_free(line, ft_substr(buffer, 0, nu_line - buffer + 1));
+        temp = buffer;
+		buffer = ft_strdup(nu_line + 1);
+        free(temp);
 	}
 	else
 	{
 		line = ft_strjoin_free(line, buffer);
-		free(buffer);
+		buffer = NULL;
 	}
 	return (line);
 }
