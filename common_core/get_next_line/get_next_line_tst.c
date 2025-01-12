@@ -65,8 +65,9 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	int		len;
 	char	*joined;
 
-	if (!s1 || !s2)
-		return (NULL);
+	
+	if (!s1)
+		s1 = "";
 	len_s1 = ft_strlen(s1);
 	len_s2 = ft_strlen(s2);
 	len = len_s1 + len_s2;
@@ -86,6 +87,99 @@ char	*ft_strjoin_free(char const *s1, char const *s2)
 	free((void *)s1);
 	return (joined);
 }
+
+char	*ft_strdup(const char *s1)
+{
+	char	*out;
+	size_t	out_len;	
+
+	out_len = ft_strlen(s1) + 1;
+	out = (char *)malloc(out_len * sizeof(char));
+	if (!out)
+		return (NULL);
+	ft_strlcpy(out, s1, out_len);
+	return (out);
+}
+
+char	*ft_substr(char const *s, unsigned int start, size_t len)
+{
+	char	*subs;
+
+	if (!s)
+		return (0);
+	if (ft_strlen(s) < start)
+		return (ft_strdup(""));
+	if (ft_strlen(s + start) < len)
+		len = ft_strlen(s + start);
+	subs = (char *)malloc((len + 1) * sizeof(char));
+	if (!subs)
+		return (NULL);
+	ft_strlcpy(subs, s + start, len + 1);
+	return (subs);
+}
+
+char	*ft_strchr(const char *s, int c)
+{
+	while (*s)
+	{
+		if (*s == (char)c)
+			return ((char *)s);
+		s++;
+	}
+	if ((char)c == '\0')
+		return ((char *)s);
+	return (0);
+}
+
+static size_t	word_count(char const *s, char c)
+{
+	size_t	count;
+	int		i;
+
+	if (!s)
+		return (0);
+	count = 0;
+	i = 0;
+	while (s[i])
+	{
+		while (s[i] == c)
+			i++;
+		if (s[i])
+			count++;
+		while (s[i] && (s[i] != c))
+			i++;
+	}
+	return (count);
+}
+
+char	**ft_split(char const *s, char c)
+{
+	char	**split;
+	int		i;
+	size_t	w_len;
+
+	split = (char **)malloc((word_count(s, c) + 1) * sizeof(char *));
+	if (!split || !s)
+		return (NULL);
+	i = 0;
+	while (*s)
+	{
+		while (*s == c && *s)
+			s++;
+		if (*s)
+		{
+			if (!ft_strchr(s, c))
+				w_len = ft_strlen(s);
+			else
+				w_len = ft_strchr(s, c) - s;
+			split[i++] = ft_substr(s, 0, w_len);
+			s += w_len;
+		}
+	}
+	split[i] = NULL;
+	return (split);
+}
+
 /*
 char	*read_buffer(int fd)
 {
@@ -116,50 +210,54 @@ char	*read_buffer(int fd)
 }
 */
 
-char	read_buffer(int fd)
+char	*read_buffer(int fd, int *read_bytes)
 {
 	char	*buffer;
+	
 
 	buffer = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
-	read(fd, &buffer, BUFFER_SIZE);
-	buffer[ft_strlen(buffer)] = '\0';
-	return (buffer);
-}
-
-int	has_newline(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
+	if (!buffer)
+		return (NULL);
+	*read_bytes = read(fd, buffer, BUFFER_SIZE);
+	if (*read_bytes < 0)
 	{
-		if (str[i] == '\n')
-			return (1);
-		i++;
+		free(buffer);
+		return (NULL);
 	}
-	return (0);
+	buffer[*read_bytes] = '\0';
+	return (buffer);
 }
 
 char	*get_next_line(int fd)
 {
 	char	*line;
 	static char	*buffer;
-	int	nu_line;
+	char	*nu_line;
+	int	read_bytes;
 
-	line = '\0';
-	nu_line = 0;
-
-	while (nu_line == 0)
+	line = NULL;
+	if (!buffer)
 	{
-		buffer = read_buffer(fd);
-		nu_line = has_newline(buffer);
-		if (nu_line == 1)
-		{
-			line = ft_strjoin_free(line, ft_split(buffer)[0]);
-			
-		}
-		else
-			line = ft_strjoin_free(line, buffer);
+		buffer = read_buffer(fd, &read_bytes);
+		//printf("%s", buffer);
+		nu_line = ft_strchr(buffer, '\n');
+	}
+	while (nu_line == 0 && read_bytes == BUFFER_SIZE)
+	{
+		line = ft_strjoin_free(line, buffer);
+		buffer = read_buffer(fd, &read_bytes);
+		nu_line = ft_strchr(buffer, '\n');
+	}
+	if (nu_line != 0)
+	{
+		line = ft_strjoin_free(line, ft_split(buffer, '\n')[0]);
+		line = ft_strjoin_free(line, "\n");
+		buffer = ft_split(buffer, '\n')[1];
+	}
+	else
+	{
+		line = ft_strjoin_free(line, buffer);
+		buffer = NULL;
 	}
 	return (line);
 }

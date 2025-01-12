@@ -9,6 +9,7 @@ common_core/ft_printf/*.a
 common_core/ft_printf/libft/*.a
 common_core/ft_printf/libft/*.o
 common_core/ft_printf/a.out
+common_core/get_next_line/gnlTester
 .DS_Store
 common_core/.DS_Store
 common_core/libft/.DS_Store
