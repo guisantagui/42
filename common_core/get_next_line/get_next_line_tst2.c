@@ -205,29 +205,34 @@ char	*get_next_line(int fd)
 	char	*line;
 	static char	*buffer;
 	char	*nu_line;
-	int	read_bytes;
+	static int	read_bytes;
+    char    *temp;
 
-	if (!fd || BUFFER_SIZE < 1)
+	if (fd < 0 || BUFFER_SIZE < 1)
 		return (NULL);
 	line = NULL;
 	nu_line = NULL;
 	if (!buffer)
-	{
+    {
 		buffer = read_buffer(fd, &read_bytes);
-		//printf("%s", buffer);
-		nu_line = ft_strchr(buffer, '\n');
-	}
-	while (nu_line == 0 && read_bytes == BUFFER_SIZE)
+        if (read_bytes <= 0)
+            return (line);
+    }
+	nu_line = ft_strchr(buffer, '\n');
+	while (!nu_line && read_bytes == BUFFER_SIZE)
 	{
 		line = ft_strjoin_free(line, buffer);
+        free(buffer);
 		buffer = read_buffer(fd, &read_bytes);
+        //printf("buffer: %s\n", buffer);
 		nu_line = ft_strchr(buffer, '\n');
 	}
 	if (nu_line != 0)
 	{
-		line = ft_strjoin_free(line, ft_split(buffer, '\n')[0]);
-		line = ft_strjoin_free(line, "\n");
-		buffer = ft_split(buffer, '\n')[1];
+        line = ft_strjoin_free(line, ft_substr(buffer, 0, nu_line - buffer + 1));
+        temp = buffer;
+		buffer = ft_strdup(nu_line + 1);
+        free(temp);
 	}
 	else
 	{
