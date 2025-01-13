@@ -1,0 +1,56 @@
+[1;31mError[0m in test 7: [0;36mget_next_line(0: "stdin")[0m: 
+Memory leak: 0x10ab006f0 - 12 bytes
+You failed to free the memory allocated at:
+0   test3.out                           0x00000001048f3e48 _add_malloc + 752
+1   test3.out                           0x00000001048f3b48 malloc + 368
+2   test3.out                           0x00000001048fb168 ft_substr + 192
+3   test3.out                           0x00000001048fadc4 set_line + 284
+4   test3.out                           0x00000001048fb530 get_next_line + 728
+5   test3.out                           0x00000001048fa3b8 test_gnl_func + 108
+6   test3.out                           0x00000001048f3368 main + 20156
+7   dyld                                0x000000018e6ca0e0 start + 2360
+
+Memory leak: 0x10ab006b0 - 11 bytes
+You failed to free the memory allocated at:
+0   test3.out                           0x00000001048f3e48 _add_malloc + 752
+1   test3.out                           0x00000001048f3b48 malloc + 368
+2   test3.out                           0x00000001048fb168 ft_substr + 192
+3   test3.out                           0x00000001048fadc4 set_line + 284
+4   test3.out                           0x00000001048fb530 get_next_line + 728
+5   test3.out                           0x00000001048fa3b8 test_gnl_func + 108
+6   test3.out                           0x00000001048f33b4 main + 20232
+7   dyld                                0x000000018e6ca0e0 start + 2360
+
+Memory leak: 0x10ab00670 - 13 bytes
+You failed to free the memory allocated at:
+0   test3.out                           0x00000001048f3e48 _add_malloc + 752
+1   test3.out                           0x00000001048f3b48 malloc + 368
+2   test3.out                           0x00000001048fb168 ft_substr + 192
+3   test3.out                           0x00000001048fadc4 set_line + 284
+4   test3.out                           0x00000001048fb530 get_next_line + 728
+5   test3.out                           0x00000001048fa3b8 test_gnl_func + 108
+6   test3.out                           0x00000001048f3400 main + 20308
+7   dyld                                0x000000018e6ca0e0 start + 2360
+
+Memory leak: 0x10ab00630 - 12 bytes
+You failed to free the memory allocated at:
+0   test3.out                           0x00000001048f3e48 _add_malloc + 752
+1   test3.out                           0x00000001048f3b48 malloc + 368
+2   test3.out                           0x00000001048fb168 ft_substr + 192
+3   test3.out                           0x00000001048fadc4 set_line + 284
+4   test3.out                           0x00000001048fb530 get_next_line + 728
+5   test3.out                           0x00000001048fa3b8 test_gnl_func + 108
+6   test3.out                           0x00000001048f344c main + 20384
+7   dyld                                0x000000018e6ca0e0 start + 2360
+
+Memory leak: 0x10ab005d0 - 6 bytes
+You failed to free the memory allocated at:
+0   test3.out                           0x00000001048f3e48 _add_malloc + 752
+1   test3.out                           0x00000001048f3b48 malloc + 368
+2   test3.out                           0x00000001048fb168 ft_substr + 192
+3   test3.out                           0x00000001048fadc4 set_line + 284
+4   test3.out                           0x00000001048fb530 get_next_line + 728
+5   test3.out                           0x00000001048fa3b8 test_gnl_func + 108
+6   test3.out                           0x00000001048f3498 main + 20460
+7   dyld                                0x000000018e6ca0e0 start + 2360
+

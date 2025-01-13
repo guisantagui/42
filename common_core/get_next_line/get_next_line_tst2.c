@@ -133,65 +133,15 @@ char	*ft_strchr(const char *s, int c)
 	return (0);
 }
 
-static size_t	word_count(char const *s, char c)
-{
-	size_t	count;
-	int		i;
-
-	if (!s)
-		return (0);
-	count = 0;
-	i = 0;
-	while (s[i])
-	{
-		while (s[i] == c)
-			i++;
-		if (s[i])
-			count++;
-		while (s[i] && (s[i] != c))
-			i++;
-	}
-	return (count);
-}
-
-char	**ft_split(char const *s, char c)
-{
-	char	**split;
-	int		i;
-	size_t	w_len;
-
-	split = (char **)malloc((word_count(s, c) + 1) * sizeof(char *));
-	if (!split || !s)
-		return (NULL);
-	i = 0;
-	while (*s)
-	{
-		while (*s == c && *s)
-			s++;
-		if (*s)
-		{
-			if (!ft_strchr(s, c))
-				w_len = ft_strlen(s);
-			else
-				w_len = ft_strchr(s, c) - s;
-			split[i++] = ft_substr(s, 0, w_len);
-			s += w_len;
-		}
-	}
-	split[i] = NULL;
-	return (split);
-}
-
 char	*read_buffer(int fd, int *read_bytes)
 {
 	char	*buffer;
 	
-
 	buffer = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (!buffer)
 		return (NULL);
 	*read_bytes = read(fd, buffer, BUFFER_SIZE);
-	if (*read_bytes < 0)
+	if (*read_bytes <= 0)
 	{
 		free(buffer);
 		return (NULL);
@@ -244,13 +194,38 @@ char	*get_next_line(int fd)
 }
 */
 
+void	set_line(char **line, char **buffer, char *nu_line)
+{
+	char	*temp;
+	if (nu_line)
+	{
+		*line = ft_strjoin_free(*line, ft_substr(*buffer, 0, nu_line - *buffer + 1));
+		if (ft_strlen(nu_line + 1) > 0)
+		{
+			temp = *buffer;
+			*buffer = ft_strdup(nu_line + 1);
+			free(temp);
+		}
+		else
+		{
+			free(*buffer);
+			*buffer = NULL;
+		}
+	}
+	else
+	{
+		*line = ft_strjoin_free(*line, *buffer);
+    	free(*buffer);
+		*buffer = NULL;
+	}
+}
+
 char	*get_next_line(int fd)
 {
 	char	*line;
 	static char	*buffer;
 	char	*nu_line;
 	int	read_bytes;
-    char    *temp;
 
 	if (fd < 0 || BUFFER_SIZE < 1)
 		return (NULL);
@@ -261,36 +236,12 @@ char	*get_next_line(int fd)
     	{
 			buffer = read_buffer(fd, &read_bytes);
 			if (read_bytes <= 0)
-			{
-				free(buffer);
-				buffer = NULL;
             	return (line);
-			}
     	}
 		nu_line = ft_strchr(buffer, '\n');
+		set_line(&line, &buffer, nu_line);
 		if (nu_line)
-		{
-        	line = ft_strjoin_free(line, ft_substr(buffer, 0, nu_line - buffer + 1));
-            if (ft_strlen(nu_line + 1) > 0)
-            {
-        	    temp = buffer;
-			    buffer = ft_strdup(nu_line + 1);
-        	    free(temp);
-            }
-            else
-            {
-                free(buffer);
-                buffer = NULL;
-            }
 			return (line);
-		}
-		else
-		{
-			line = ft_strjoin_free(line, buffer);
-        	free(buffer);
-			buffer = NULL;
-        	//printf("buffer: %s\n", buffer);
-		}
 	}
 }
 
@@ -304,7 +255,7 @@ int	main()
 	printf("First line: %s", line);
 	line = get_next_line(fd);
 	printf("Second line: %s", line);
-	//line = get_next_line(fd);
-	//printf("Third line: %s", line);
+	line = get_next_line(fd);
+	printf("Third line: %s", line);
 	//printf("3===D~~~~");
 }
