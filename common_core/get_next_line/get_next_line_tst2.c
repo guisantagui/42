@@ -200,6 +200,7 @@ char	*read_buffer(int fd, int *read_bytes)
 	return (buffer);
 }
 
+/*
 char	*get_next_line(int fd)
 {
 	char	*line;
@@ -241,6 +242,57 @@ char	*get_next_line(int fd)
 	}
 	return (line);
 }
+*/
+
+char	*get_next_line(int fd)
+{
+	char	*line;
+	static char	*buffer;
+	char	*nu_line;
+	int	read_bytes;
+    char    *temp;
+
+	if (fd < 0 || BUFFER_SIZE < 1)
+		return (NULL);
+	line = NULL;
+	while (1)
+	{
+		if (!buffer)
+    	{
+			buffer = read_buffer(fd, &read_bytes);
+			if (read_bytes <= 0)
+			{
+				free(buffer);
+				buffer = NULL;
+            	return (line);
+			}
+    	}
+		nu_line = ft_strchr(buffer, '\n');
+		if (nu_line)
+		{
+        	line = ft_strjoin_free(line, ft_substr(buffer, 0, nu_line - buffer + 1));
+            if (ft_strlen(nu_line + 1) > 0)
+            {
+        	    temp = buffer;
+			    buffer = ft_strdup(nu_line + 1);
+        	    free(temp);
+            }
+            else
+            {
+                free(buffer);
+                buffer = NULL;
+            }
+			return (line);
+		}
+		else
+		{
+			line = ft_strjoin_free(line, buffer);
+        	free(buffer);
+			buffer = NULL;
+        	//printf("buffer: %s\n", buffer);
+		}
+	}
+}
 
 int	main()
 {
@@ -252,7 +304,7 @@ int	main()
 	printf("First line: %s", line);
 	line = get_next_line(fd);
 	printf("Second line: %s", line);
-	line = get_next_line(fd);
-	printf("Third line: %s", line);
-	printf("3===D~~~~");
+	//line = get_next_line(fd);
+	//printf("Third line: %s", line);
+	//printf("3===D~~~~");
 }

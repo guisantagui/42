@@ -53,13 +53,12 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 	return (i);
 }
 
-static char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin_free(char const *s1, char const *s2)
 {
 	int		len_s1;
 	int		len_s2;
 	int		len;
 	char	*joined;
-
 	
 	if (!s1)
 		s1 = "";
@@ -71,14 +70,7 @@ static char	*ft_strjoin(char const *s1, char const *s2)
 		return (NULL);
 	ft_strlcpy(joined, s1, len_s1 + 1);
 	ft_strlcat(joined, s2, len + 1);
-	return (joined);
-}
-
-char	*ft_strjoin_free(char const *s1, char const *s2)
-{
-	char	*joined;
-
-	joined = ft_strjoin(s1, s2);
-	free((void *)s1);
+	if (s1 && *s1)
+		free((void *)s1);
 	return (joined);
 }
