@@ -51,7 +51,7 @@ static char	*read_buffer(int fd, int *read_bytes)
 	if (!buffer)
 		return (NULL);
 	*read_bytes = read(fd, buffer, BUFFER_SIZE);
-	if (*read_bytes < 0)
+	if (*read_bytes <= 0)
 	{
 		free(buffer);
 		return (NULL);
@@ -102,6 +102,32 @@ char	*get_next_line(int fd)
     	{
 			buffer = read_buffer(fd, &read_bytes);
 			if (read_bytes <= 0)
+            	return (line);
+    	}
+		nu_line = ft_strchr(buffer, '\n');
+		set_line(&line, &buffer, nu_line);
+		if (nu_line)
+			return (line);
+	}
+}
+
+/*
+char	*get_next_line(int fd)
+{
+	char	*line;
+	static char	*buffer;
+	char	*nu_line;
+	int	read_bytes;
+
+	if (fd < 0 || BUFFER_SIZE < 1)
+		return (NULL);
+	line = NULL;
+	while (1)
+	{
+		if (!buffer)
+    	{
+			buffer = read_buffer(fd, &read_bytes);
+			if (read_bytes <= 0)
 			{
 				free(buffer);
 				buffer = NULL;
@@ -114,3 +140,4 @@ char	*get_next_line(int fd)
 			return (line);
 	}
 }
+*/
