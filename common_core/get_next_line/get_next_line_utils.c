@@ -1,4 +1,29 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gsantama <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/13 18:16:39 by gsantama          #+#    #+#             */
+/*   Updated: 2025/01/13 18:17:45 by gsantama         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
+
+char	*ft_strdup(const char *s1)
+{
+	char	*out;
+	size_t	out_len;	
+
+	out_len = ft_strlen(s1) + 1;
+	out = (char *)malloc(out_len * sizeof(char));
+	if (!out)
+		return (NULL);
+	ft_strlcpy(out, s1, out_len);
+	return (out);
+}
 
 size_t	ft_strlen(const char *str)
 {
@@ -59,11 +84,9 @@ char	*ft_strjoin_free(char const *s1, char const *s2, int free_both)
 	int		len_s2;
 	int		len;
 	char	*joined;
-	
+
 	if (!s1)
 		s1 = "";
-	//if (!s2)
-	//	return (NULL);
 	len_s1 = ft_strlen(s1);
 	len_s2 = ft_strlen(s2);
 	len = len_s1 + len_s2;
