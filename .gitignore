@@ -11,6 +11,7 @@ common_core/ft_printf/libft/*.o
 common_core/ft_printf/a.out
 common_core/get_next_line/gnlTester
 common_core/get_next_line/fsoares
+common_core/get_next_line/.get_next_line_utils.c.swp
 .DS_Store
 common_core/.DS_Store
 common_core/libft/.DS_Store
