@@ -53,7 +53,7 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 	return (i);
 }
 
-char	*ft_strjoin_free(char const *s1, char const *s2)
+char	*ft_strjoin_free(char const *s1, char const *s2, int free_both)
 {
 	int		len_s1;
 	int		len_s2;
@@ -74,5 +74,7 @@ char	*ft_strjoin_free(char const *s1, char const *s2)
 	ft_strlcat(joined, s2, len + 1);
 	if (s1 && *s1)
 		free((void *)s1);
+	if (s2 && free_both == 1)
+		free((void *)s2);
 	return (joined);
 }
