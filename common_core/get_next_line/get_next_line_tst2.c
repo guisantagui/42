@@ -202,12 +202,14 @@ void	set_line(char **line, char **buffer, char *nu_line)
 		*line = ft_strjoin_free(*line, ft_substr(*buffer, 0, nu_line - *buffer + 1));
 		if (ft_strlen(nu_line + 1) > 0)
 		{
+            printf("buffer is newline\n");
 			temp = *buffer;
 			*buffer = ft_strdup(nu_line + 1);
 			free(temp);
 		}
 		else
 		{
+            printf("buffer is nullchar\n");
 			free(*buffer);
 			*buffer = NULL;
 		}
