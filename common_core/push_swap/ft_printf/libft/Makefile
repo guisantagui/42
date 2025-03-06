@@ -55,8 +55,8 @@ RM = rm -f
 
 CFLAGS = -Wall -Werror -Wextra
 
-.c.o:	
-		${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
+%.o: %.c
+	${CC} ${CFLAGS} -c $< -o $@
 
 ${NAME}:	${OBJS}
 			ar rc ${NAME} ${OBJS}

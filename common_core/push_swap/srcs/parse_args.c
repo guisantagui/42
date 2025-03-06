@@ -1,4 +1,4 @@
-#include ¨push_swap.h"
+#include "../includes/push_swap.h"
 
 int	is_number(char *str)
 {
@@ -25,6 +25,7 @@ t_list	*parse_args(int argc, char **argv)
 	int	i;
 	t_list	*lst;
 	t_list	*node;
+	int	*num;
 
 	i = 1;
 	lst = NULL;
@@ -32,21 +33,20 @@ t_list	*parse_args(int argc, char **argv)
 	{
 		if (is_number(argv[i]))
 		{
-			node = ft_lstnew(ft_atoi(argv[i]));
+			num = malloc(sizeof(int));
+			if (!num)
+				error(&lst);
+			*num = ft_atoi(argv[i]);
+			node = ft_lstnew(num);
 			if (!node)
 			{
-				ft_lstclear(&lst, free);
-				ft_printf("Error\n");
-				exit(1);
+				free(num);
+				error(&lst);
 			}
 			ft_lstadd_back(&lst, node);
 		}
 		else
-		{
-			ft_printf("Error\n");
-			ft_lstclear(&lst, free);
-			exit(1);
-		}
+			error(&lst);
 		i++;
 	}
 	return (lst);
