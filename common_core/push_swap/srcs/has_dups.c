@@ -9,7 +9,7 @@ int	has_dups(t_list *lst)
 		lst_next = lst->next;
 		while (lst_next)
 		{
-			if (lst->content == lst_next->content)
+			if (*(int *)lst->content == *(int *)lst_next->content)
 				return (1);
 			lst_next = lst_next->next;
 		}
