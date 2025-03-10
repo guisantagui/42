@@ -46,20 +46,6 @@ int	main(int argc, char **argv)
 		ft_printf("size_a after sort and add: %d\n", ft_lstsize(a));
 		ft_printf("A:\n");
 		print_list(a);
-		ft_printf("B:\n");
-		print_list(b);
-		//ft_printf("%d\n", (*(int *)b->content));
-		//b = b->next;
-		//while (b)
-		//	ft_printf("Je\n");
-		
-		//ft_printf("%d\n", (*(int *)b->content));
-		/*while (b)
-		{
-			num = *(int *)b->content;
-			ft_printf("B: %d\n", num);
-			b = b->next;
-		}*/
 	}
 	return (0);
 }

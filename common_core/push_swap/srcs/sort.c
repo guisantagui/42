@@ -7,32 +7,36 @@ void    sort(t_list **a, t_list **b)
     int i;
     int a_size;
     int j;
-    //int top_val;
+    int ops;
 
     max = find_max(*a);
     max_bits = count_bits(max);
-    ft_printf("max_bits: %d\n", max_bits);
     i = 0;
-    a_size = ft_lstsize(*a);
-    j = 0;
+    ops = 0;
     while (i < max_bits)
     {
-        ft_printf("Jaja");
+        a_size = ft_lstsize(*a);
+        j = 0;
         while (j < a_size)
         {
-            ft_printf("Jeje");
-            //top_val = (*a)->content;
             if ((*(int *)(*a)->content & (1 << i)) == 0)
             {
-                ft_printf("Jiji");
                 push(a, b);
+                ops++;
             }
             else
+            {
                 rotate(a);
+                ops++;
+            }
             j++;
         }
         while (*b)
+        {
             push(b, a);
+            ops++;
+        }
         i++;
     }
+    ft_printf("N. operations = %d\n", ops);
 }
