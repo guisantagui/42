@@ -29,21 +29,25 @@ int	main(int argc, char **argv)
 			ft_lstclear(&b, free);
 			error(&a);
 		}
+		ft_printf("Is sorted: %d\n", is_sorted(a));
 		b = NULL;
 		min = find_min(a);
 		ft_printf("size_a before: %d\n", ft_lstsize(a));
 		if (min < 0)
 			subs_val(&a, min);
 		ft_printf("minimum: %d\n", min);
+		ft_printf("A after subs:\n");
+		print_list(a);
 		//swap(a);
 		//rrotate(&a);
 		//push(&a, &b);
-		sort(&a, &b);
+		//sort_three(&a);
+		//sort(&a, &b);
 		ft_printf("size_a after sort: %d\n", ft_lstsize(a));
 		//ft_printf("Hola");
 		if (min < 0)
 			add_val(&a, min);
-		ft_printf("size_a after sort and add: %d\n", ft_lstsize(a));
+		//ft_printf("size_a after sort and add: %d\n", ft_lstsize(a));
 		ft_printf("A:\n");
 		print_list(a);
 	}
