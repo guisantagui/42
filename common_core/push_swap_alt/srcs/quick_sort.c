@@ -13,8 +13,8 @@ static int get_pivot(t_list *lst, int len)
 void quick_sort(t_list **a, t_list **b, int len)
 {
     // Base case for small arrays
-    if (len <= 3) {
-        sort_small(a, b, len);
+    if (len <= 5) {
+        sort_short(a, b, len);
         return;
     }
     

@@ -19,5 +19,6 @@ int find_max(t_list *lst);
 int is_sorted(t_list *lst);
 int count_bits(int n);
 void    sort_short(t_list **lst);
+void quick_sort(t_list **a, t_list **b, int len);
 
 #endif

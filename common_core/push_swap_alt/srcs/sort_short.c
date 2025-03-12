@@ -29,7 +29,7 @@ static void    sort_three(t_list **lst)
         swap(*lst);
 }
 
-void    sort_short(t_list **lst)
+void    sort_short(t_list **lst, int len)
 {
     int lst_len;
 
