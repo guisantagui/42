@@ -10,4 +10,5 @@ void    swap(t_list *lst)
         lst->content = lst->next->content;
         lst->next->content = t;
     }
+    ft_printf("swap\n");
 }

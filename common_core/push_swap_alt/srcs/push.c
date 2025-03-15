@@ -12,4 +12,5 @@ void    push(t_list **src, t_list **dst)
     ft_lstadd_front(dst, first);
     //first->next = *dst;
     //*dst = first;
+    ft_printf("push\n");
 }

@@ -14,11 +14,12 @@ void    swap(t_list *lst);
 void    rotate(t_list **lst);
 void    rrotate(t_list **lst);
 void    push(t_list **src, t_list **dst);
-int find_min(t_list *lst);
-int find_max(t_list *lst);
-int is_sorted(t_list *lst);
+int find_min(t_list *lst, int len);
+int find_max(t_list *lst, int len);
+int is_sorted(t_list *lst, int reverse, int len);
 int count_bits(int n);
-void    sort_short(t_list **lst);
-void quick_sort(t_list **a, t_list **b, int len);
+void    sort_short(t_list **a, t_list **b, int len, int reverse);
+void quick_sort(t_list **a, t_list **b, int len, int reverse);
+void print_list(t_list *lst);
 
 #endif

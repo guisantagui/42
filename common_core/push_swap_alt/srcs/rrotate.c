@@ -16,4 +16,5 @@ void    rrotate(t_list **lst)
     last->next = first;
     *lst = last;
     sec_last->next = NULL;
+    ft_printf("rrotate\n");
 }
