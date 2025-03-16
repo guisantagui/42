@@ -29,13 +29,8 @@ int	main(int argc, char **argv)
 		b = NULL;
 		a_stack = init_stack(a, 'a');
 		b_stack = init_stack(b, 'b');
-		sort_short(&a_stack->list, &b_stack->list, a_stack->size, 0);
-		//sort_short(&a, &b, argc - 1, 0);
-		quick_sort(&a, &b, argc - 1, 0);
-		//ft_printf("A:\n");
-		//print_list(a_stack->list);
-		print_list(a);
-		//ft_printf("Is sorted: %d\n", is_sorted(a, 0, ft_lstsize(a)));
+		quick_sort(&a_stack, &b_stack, a_stack->size, 0);
+		free_ab(&a_stack, &b_stack);
 	}
 	return (0);
 }

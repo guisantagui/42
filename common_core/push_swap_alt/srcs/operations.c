@@ -1,61 +1,69 @@
 #include "../includes/push_swap.h"
 
-void    push(t_list **src, t_list **dst)
+void    push(t_stack **src, t_stack **dst)
 {
     t_list  *first;
 
-    if (!src || !*src)
+    if (!src || !*src || !(*src)->list)
         return;
-    first = *src;
-    *src = first->next;
+    first = (*src)->list;
+    (*src)->list = first->next;
     first->next = NULL;
-    ft_lstadd_front(dst, first);
-    ft_printf("push\n");
+    ft_lstadd_front(&(*dst)->list, first);
+    (*src)->size--;
+    (*dst)->size++; 
+    ft_printf("p%c\n", (*dst)->id);
 }
 
-void    swap(t_list *lst)
+void    swap(t_stack **stack)
 {
     void    *t;
 
-    if (lst && lst->next)
+    if ((*stack)->list && (*stack)->list->next)
     {
-        t = lst->content;
-        lst->content = lst->next->content;
-        lst->next->content = t;
+        t = (*stack)->list->content;
+        (*stack)->list->content = (*stack)->list->next->content;
+        (*stack)->list->next->content = t;
+        ft_printf("s%c\n", (*stack)->id);
     }
-    ft_printf("swap\n");
 }
 
-void    rotate(t_list **lst)
+void    rotate(t_stack **stack)
 {
     t_list *first;
     t_list	*last;
 
-    first = *lst;
-    last = *lst;
-	while (last -> next != NULL)
-		last = last -> next;
-    *lst = first->next;
-    first->next = NULL;
-    last->next = first;
-    ft_printf("rotate\n");
+    if ((*stack)->size > 1)
+    {
+        first = (*stack)->list;
+        last = (*stack)->list;
+	    while (last -> next != NULL)
+	    	last = last -> next;
+        (*stack)->list = first->next;
+        first->next = NULL;
+        last->next = first;
+        ft_printf("r%c\n", (*stack)->id);
+    }
 }
 
-void    rrotate(t_list **lst)
+void    rrotate(t_stack **stack)
 {
     t_list *first;
     t_list	*last;
     t_list  *sec_last;
 
-    first = *lst;
-    last = *lst;
-	while (last -> next)
+    if ((*stack)->size > 1)
     {
-        sec_last = last;
-		last = last -> next;
+        first = (*stack)->list;
+        last = (*stack)->list;
+	    while (last -> next)
+        {
+            sec_last = last;
+	    	last = last -> next;
+        }
+        last->next = first;
+        (*stack)->list = last;
+        sec_last->next = NULL;
+        ft_printf("rr%c\n", (*stack)->id);
     }
-    last->next = first;
-    *lst = last;
-    sec_last->next = NULL;
-    ft_printf("rrotate\n");
 }

@@ -1,61 +1,140 @@
 #include "../includes/push_swap.h"
 
-static void    sort_two(t_list **lst, int len, int reverse)
+static void    sort_two(t_stack **stack, int len, int reverse)
 {
-    if (!is_sorted(*lst, reverse, len))
-        swap(*lst);
+    if (!is_sorted((*stack)->list, reverse, len))
+        swap(stack);
 }
 
-static void    sort_three(t_list **lst, int len, int reverse)
+static void    sort_three(t_stack **stack, int len, int reverse)
 {
     int ref;
 
-	if (is_sorted(*lst, reverse, len))
+	if (is_sorted((*stack)->list, reverse, len))
         return ;
 	if (reverse == 0)
-    	ref = find_max(*lst, len);
+    	ref = find_max((*stack)->list, len);
 	else
-		ref = find_min(*lst, len);
-    if (*(int *)(*lst)->content == ref)
+		ref = find_min((*stack)->list, len);
+    if (*(int *)(*stack)->list->content == ref)
     {
-        swap(*lst);
-		rotate(lst);
-		swap(*lst);
-		rrotate(lst);
+        swap(stack);
+		rotate(stack);
+		swap(stack);
+		rrotate(stack);
     }
-    else if (*(int *)(*lst)->next->content == ref)
+    else if (*(int *)(*stack)->list->next->content == ref)
 	{
-        rotate(lst);
-		swap(*lst);
-		rrotate(lst);
+        rotate(stack);
+		swap(stack);
+		rrotate(stack);
 	}
-	sort_two(lst, len, reverse);
+	sort_two(stack, len, reverse);
 }
 
-static void	sort_four(t_list **a, t_list **b, int len, int reverse)
+static void	sort_four(t_stack **a, t_stack **b, int len, int reverse)
 {
 	int	ref;
 
 	if (reverse == 0)
-		ref = find_min(*a, len);
+		ref = find_min((*a)->list, len);
 	else
-		ref = find_max(*a, len);
-	if (is_sorted(*a, reverse, len))
+		ref = find_max((*a)->list, len);
+	if (is_sorted((*a)->list, reverse, len))
 		return ;
-	if (*(int *)(*a)->content != ref)
+	if (*(int *)(*a)->list->content != ref)
 	{
 		push(a, b);
 		sort_three(a, len - 1, reverse);
 		push(b, a);
-		swap(*a);
+		swap(a);
 	}
-	if (!is_sorted(*a, reverse, len))
+	if (!is_sorted((*a)->list, reverse, len))
 	{
 		push(a, b);
 		sort_three(a, len - 1, reverse);
 		push(b, a);
 	}
 }
+
+void	sort_three_fast(t_stack **stack, int len, int reverse)
+{
+	int ref;
+
+	if (is_sorted((*stack)->list, reverse, len))
+        return ;
+	if (reverse == 0)
+    	ref = find_max((*stack)->list, len);
+	else
+		ref = find_min((*stack)->list, len);
+	if (*(int *)(*stack)->list->content == ref)
+    {
+        rotate(stack);
+        if (!is_sorted((*stack)->list, reverse, len))
+            swap(stack);
+    }
+    else if (*(int *)(*stack)->list->next->content == ref)
+    {
+        rrotate(stack);
+        if (!is_sorted((*stack)->list, reverse, len))
+            swap(stack);
+    }
+    else
+        swap(stack);
+}
+
+void	sort_four_fast(t_stack **a, t_stack **b, int len, int reverse)
+{
+	int ref;
+
+	if (is_sorted((*a)->list, reverse, len))
+        return ;
+	if (reverse == 0)
+    	ref = find_min((*a)->list, len);
+	else
+		ref = find_max((*a)->list, len);
+	if (*(int *)(*a)->list->next->content == ref)
+		rotate(a);
+	if (*(int *)(*a)->list->next->next->content == ref)
+		rrotate(a);
+	if (*(int *)(*a)->list->next->next->next->content == ref)
+		rrotate(a);
+	if (*(int *)(*a)->list->content == ref)
+	{
+		push(a, b);
+		sort_three_fast(a, len, reverse);
+		push(b, a);
+	}
+}
+
+void    sort_short(t_stack **a, t_stack **b, int len, int reverse)
+{
+	if (len == 2)
+        sort_two(a, len, reverse);
+    else if (len == 3 && (*a)->size > 3)
+        sort_three(a, len, reverse);
+	else if (len == 3 && (*a)->size == 3)
+		sort_three_fast(a, len, reverse);
+    else if (len == 4 && (*a)->size > 4)
+        sort_four(a, b, len, reverse);
+	else if (len == 4 && (*a)->size == 4)
+		sort_four_fast(a, b, len, reverse);
+	/*
+    else if (len == 5)
+        sort_five(a, b, len, reverse);
+	*/
+}
+
+
+
+
+
+
+
+
+
+
+
 
 /*
 static void	sort_four(t_list **a, t_list **b, int len, int reverse)
@@ -112,16 +191,3 @@ static void	sort_five(t_list **a, t_list **b, int len, int reverse)
 	}
 }
 */
-void    sort_short(t_list **a, t_list **b, int len, int reverse)
-{
-	if (len == 2)
-        sort_two(a, len, reverse);
-    else if (len == 3)
-        sort_three(a, len, reverse);
-    else if (len == 4)
-        sort_four(a, b, len, reverse);
-	/*
-    else if (len == 5)
-        sort_five(a, b, len, reverse);
-	*/
-}
