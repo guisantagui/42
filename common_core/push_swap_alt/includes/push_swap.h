@@ -7,9 +7,34 @@
 # include "../ft_printf/ft_printf.h"
 # include "../ft_printf/libft/libft.h"
 
+# ifndef INT_MAX
+#  define INT_MAX 2147483647
+# endif
+
+# ifndef INT_MIN
+#  define INT_MIN (-2147483648)
+# endif
+
+typedef struct s_stack
+{
+	t_list	*list;
+    int     size;
+	char	id;
+}			t_stack;
+
+// Parser
 int	has_dups(t_list *list);
-t_list  *parse_args(int argc, char **argv);
+int	is_number(char *str);
+int	arr_len(char **arr);
+void free_arr(char **arr);
 void    error(t_list **lst);
+char	**split_cust(char *str, char *charset);
+t_list  *parse_args(int argc, char **argv);
+
+// Stack
+t_stack	*init_stack(t_list *lst, char id);
+
+// Operations
 void    swap(t_list *lst);
 void    rotate(t_list **lst);
 void    rrotate(t_list **lst);
