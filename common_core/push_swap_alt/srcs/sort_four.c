@@ -6,7 +6,7 @@
 /*   By: gsantama <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 20:19:05 by gsantama          #+#    #+#             */
-/*   Updated: 2025/03/17 20:40:05 by gsantama         ###   ########.fr       */
+/*   Updated: 2025/03/17 21:13:17 by gsantama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static void	sort_four_fast(t_stack **a, t_stack **b, int len, int reverse)
 		if (!is_sorted((*a)->list, reverse, len))
 		{
 			push(a, b);
-			sort_three_fast(a, len, reverse);
+			sort_three(a, len, reverse);
 			push(b, a);
 		}
 	}
@@ -68,9 +68,9 @@ void	sort_four(t_stack **a, t_stack **b, int len, int reverse)
 {
 	if (len == 4)
 	{
-		if ((*a)->stack->size > 4)
+		if ((*a)->size > 4)
 			sort_four_slow(a, b, len, reverse);
-		else if ((*a)->stack->size == 4)
+		else if ((*a)->size == 4)
 			sort_four_fast(a, b, len, reverse);
 	}
 }

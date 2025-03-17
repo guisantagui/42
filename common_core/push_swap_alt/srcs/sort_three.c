@@ -6,7 +6,7 @@
 /*   By: gsantama <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 20:09:39 by gsantama          #+#    #+#             */
-/*   Updated: 2025/03/17 20:38:39 by gsantama         ###   ########.fr       */
+/*   Updated: 2025/03/17 21:14:07 by gsantama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,9 @@ void	sort_three(t_stack **stack, int len, int reverse)
 {
 	if (len == 3)
 	{
-		if ((*a)->stack->size > 3)
+		if ((*stack)->size > 3)
 			sort_three_slow(stack, len, reverse);
-		else if ((*a)->stack->size == 3)
+		else if ((*stack)->size == 3)
 			sort_three_fast(stack, len, reverse);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: gsantama <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 19:23:48 by gsantama          #+#    #+#             */
-/*   Updated: 2025/03/17 19:25:33 by gsantama         ###   ########.fr       */
+/*   Updated: 2025/03/17 21:07:27 by gsantama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	print_list(t_list *lst)
 
 int	main(int argc, char **argv)
 {
-	t_listi	*a;
+	t_list	*a;
 	t_list	*b;
 	t_stack	*a_stack;
 	t_stack	*b_stack;
