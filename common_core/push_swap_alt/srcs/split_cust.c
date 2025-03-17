@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   split_cust.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gsantama <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/17 21:04:45 by gsantama          #+#    #+#             */
+/*   Updated: 2025/03/17 21:05:20 by gsantama         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/push_swap.h"
 
 static int	is_sep(char c, char *charset)
@@ -39,7 +51,7 @@ static int	word_count(char *str, char *charset)
 	return (count);
 }
 
-static	int strlen_til_sep(char *str, char *charset)
+static	int	strlen_til_sep(char *str, char *charset)
 {
 	int	i;
 

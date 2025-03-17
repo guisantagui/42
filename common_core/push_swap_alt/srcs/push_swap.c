@@ -1,6 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gsantama <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/17 19:23:48 by gsantama          #+#    #+#             */
+/*   Updated: 2025/03/17 19:25:33 by gsantama         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/push_swap.h"
 
-void	print_list(t_list *lst){
+void	print_list(t_list *lst)
+{
 	while (lst)
 	{
 		ft_printf("%d\n", (*(int *)lst->content));
@@ -10,10 +23,10 @@ void	print_list(t_list *lst){
 
 int	main(int argc, char **argv)
 {
-	t_list	*a;
+	t_listi	*a;
 	t_list	*b;
-	t_stack *a_stack;
-	t_stack *b_stack;
+	t_stack	*a_stack;
+	t_stack	*b_stack;
 
 	if (argc == 1)
 		return (0);

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_args.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gsantama <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/17 19:19:12 by gsantama          #+#    #+#             */
+/*   Updated: 2025/03/17 19:23:17 by gsantama         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/push_swap.h"
 
 static char	**argv_to_arr(int argc, char **argv)
@@ -25,8 +37,8 @@ static char	**argv_to_arr(int argc, char **argv)
 
 static void	numstr_to_node(char *numstr, t_list **lst)
 {
-	int	*num;
-	t_list *node;
+	int		*num;
+	t_list	*node;
 
 	num = malloc(sizeof(int));
 	if (!num)
@@ -43,9 +55,9 @@ static void	numstr_to_node(char *numstr, t_list **lst)
 
 static t_list	*arr_to_list(char **arr)
 {
-	int	i;
+	int		i;
 	t_list	*lst;
-	int	len;
+	int		len;
 
 	i = 0;
 	lst = NULL;

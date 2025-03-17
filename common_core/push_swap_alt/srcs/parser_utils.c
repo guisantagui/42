@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser_utils.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gsantama <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/17 21:02:30 by gsantama          #+#    #+#             */
+/*   Updated: 2025/03/17 21:04:24 by gsantama         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/push_swap.h"
 
 int	is_number(char *str)
@@ -7,7 +19,8 @@ int	is_number(char *str)
 	i = 0;
 	while (str[i])
 	{
-		while (str[i] == ' ' || str[i] == '\t' || str[i] == '\f' || str[i] == '\r' || str[i] == '\n' || str[i] == '\v')
+		while (str[i] == ' ' || str[i] == '\t' || str[i] == '\f'
+			|| str[i] == '\r' || str[i] == '\n' || str[i] == '\v')
 			i++;
 		if (str[i] == '+' || str[i] == '-')
 			i++;
@@ -30,7 +43,7 @@ int	arr_len(char **arr)
 	return (len);
 }
 
-void free_arr(char **arr)
+void	free_arr(char **arr)
 {
 	int	i;
 
@@ -44,9 +57,9 @@ void free_arr(char **arr)
 	}
 }
 
-void    error(t_list **lst)
+void	error(t_list **lst)
 {
-    ft_lstclear(lst, free);
+	ft_lstclear(lst, free);
 	ft_printf("Error\n");
 	exit(1);
 }
