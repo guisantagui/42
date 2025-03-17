@@ -31,6 +31,13 @@ typedef struct	s_stack_state
 	int	n_rotations;
 }		t_stack_state;
 
+typedef struct	s_data
+{
+	t_stack	*a;
+	t_stack	*b;
+	t_list	*ops;
+}		t_data;
+
 // Parser
 int	has_dups(t_list *list);
 int	is_number(char *str);
@@ -60,6 +67,7 @@ void	sort_four(t_stack **a, t_stack **b, int len, int reverse);
 void	sort_five(t_stack **a, t_stack **b, int len, int reverse);
 void	sort_short(t_stack **a, t_stack **b, int len, int reverse);
 void	quick_sort(t_stack **a, t_stack **b, int len, int reverse);
+void    sort(t_stack **a, t_stack **b);
 void	print_list(t_list *lst);
 
 #endif

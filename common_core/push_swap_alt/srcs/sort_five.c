@@ -21,7 +21,7 @@ static void	sort_five_slow(t_stack **a, t_stack **b, int len, int reverse)
 	if (!reverse)
 		ref = find_min((*a)->list, len);
 	else
-		ref = find_min((*a)->list, len);
+		ref = find_max((*a)->list, len);
 	if (*(int *)(*a)->list->content != ref)
 	{
 		push(a, b);
@@ -58,7 +58,7 @@ static void	sort_five_fast(t_stack **a, t_stack **b, int len, int reverse)
 	if (!is_sorted((*a)->list, reverse, len))
 	{
 		push(a, b);
-		sort_four(a, b, len, reverse);
+		sort_four(a, b, len - 1, reverse);
 		push(b, a);
 	}
 }

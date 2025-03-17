@@ -19,7 +19,7 @@ static void	bubblesort(int *arr, int len)
 	int	t;
 
 	i = 0;
-	while (i < len -1)
+	while (i < len - 1)
 	{
 		j = 0;
 		while (j < len - i - 1)
@@ -58,30 +58,6 @@ static int	get_pivot(t_list *lst, int len)
 	return (pivot);
 }
 
-static void	do_partition(t_stack **a, t_stack **b, int len,
-		int reverse, t_stack_state *state)
-{
-	while (len > 0)
-	{
-		if ((!reverse && (*(int *)(*a)->list->content < state->pivot)) ||
-			(reverse && (*(int *)(*a)->list->content > state->pivot)))
-		{
-			push(a, b);
-			state->content_less++;
-		}
-		else
-		{
-			if (!state->first_content_set)
-			{
-				state->first_content = *(int *)(*a)->list->content;
-				state->first_content_set = 1;
-			}
-			rotate(a);
-		}
-		len--;
-	}
-}
-
 static t_stack_state	init_state(t_stack **stack, int len)
 {
 	t_stack_state	state;
@@ -93,17 +69,44 @@ static t_stack_state	init_state(t_stack **stack, int len)
 	return (state);
 }
 
+static t_stack_state	do_partition(t_stack **a, t_stack **b, int len,
+		int reverse)
+{
+    t_stack_state	state;
+
+    state = init_state(a, len);
+	while (len > 0)
+	{
+		if ((!reverse && (*(int *)(*a)->list->content < state.pivot)) ||
+			(reverse && (*(int *)(*a)->list->content > state.pivot)))
+		{
+			push(a, b);
+			state.content_less++;
+		}
+		else
+		{
+			if (!state.first_content_set)
+			{
+				state.first_content = *(int *)(*a)->list->content;
+				state.first_content_set = 1;
+			}
+			rotate(a);
+		}
+		len--;
+	}
+    return (state);
+}
+
 void	quick_sort(t_stack **a, t_stack **b, int len, int reverse)
 {
 	t_stack_state	state;
 
-	state = init_state(a, len);
 	if (len <= 5)
 	{
 		sort_short(a, b, len, reverse);
 		return ;
 	}
-	do_partition(a, b, len, reverse, &state);
+	state = do_partition(a, b, len, reverse);
 	state.n_rotations = len - state.content_less;
 	if (*(int *)(*a)->list->content != state.first_content)
 	{

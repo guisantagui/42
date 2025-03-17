@@ -58,7 +58,7 @@ static void	sort_four_fast(t_stack **a, t_stack **b, int len, int reverse)
 		if (!is_sorted((*a)->list, reverse, len))
 		{
 			push(a, b);
-			sort_three(a, len, reverse);
+			sort_three(a, len - 1, reverse);
 			push(b, a);
 		}
 	}
