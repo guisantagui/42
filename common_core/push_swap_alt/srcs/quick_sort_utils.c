@@ -36,7 +36,7 @@ void	bubblesort(int *arr, int len)
 	}
 }
 
-int	get_pivot(t_list *lst, int len)
+int	get_pivot(t_list *lst, int len, int *is_error)
 {
 	int		*values;
 	t_list	*current;
@@ -44,6 +44,11 @@ int	get_pivot(t_list *lst, int len)
 	int		pivot;
 
 	values = malloc(sizeof(int) * len);
+	if (!values)
+	{
+		*is_error = 1;
+		return (0);
+	}
 	current = lst;
 	i = 0;
 	while (i < len && current)
@@ -62,7 +67,8 @@ t_stack_state	init_state(t_stack **stack, int len)
 {
 	t_stack_state	state;
 
-	state.pivot = get_pivot((*stack)->list, len);
+	state.error = 0;
+	state.pivot = get_pivot((*stack)->list, len, &state.error);
 	state.content_less = 0;
 	state.first_content_set = 0;
 	state.n_rotations = 0;
@@ -75,6 +81,11 @@ t_stack_state	do_partition(t_stack **a, t_stack **b, int len,
     t_stack_state	state;
 
     state = init_state(a, len);
+	if (state.error == 1)
+	{
+		free_ab(a, b);
+		ft_printf("Error\n");
+	}
 	while (len > 0)
 	{
 		if ((!reverse && (*(int *)(*a)->list->content < state.pivot)) ||

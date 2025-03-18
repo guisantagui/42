@@ -24,6 +24,7 @@ typedef struct	s_stack
 
 typedef struct	s_stack_state
 {
+	int	error;
 	int	pivot;
 	int	first_content;
 	int	first_content_set;
@@ -69,7 +70,7 @@ void	sort_five(t_stack **a, t_stack **b, int len, int reverse);
 void	sort_short(t_stack **a, t_stack **b, int len, int reverse);
 
 void	bubblesort(int *arr, int len);
-int	get_pivot(t_list *lst, int len);
+int	get_pivot(t_list *lst, int len, int *is_error);
 t_stack_state	init_state(t_stack **stack, int len);
 t_stack_state	do_partition(t_stack **a, t_stack **b, int len, int reverse);
 void	reset_stacks(t_stack **a, t_stack **b, t_stack_state state);
