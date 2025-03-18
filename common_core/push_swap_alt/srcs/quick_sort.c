@@ -12,89 +12,34 @@
 
 #include "../includes/push_swap.h"
 
-static void	bubblesort(int *arr, int len)
+static int	loc_num(t_list *lst, int num)
 {
 	int	i;
-	int	j;
-	int	t;
 
 	i = 0;
-	while (i < len - 1)
+	while (lst && *(int *)lst->content != num)
 	{
-		j = 0;
-		while (j < len - i - 1)
-		{
-			if (arr[j] > arr[j + 1])
-			{
-				t = arr[j];
-				arr[j] = arr[j + 1];
-				arr[j + 1] = t;
-			}
-			j++;
-		}
+		lst = lst->next;
 		i++;
 	}
+	return (i);
 }
 
-static int	get_pivot(t_list *lst, int len)
+static void	reset_rotations(t_stack **stack, t_stack_state state)
 {
-	int		*values;
-	t_list	*current;
-	int		i;
-	int		pivot;
+	int	num_idx;
 
-	values = malloc(sizeof(int) * len);
-	current = lst;
-	i = 0;
-	while (i < len && current)
+	if (*(int *)(*stack)->list->content != state.first_content)
 	{
-		values[i] = *(int *)current->content;
-		current = current->next;
-		i++;
-	}
-	bubblesort(values, len);
-	pivot = values[len / 2];
-	free(values);
-	return (pivot);
-}
-
-static t_stack_state	init_state(t_stack **stack, int len)
-{
-	t_stack_state	state;
-
-	state.pivot = get_pivot((*stack)->list, len);
-	state.content_less = 0;
-	state.first_content_set = 0;
-	state.n_rotations = 0;
-	return (state);
-}
-
-static t_stack_state	do_partition(t_stack **a, t_stack **b, int len,
-		int reverse)
-{
-    t_stack_state	state;
-
-    state = init_state(a, len);
-	while (len > 0)
-	{
-		if ((!reverse && (*(int *)(*a)->list->content < state.pivot)) ||
-			(reverse && (*(int *)(*a)->list->content > state.pivot)))
+		num_idx = loc_num((*stack)->list, state.first_content);
+		while (*(int *)(*stack)->list->content != state.first_content)
 		{
-			push(a, b);
-			state.content_less++;
+			if (num_idx < (*stack)->size / 2)
+				rotate(stack);
+			else
+				rrotate(stack);
 		}
-		else
-		{
-			if (!state.first_content_set)
-			{
-				state.first_content = *(int *)(*a)->list->content;
-				state.first_content_set = 1;
-			}
-			rotate(a);
-		}
-		len--;
 	}
-    return (state);
 }
 
 void	quick_sort(t_stack **a, t_stack **b, int len, int reverse)
@@ -108,19 +53,8 @@ void	quick_sort(t_stack **a, t_stack **b, int len, int reverse)
 	}
 	state = do_partition(a, b, len, reverse);
 	state.n_rotations = len - state.content_less;
-	if (*(int *)(*a)->list->content != state.first_content)
-	{
-		while (state.n_rotations > 0)
-		{
-			rrotate(a);
-			state.n_rotations--;
-		}
-	}
+	reset_rotations(a, state);
 	quick_sort(b, a, state.content_less, !reverse);
 	quick_sort(a, b, len - state.content_less, reverse);
-	while (state.content_less > 0)
-	{
-		push(b, a);
-		state.content_less--;
-	}
+	reset_stacks(a, b, state);
 }

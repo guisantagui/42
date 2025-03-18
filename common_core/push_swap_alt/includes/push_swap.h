@@ -66,6 +66,12 @@ void    sort_three(t_stack **stack, int len, int reverse);
 void	sort_four(t_stack **a, t_stack **b, int len, int reverse);
 void	sort_five(t_stack **a, t_stack **b, int len, int reverse);
 void	sort_short(t_stack **a, t_stack **b, int len, int reverse);
+
+void	bubblesort(int *arr, int len);
+int	get_pivot(t_list *lst, int len);
+t_stack_state	init_state(t_stack **stack, int len);
+t_stack_state	do_partition(t_stack **a, t_stack **b, int len, int reverse);
+void	reset_stacks(t_stack **a, t_stack **b, t_stack_state state);
 void	quick_sort(t_stack **a, t_stack **b, int len, int reverse);
 void    sort(t_stack **a, t_stack **b);
 void	print_list(t_list *lst);
