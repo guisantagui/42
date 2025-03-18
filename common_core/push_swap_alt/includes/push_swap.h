@@ -32,13 +32,6 @@ typedef struct	s_stack_state
 	int	n_rotations;
 }		t_stack_state;
 
-typedef struct	s_data
-{
-	t_stack	*a;
-	t_stack	*b;
-	t_list	*ops;
-}		t_data;
-
 // Parser
 int	has_dups(t_list *list);
 int	is_number(char *str);
@@ -52,6 +45,7 @@ t_list	*parse_args(int argc, char **argv);
 // Stack
 t_stack	*init_stack(t_list *lst, char id);
 void	free_ab(t_stack **a, t_stack **b);
+void	error_ab(t_stack **a, t_stack **b);
 
 // Operations
 void	swap(t_stack **stack);
@@ -71,7 +65,7 @@ void	sort_short(t_stack **a, t_stack **b, int len, int reverse);
 
 void	bubblesort(int *arr, int len);
 int	get_pivot(t_list *lst, int len, int *is_error);
-t_stack_state	init_state(t_stack **stack, int len);
+t_stack_state	init_state(t_stack **a, t_stack **b, int len);
 t_stack_state	do_partition(t_stack **a, t_stack **b, int len, int reverse);
 void	reset_stacks(t_stack **a, t_stack **b, t_stack_state state);
 void	quick_sort(t_stack **a, t_stack **b, int len, int reverse);

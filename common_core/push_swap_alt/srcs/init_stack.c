@@ -40,3 +40,10 @@ void	free_ab(t_stack **a, t_stack **b)
 	free_stack(a);
 	free_stack(b);
 }
+
+void	error_ab(t_stack **a, t_stack **b)
+{
+	free_ab(a, b);
+	ft_printf("Error\n");
+	exit(1);
+}

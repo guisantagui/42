@@ -61,15 +61,17 @@ int	get_pivot(t_list *lst, int len, int *is_error)
 	return (pivot);
 }
 
-t_stack_state	init_state(t_stack **stack, int len)
+t_stack_state	init_state(t_stack **a, t_stack **b, int len)
 {
 	t_stack_state	state;
 
 	state.error = 0;
-	state.pivot = get_pivot((*stack)->list, len, &state.error);
+	state.pivot = get_pivot((*a)->list, len, &state.error);
 	state.content_less = 0;
 	state.first_content_set = 0;
 	state.n_rotations = 0;
+	if (state.error == 1)
+		error_ab(a, b);
 	return (state);
 }
 
@@ -78,12 +80,7 @@ t_stack_state	do_partition(t_stack **a, t_stack **b, int len,
 {
     t_stack_state	state;
 
-    state = init_state(a, len);
-	if (state.error == 1)
-	{
-		free_ab(a, b);
-		ft_printf("Error\n");
-	}
+    state = init_state(a, b, len);
 	while (len > 0)
 	{
 		if ((!reverse && (*(int *)(*a)->list->content < state.pivot)) ||
