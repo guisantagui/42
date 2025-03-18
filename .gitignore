@@ -1,4 +1,6 @@
 **/a.out
+common_core/push_swap/
+common_core/push_swap_threeQS/
 common_core/libft/libftTester
 common_core/libft/libft-war-machine
 common_core/libft/*.o
