@@ -39,7 +39,6 @@ void	bubblesort(int *arr, int len)
 int	get_pivot(t_list *lst, int len, int *is_error)
 {
 	int		*values;
-	t_list	*current;
 	int		i;
 	int		pivot;
 
@@ -49,12 +48,11 @@ int	get_pivot(t_list *lst, int len, int *is_error)
 		*is_error = 1;
 		return (0);
 	}
-	current = lst;
 	i = 0;
-	while (i < len && current)
+	while (i < len && lst)
 	{
-		values[i] = *(int *)current->content;
-		current = current->next;
+		values[i] = *(int *)lst->content;
+		lst = lst->next;
 		i++;
 	}
 	bubblesort(values, len);
