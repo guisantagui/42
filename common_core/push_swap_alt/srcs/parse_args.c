@@ -35,20 +35,24 @@ static char	**argv_to_arr(int argc, char **argv)
 	return (arr);
 }
 
-static void	numstr_to_node(char *numstr, t_list **lst)
+static void	numstr_to_node(char *numstr, t_list **lst, int *is_error)
 {
 	int		*num;
 	t_list	*node;
 
 	num = malloc(sizeof(int));
 	if (!num)
-		error(lst);
-	*num = ft_atoi(numstr);
-	node = ft_lstnew(num);
-	if (!node)
 	{
+		*is_error = 1;
+		return ;
+	}
+	*num = atoi_cust(numstr, is_error);
+	node = ft_lstnew(num);
+	if (!node || *is_error == 1)
+	{
+		*is_error = 1;
 		free(num);
-		error(lst);
+		return ;
 	}
 	ft_lstadd_back(lst, node);
 }
@@ -58,22 +62,28 @@ static t_list	*arr_to_list(char **arr)
 	int		i;
 	t_list	*lst;
 	int		len;
+	int	*is_error;
 
 	i = 0;
 	lst = NULL;
 	len = arr_len(arr);
-	while (i < len)
+	is_error = malloc(sizeof(int));
+	*is_error = 0;
+	while (i < len && *is_error == 0)
 	{
 		if (is_number(arr[i]))
-			numstr_to_node(arr[i], &lst);
+			numstr_to_node(arr[i], &lst, is_error);
 		else
 		{
+			free(is_error);
 			free_arr(arr);
 			error(&lst);
 		}
 		i++;
 	}
 	free_arr(arr);
+	if (*is_error)
+		error(&lst);
 	return (lst);
 }
 

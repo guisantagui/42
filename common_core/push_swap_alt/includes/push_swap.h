@@ -42,6 +42,7 @@ typedef struct	s_data
 int	has_dups(t_list *list);
 int	is_number(char *str);
 int	arr_len(char **arr);
+int	atoi_cust(const char *str, int *is_error);
 void	free_arr(char **arr);
 void	error(t_list **lst);
 char	**split_cust(char *str, char *charset);

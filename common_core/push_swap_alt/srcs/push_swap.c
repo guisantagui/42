@@ -42,9 +42,7 @@ int	main(int argc, char **argv)
 		b = NULL;
 		a_stack = init_stack(a, 'a');
 		b_stack = init_stack(b, 'b');
-		//quick_sort(&a_stack, &b_stack, a_stack->size, 0);
 		sort(&a_stack, &b_stack);
-		//print_list(a_stack->list);
 		free_ab(&a_stack, &b_stack);
 	}
 	return (0);

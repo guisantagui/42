@@ -57,6 +57,38 @@ void	free_arr(char **arr)
 	}
 }
 
+int	atoi_cust(const char *str, int *is_error)
+{
+	int	i;
+	long	res;
+	int	sign;
+
+	i = 0;
+	res = 0;
+	sign = 1;
+	while (str[i] == ' ' || str[i] == '\t' || str[i] == '\f'
+		|| str[i] == '\r' || str[i] == '\n' || str[i] == '\v')
+		i++;
+	if (str[i] == '+' || str[i] == '-')
+	{
+		if (str[i] == '-')
+			sign *= -1;
+		i++;
+	}
+	while ((str[i] && ft_isdigit(str[i])) && *is_error == 0)
+	{
+		if (res > (INT_MAX / 10) || (res == INT_MAX / 10 && (str[i] - '0') > (INT_MAX % 10)))
+		{
+			*is_error = 1;
+			return (0);
+		}
+		res *= 10;
+		res += str[i] - '0';
+		i++;
+	}
+	return ((int)(sign * res));
+}
+
 void	error(t_list **lst)
 {
 	ft_lstclear(lst, free);
