@@ -11,6 +11,8 @@ SRCS_PATH = ./srcs
 
 SRC_C = $(SRCS_PATH)/client.c
 SRC_S = $(SRCS_PATH)/server.c
+SRC_CBONUS = $(SRCS_PATH)/client_bonus.c
+SRC_SBONUS = $(SRCS_PATH)/server_bonus.c
 
 CC = cc
 
@@ -24,7 +26,8 @@ SRCS_PRINTF := $(wildcard $(PRINTF_PATH)/*.c)
 OBJS_PRINTF = ${SRCS_PRINTF:.c=.o}
 OBJ_C = ${SRC_C:.c=.o}
 OBJ_S = ${SRC_S:.c=.o}
-
+OBJ_CBONUS = ${SRC_CBONUS:.c=.o}
+OBJ_SBONUS = ${SRC_SBONUS:.c=.o}
 
 
 all:		$(NAME_C) $(NAME_S)
@@ -54,7 +57,7 @@ clean:
 	@cd $(PRINTF_PATH) && make clean
 
 fclean: clean
-	${RM} ${OBJS} ${NAME}
+	${RM} ${OBJ_C} ${OBJ_S} ${OBJ_CBONUS} ${OBJ_SBONUS} ${NAME_C} ${NAME_S} ${NAME_CBONUS} ${NAME_SBONUS} 
 	@cd $(PRINTF_PATH) && make fclean
 
 re: fclean all

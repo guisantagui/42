@@ -18,7 +18,7 @@ void    handler(int sig)
     }
 }
 
-int main()
+int main(void)
 {
     ft_printf("Server PID: %d\n", getpid());
     signal(SIGUSR2, handler);
