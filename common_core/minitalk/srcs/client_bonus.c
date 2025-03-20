@@ -20,18 +20,8 @@ void    send_char(int pid, unsigned char oct)
 
 void    handler(int sig)
 {
-    static int bit;
-    static unsigned int buffer;
-
     if (sig == SIGUSR1)
-        buffer |= (1 << bit);
-    bit++;
-    if (bit == 8)
-    {
-        ft_printf("%c", (unsigned char)buffer);
-        bit = 0;
-        buffer = 0;
-    }
+        ft_printf("\033[0;32mMessage received!\033[0m\n");
 }
 
 void    send_argv(char **argv)
@@ -51,9 +41,11 @@ void    send_argv(char **argv)
 
 int main(int argc, char **argv)
 {
-    signal(SIGUSR2, handler);
-    signal(SIGUSR1, handler);
     if (argc == 3)
+    {
+        signal(SIGUSR2, handler);
+        signal(SIGUSR1, handler);
         send_argv(argv);
+    }
     return (0);
 }
