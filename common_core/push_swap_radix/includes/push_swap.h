@@ -34,7 +34,6 @@ typedef struct	s_stack_state
 }		t_stack_state;
 
 // Parser
-int	*lst_to_arr(t_list *lst, int size, int *is_error);
 int	has_dups(t_list *list);
 int	is_number(char *str);
 int	arr_len(char **arr);
@@ -43,12 +42,12 @@ void	free_arr(char **arr);
 void	error(t_list **lst);
 char	**split_cust(char *str, char *charset);
 t_list	*parse_args(int argc, char **argv);
-t_list *get_list_ranks(t_list *lst, int size, int *is_error);
 
 // Stack
 t_stack	*init_stack(t_list *lst, char id, int *is_error);
 void	free_stack(t_stack **stack);
 void	free_ab(t_stack **a, t_stack **b);
+t_list *get_list_ranks(t_list *lst, int size, int *is_error);
 void	error_ab(t_stack **a, t_stack **b);
 
 // Operations

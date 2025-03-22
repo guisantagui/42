@@ -74,16 +74,13 @@ static t_list	*arr_to_list(char **arr)
 		if (is_number(arr[i]))
 			numstr_to_node(arr[i], &lst, is_error);
 		else
-		{
-			free(is_error);
-			free_arr(arr);
-			error(&lst);
-		}
+			*is_error = 1;
 		i++;
 	}
 	free_arr(arr);
 	if (*is_error)
 		error(&lst);
+	free(is_error);
 	return (lst);
 }
 
