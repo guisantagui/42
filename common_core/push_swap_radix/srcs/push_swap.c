@@ -12,15 +12,6 @@
 
 #include "../includes/push_swap.h"
 
-void	print_list(t_list *lst)
-{
-	while (lst)
-	{
-		ft_printf("%d\n", (*(int *)lst->content));
-		lst = lst->next;
-	}
-}
-
 t_data	*init_data(int argc, char **argv)
 {
 	t_stack	*a_stack;
