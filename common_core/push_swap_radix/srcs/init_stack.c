@@ -52,3 +52,10 @@ void	error_ab(t_stack **a, t_stack **b)
 	ft_printf("Error\n");
 	exit(1);
 }
+
+void	error_stack(t_stack **s)
+{
+	free_stack(s);
+	ft_printf("Error\n");
+	exit(1);
+}

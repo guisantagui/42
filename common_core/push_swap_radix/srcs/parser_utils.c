@@ -91,7 +91,8 @@ int	atoi_cust(const char *str, int *is_error)
 
 void	error(t_list **lst)
 {
-	ft_lstclear(lst, free);
+	if (lst != NULL || *lst != NULL)
+		ft_lstclear(lst, free);
 	ft_printf("Error\n");
 	exit(1);
 }

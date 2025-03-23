@@ -21,42 +21,47 @@ void	print_list(t_list *lst)
 	}
 }
 
-int	main(int argc, char **argv)
+t_data	*init_data(int argc, char **argv)
 {
-	t_list	*a;
-	t_list	*b;
 	t_stack	*a_stack;
 	t_stack	*b_stack;
 	int	is_error;
+	t_data	*data;
 
 	is_error = 0;
+	data = malloc(sizeof(t_data));
+	a_stack = init_stack(parse_args(argc, argv), 'a', &is_error);
+	if (is_error == 1)
+	{
+		free_stack(&a_stack);
+		ft_printf("Error\n");
+	}
+	b_stack = init_stack(NULL, 'b', &is_error);
+	if (is_error == 1)
+		error_ab(&a_stack, &b_stack);
+	data->a = a_stack;
+	data->b = b_stack;
+	return (data);
+}
+
+void	free_data(t_data **data)
+{
+	free_ab(&(*data)->a, &(*data)->b);
+	free(*data);
+	*data = NULL;
+}
+
+int	main(int argc, char **argv)
+{
+	t_data	*data;
+
 	if (argc == 1)
 		return (0);
 	else if (argc >= 2)
 	{
-		a = parse_args(argc, argv);
-		b = malloc(sizeof(t_list));
-		if (!b)
-		{
-			ft_lstclear(&b, free);
-			error(&a);
-		}
-		b = NULL;
-		a_stack = init_stack(a, 'a', &is_error);
-		if (is_error == 1)
-		{
-			free_stack(&a_stack);
-			ft_lstclear(&b, free);
-			ft_printf("Error\n");
-		}
-		b_stack = init_stack(b, 'b', &is_error);
-		if (is_error == 1)
-		{
-			free_ab(&a_stack, &b_stack);
-		}
-		//print_list(a_stack->rank);
-		sort(&a_stack, &b_stack, "RS");
-		free_ab(&a_stack, &b_stack);
+		data = init_data(argc, argv);
+		sort(&data, "RS");
+		free_data(&data);
 	}
 	return (0);
 }

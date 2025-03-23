@@ -14,6 +14,6 @@
 
 void	sort_two(t_stack **stack, int len, int reverse)
 {
-	if (!is_sorted((*stack)->list, reverse, len))
+	if (!is_sorted((*stack)->rank, reverse, len))
 		swap(stack);
 }

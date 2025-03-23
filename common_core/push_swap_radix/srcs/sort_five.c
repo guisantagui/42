@@ -16,20 +16,20 @@ static void	sort_five_slow(t_stack **a, t_stack **b, int len, int reverse)
 {
 	int	ref;
 
-	if (is_sorted((*a)->list, reverse, len))
+	if (is_sorted((*a)->rank, reverse, len))
 		return ;
 	if (!reverse)
-		ref = find_min((*a)->list, len);
+		ref = find_min((*a)->rank, len);
 	else
-		ref = find_max((*a)->list, len);
-	if (*(int *)(*a)->list->content != ref)
+		ref = find_max((*a)->rank, len);
+	if (*(int *)(*a)->rank->content != ref)
 	{
 		push(a, b);
 		sort_four(a, b, len - 1, reverse);
 		push(b, a);
 		swap(a);
 	}
-	if (!is_sorted((*a)->list, reverse, len))
+	if (!is_sorted((*a)->rank, reverse, len))
 	{
 		push(a, b);
 		sort_four(a, b, len - 1, reverse);
@@ -41,21 +41,21 @@ static void	sort_five_fast(t_stack **a, t_stack **b, int len, int reverse)
 {
 	int	ref;
 
-	if (is_sorted((*a)->list, reverse, len))
+	if (is_sorted((*a)->rank, reverse, len))
 		return ;
 	if (reverse == 0)
-		ref = find_min((*a)->list, len);
+		ref = find_min((*a)->rank, len);
 	else
-		ref = find_max((*a)->list, len);
-	if (*(int *)(*a)->list->next->next->content == ref)
+		ref = find_max((*a)->rank, len);
+	if (*(int *)(*a)->rank->next->next->content == ref)
 		rotate(a);
-	if (*(int *)(*a)->list->next->content == ref)
+	if (*(int *)(*a)->rank->next->content == ref)
 		rotate(a);
-	if (*(int *)(*a)->list->next->next->next->content == ref)
+	if (*(int *)(*a)->rank->next->next->next->content == ref)
 		rrotate(a);
-	if (*(int *)(*a)->list->next->next->next->next->content == ref)
+	if (*(int *)(*a)->rank->next->next->next->next->content == ref)
 		rrotate(a);
-	if (!is_sorted((*a)->list, reverse, len))
+	if (!is_sorted((*a)->rank, reverse, len))
 	{
 		push(a, b);
 		sort_four(a, b, len - 1, reverse);

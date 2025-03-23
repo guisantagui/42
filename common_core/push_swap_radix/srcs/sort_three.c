@@ -16,20 +16,20 @@ static void	sort_three_slow(t_stack **stack, int len, int reverse)
 {
 	int	ref;
 
-	if (is_sorted((*stack)->list, reverse, len))
+	if (is_sorted((*stack)->rank, reverse, len))
 		return ;
 	if (reverse == 0)
-		ref = find_max((*stack)->list, len);
+		ref = find_max((*stack)->rank, len);
 	else
-		ref = find_min((*stack)->list, len);
-	if (*(int *)(*stack)->list->content == ref)
+		ref = find_min((*stack)->rank, len);
+	if (*(int *)(*stack)->rank->content == ref)
 	{
 		swap(stack);
 		rotate(stack);
 		swap(stack);
 		rrotate(stack);
 	}
-	else if (*(int *)(*stack)->list->next->content == ref)
+	else if (*(int *)(*stack)->rank->next->content == ref)
 	{
 		rotate(stack);
 		swap(stack);
@@ -42,22 +42,22 @@ static void	sort_three_fast(t_stack **stack, int len, int reverse)
 {
 	int	ref;
 
-	if (is_sorted((*stack)->list, reverse, len))
+	if (is_sorted((*stack)->rank, reverse, len))
 		return ;
 	if (reverse == 0)
-		ref = find_max((*stack)->list, len);
+		ref = find_max((*stack)->rank, len);
 	else
-		ref = find_min((*stack)->list, len);
-	if (*(int *)(*stack)->list->content == ref)
+		ref = find_min((*stack)->rank, len);
+	if (*(int *)(*stack)->rank->content == ref)
 	{
 		rotate(stack);
-		if (!is_sorted((*stack)->list, reverse, len))
+		if (!is_sorted((*stack)->rank, reverse, len))
 			swap(stack);
 	}
-	else if (*(int *)(*stack)->list->next->content == ref)
+	else if (*(int *)(*stack)->rank->next->content == ref)
 	{
 		rrotate(stack);
-		if (!is_sorted((*stack)->list, reverse, len))
+		if (!is_sorted((*stack)->rank, reverse, len))
 			swap(stack);
 	}
 	else
