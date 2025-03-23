@@ -81,6 +81,5 @@ t_stack_state	do_partition(t_stack **a, t_stack **b, int len, int reverse);
 void	reset_stacks(t_stack **a, t_stack **b, t_stack_state state);
 void	quick_sort(t_stack **a, t_stack **b, int len, int reverse);
 void    sort(t_data **data, char *alg);
-void	print_list(t_list *lst);
 
 #endif
