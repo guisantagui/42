@@ -2,6 +2,8 @@
 
 void    init_mlx(t_fractol *fractol)
 {
+    fractol->kr = 0;
+    fractol->ki = 0;
     fractol->mlx = mlx_init();
     if (!fractol->mlx)
     {

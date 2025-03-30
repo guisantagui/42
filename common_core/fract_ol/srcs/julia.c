@@ -1,5 +1,5 @@
 #include "fractol.h"
-
+/*
 int julia(t_fractol *f, double z_re, double z_im)
 {
     int i;
@@ -14,3 +14,4 @@ int julia(t_fractol *f, double z_re, double z_im)
     }
     return (i);
 }
+*/

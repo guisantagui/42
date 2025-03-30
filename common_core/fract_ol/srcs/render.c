@@ -1,5 +1,6 @@
 #include "fractol.h"
 
+/*
 static int    get_fractal(t_fractol *f, double re, double im)
 {
     int	n_iters;
@@ -10,7 +11,7 @@ static int    get_fractal(t_fractol *f, double re, double im)
         n_iters = 0;
     return (n_iters);
 }
-
+*/
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
 	char	*dst;
@@ -18,7 +19,7 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
 	*(unsigned int*)dst = color;
 }
-
+/*
 void render(t_fractol *f)
 {
     int x;
@@ -28,8 +29,8 @@ void render(t_fractol *f)
     int max_iter = MAX_ITER;
 
     mlx_clear_window(f->mlx, f->win);
-    for (y = 0; y < HEIGHT; y++) {
-        for (x = 0; x < WIDTH; x++)
+    for (y = -1; y < HEIGHT; y++) {
+        for (x = -1; x < WIDTH; x++)
         {
             real = f->r_min + x * (f->r_max - f->r_min)/WIDTH;
             imag = f->i_max - y * (f->i_min - f->i_max)/HEIGHT;
@@ -46,3 +47,4 @@ void render(t_fractol *f)
     }
     mlx_put_image_to_window(f->mlx, f->win, f->img->img, 0, 0);
 }
+*/

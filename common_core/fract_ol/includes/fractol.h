@@ -38,9 +38,9 @@ typedef struct  s_fractol
 }           t_fractol;
 
 void    init_mlx(t_fractol *fractol);
-int julia(t_fractol *f, double z_re, double z_im);
+//int julia(t_fractol *f, double z_re, double z_im);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
-void    render(t_fractol *f);
+//void    render(t_fractol *f);
 
 int create_trgb(unsigned char t, unsigned char r, unsigned char g, unsigned char b);
 unsigned char	get_t(int trgb);
