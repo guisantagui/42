@@ -2,20 +2,7 @@
 
 #define PI 3.141592653589793
 
-int add_shade(int color, double shade)
-{
-    int t;
-    int r;
-    int g;
-    int b;
-
-    t = get_t(color);
-    r = get_r(color) * shade;
-    g = get_g(color) * shade;
-    b = get_b(color) * shade;
-    return (create_trgb(t, r, g, b));
-}
-
+/*
 void    do_cycles(t_data *img, int color, int cycles)
 {
     int x;
@@ -51,183 +38,20 @@ void    do_cycles(t_data *img, int color, int cycles)
         y++;
     }
 }
-
-void    fill_window_with_color(t_data *img, int color)
-{
-    int x;
-    int y;
-
-    // Loop through every pixel on the window and set it to red
-    for (y = 0; y < HEIGHT; y++) {
-        for (x = 0; x < WIDTH; x++) {
-            my_mlx_pixel_put(img, x, y, color);  // Red color
-        }
-    }
-}
-
-/*
-void    do_gradient(t_data *img, int color)
-{
-    int x;
-    int y;
-
-    y = 0;
-    while (y < HEIGHT)
-    {
-        x = 0;
-        while (x < WIDTH)
-        {
-            my_mlx_pixel_put(img, x, y, add_shade(color, (double)x / WIDTH));
-            x++;
-        }
-        y++;
-    }
-}
 */
-
-int julia(double kr, double ki, double z_re, double z_im)
+int main(int argc, char **argv)
 {
-    int i;
-    double temp;
-    
-    i = 0;
-    while (z_re * z_re + z_im * z_im <= 4 && i < MAX_ITER) {
-        temp = z_re * z_re - z_im * z_im + kr;
-        z_im = 2 * z_re * z_im + ki;
-        z_re = temp;
-        i++;
-    }
-    return (i);
-}
+    t_fractol   *fractol;
 
-void render(t_data *img, double r_min, double r_max)
-{
-    int x;
-    int y;
-    double real, imag;
-    int color;
-    int max_iter = MAX_ITER;
-    double  i_min;
-    double  i_max;
-
-    // Calculate center of the fractal
-    double center = (r_min + r_max) / 2.0;
-
-    // Adjust the imaginary axis based on the aspect ratio
-    double aspect_ratio = (double)WIDTH / (double)HEIGHT;
-    double range = (r_max - r_min);
-    i_max = center + range / 2.0 / aspect_ratio;
-    i_min = center - range / 2.0 / aspect_ratio;
-
-    //i_max = i_min + (r_max - r_min) * HEIGHT / WIDTH;
-    //mlx_clear_window(f->mlx, f->win);
-    for (y = -1; y < HEIGHT; y++) {
-        for (x = -1; x < WIDTH; x++)
-        {
-            real = r_min + x * (r_max - r_min)/WIDTH;
-            imag = i_max + y * (i_min - i_max)/HEIGHT;
-            
-            //int iterations = julia(-0.7, 0.27015, real, imag);
-            //int iterations = julia(0.285, 0.01, real, imag);
-            //int iterations = julia(-0.4, 0.6, real, imag);
-            int iterations = julia(-0.8, 0.156, real, imag);
-            if (iterations == max_iter)
-                color = create_trgb(0, 0, 0, 0); // Black if inside Julia set
-            else
-                color = create_trgb(0, iterations % 256, iterations % 64, iterations % 128); // Color based on iterations
-            //ft_printf("%d\n", color);
-            // Put pixel in image
-            my_mlx_pixel_put(img, x, y, color);
-        }
-    }
-    //mlx_put_image_to_window(f->mlx, f->win, f->img->img, 0, 0);
-}
-
-/*
-int julia(double real, double img, double c_re, double c_im) {
-    int i = 0;
-    double z_re = real, z_im = img;
-    
-    while (z_re * z_re + z_im * z_im <= 4 && i < MAX_ITER) {
-        double temp = z_re * z_re - z_im * z_im + c_re;
-        z_im = 2 * z_re * z_im + c_im;
-        z_re = temp;
-        i++;
-    }
-    return i;
-}
-
-
-void draw_julia_set(t_data *img, double c_re, double c_im) {
-    int x, y;
-    double real, imag;
-    int color;
-    int max_iter = MAX_ITER;
-    
-    for (y = 0; y < HEIGHT; y++) {
-        for (x = 0; x < WIDTH; x++) {
-            real = (x - WIDTH / 2) * ZOOM / WIDTH + MOVE_X;
-            imag = (y - HEIGHT / 2) * ZOOM / HEIGHT + MOVE_Y;
-            
-            int iterations = julia(real, imag, c_re, c_im);
-            if (iterations == max_iter)
-                color = create_trgb(0, 0, 0, 0); // Black if inside Julia set
-            else
-                color = create_trgb(0, iterations % 256, iterations % 64, iterations % 128); // Color based on iterations
-
-            // Put pixel in image
-            my_mlx_pixel_put(img, x, y, color);
-        }
-    }
-}
-*/
-
-
-int main(void)
-{
-    //t_fractol   *fractol;
-
-    //fractol = malloc(sizeof(t_fractol));
-    void    *mlx;
-    void    *window;
-    t_data  img;
-    //int color;
-
-    //init_mlx(fractol);
-    //render(fractol);
-    //color = create_trgb(0, 0, 0, 255);
-    //ft_printf("Col hex: %X\n", color);
-    //ft_printf("Col int: %d\n", color);
-    // Initialize the MiniLibX connection to the display
-    mlx = mlx_init();
-    if (!mlx)
-    {
-        // If mlx_init fails, print error and return
-        write(2, "Error initializing mlx.\n", 24);
-        return (1);
-    }
-
-    // Create a new window (width, height, title)
-    window = mlx_new_window(mlx, WIDTH, HEIGHT, "MiniLibX Test");
-    img.img = mlx_new_image(mlx, WIDTH, HEIGHT);
-
-    img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
-    //my_mlx_pixel_put(&img, 5, 5, color);
-    //mlx_put_image_to_window(mlx, window, img.img, 0, 0);
-    // Fill the window with a color (e.g., red: 0xFF0000)
-    mlx_clear_window(mlx, window);
-    render(&img, -2, 2);
-    //do_gradient(&img, color);
-    //do_cycles(&img, color, 20);
-    printf("Image filled\n");
-    //double  c_re = -0.766667;
-    //double  c_im = -0.090000;
-    //draw_julia_set(&img, c_re, c_im);
-    mlx_put_image_to_window(mlx, window, img.img, 0, 0);
-    //mlx_string_put(mlx, window, 10, 10, 0xFFFFFF, "Hello, MiniLibX!");
-
-    // Enter the event loop (the window will remain open until closed)
-    mlx_loop(mlx);
-    //mlx_loop(fractol->mlx);
+    fractol = malloc(sizeof(t_fractol));
+    init_zero(fractol);
+    parse_args(fractol, argc, argv);
+    init(fractol);
+    printf("kr: %f\n", fractol->kr);
+    printf("ki: %f\n", fractol->ki);
+    printf("col: %i\n", fractol->color[0]);
+    render(fractol);
+    mlx_mouse_hook(fractol->win, mouse_event, fractol);
+    mlx_loop(fractol->mlx);
     return (0);
 }
