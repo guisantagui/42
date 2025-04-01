@@ -18,6 +18,15 @@ int mouse_event(int keycode, int x, int y, t_fractol *f)
     }
     else if (keycode == MOUSE_WHEEL_DOWN)
         zoom(f, 2);
+    init_palette(f);
     render(f);
+    return (0);
+}
+
+int exit_hook(t_fractol *fractol)
+{
+    ft_printf("Exiting program...\n");
+    mlx_destroy_window(fractol->mlx, fractol->win);
+    exit(0);
     return (0);
 }

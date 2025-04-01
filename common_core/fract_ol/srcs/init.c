@@ -100,6 +100,8 @@ void    get_palette_multichrome(t_fractol *f)
 
 void    init_palette(t_fractol *f)
 {
+    if (f->palette != NULL)
+        free(f->palette);
     f->palette = malloc(sizeof(int) * f->max_iters);
     if (!f->palette)
         exit(1);

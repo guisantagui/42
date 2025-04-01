@@ -60,11 +60,15 @@ unsigned char	get_g(int trgb);
 unsigned char	get_b(int trgb);
 int add_shade(int color, double shade);
 int interpol_cols(int col_1, int col_2, double fraction);
+void    init_palette(t_fractol *f);
 
 // Moves
 void    zoom(t_fractol *f, double zoom);
 void	move(t_fractol *f, double distance, char direction);
+
+// Events
 int mouse_event(int keycode, int x, int y, t_fractol *f);
+int exit_hook(t_fractol *fractol);
 
 // Parser
 int	ft_atoi_cust(const char *str, int *sign);
