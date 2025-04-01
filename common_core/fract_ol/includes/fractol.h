@@ -42,6 +42,8 @@ typedef struct  s_fractol
     int    set;
     int    *color;
     int n_cols;
+    double zoom;
+    int max_iters;
 }           t_fractol;
 
 // Initialization and computation

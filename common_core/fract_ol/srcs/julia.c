@@ -6,7 +6,7 @@ int julia(t_fractol *f, double z_re, double z_im)
     double temp;
     
     i = 0;
-    while (z_re * z_re + z_im * z_im <= 4 && i < MAX_ITER) {
+    while (z_re * z_re + z_im * z_im <= 4 && i < f->max_iters) {
         temp = z_re * z_re - z_im * z_im + f->kr;
         z_im = 2 * z_re * z_im + f->ki;
         z_re = temp;

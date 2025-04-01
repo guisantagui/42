@@ -11,6 +11,7 @@ void    zoom(t_fractol *f, double zoom)
 	f->r_max = f->r_max - (center_r - zoom * center_r) / 2;
 	f->i_min = f->i_min + (center_i - zoom * center_i) / 2;
 	f->i_max = f->i_max - (center_i - zoom * center_i) / 2;
+	f->zoom *= zoom;
 }
 
 void	move(t_fractol *f, double distance, char direction)

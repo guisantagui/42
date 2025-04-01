@@ -16,9 +16,9 @@ void    init_zero(t_fractol *f)
     f->i_max = center + range / 2.0 / ar;
     f->i_min = center - range / 2.0 / ar;
     f->set = 0;
-    f->palette = malloc(sizeof(int) * MAX_ITER);
-    if (!f->palette)
-        exit(1);
+    f->zoom = ZOOM;
+    f->max_iters = MAX_ITER;
+    f->palette = NULL;
 }
 
 void    init_mlx(t_fractol *f)
@@ -47,7 +47,6 @@ void    init_mlx(t_fractol *f)
         exit(1);
 }
 
-
 void    get_palette_monochrome(t_fractol *f)
 {
     int col1;
@@ -59,12 +58,12 @@ void    get_palette_monochrome(t_fractol *f)
     col1 = 0x000000;
     col2 = f->color[0];
     i = 0;
-    while (i < MAX_ITER)
+    while (i < f->max_iters)
 	{
 		j = 0;
-		while (j < MAX_ITER / 2)
+		while (j < f->max_iters / 2)
 		{
-			fraction = (double)j / (MAX_ITER / 2);
+			fraction = (double)j / (f->max_iters / 2);
 			f->palette[i + j] = interpol_cols(col1, col2, fraction);
 			j++;
 		}
@@ -72,7 +71,7 @@ void    get_palette_monochrome(t_fractol *f)
 		col2 = 0xFFFFFF;
 		i += j;
 	}
-	f->palette[MAX_ITER - 1] = 0;
+	f->palette[f->max_iters - 1] = 0;
 }
 
 void    get_palette_multichrome(t_fractol *f)
@@ -84,51 +83,26 @@ void    get_palette_multichrome(t_fractol *f)
 
 	i = 0;
 	x = 0;
-	while (i < MAX_ITER)
+	while (i < f->max_iters)
 	{
 		j = 0;
-		while ((i + j) < MAX_ITER && j < (MAX_ITER / (f->n_cols - 1)))
+		while ((i + j) < f->max_iters && j < (f->max_iters / (f->n_cols - 1)))
 		{
-			fraction = (double)j / (MAX_ITER / (f->n_cols - 1));
+			fraction = (double)j / (f->max_iters / (f->n_cols - 1));
 			f->palette[i + j] = interpol_cols(f->color[x], f->color[x + 1], fraction);
 			j++;
 		}
 		x++;
 		i += j;
 	}
-	f->palette[MAX_ITER - 1] = 0;
+	f->palette[f->max_iters - 1] = 0;
 }
-/*
-void    init_palette(t_fractol *f, int color)
-{
-    int col1;
-    int col2;
-    int i;
-    int j;
-    double fraction;
-
-    col1 = 0x000000;
-    col2 = color;
-    i = 0;
-    while (i < MAX_ITER)
-	{
-		j = 0;
-		while (j < MAX_ITER / 2)
-		{
-			fraction = (double)j / (MAX_ITER / 2);
-			f->palette[i + j] = interpol_cols(col1, col2, fraction);
-			j++;
-		}
-		col1 = col2;
-		col2 = 0xFFFFFF;
-		i += j;
-	}
-	f->palette[MAX_ITER - 1] = 0;
-}
-*/
 
 void    init_palette(t_fractol *f)
 {
+    f->palette = malloc(sizeof(int) * f->max_iters);
+    if (!f->palette)
+        exit(1);
     if (f->n_cols == 1)
         get_palette_monochrome(f);
     else

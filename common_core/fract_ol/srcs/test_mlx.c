@@ -44,9 +44,12 @@ int main(int argc, char **argv)
     t_fractol   *fractol;
 
     fractol = malloc(sizeof(t_fractol));
+    printf("Hola");
     init_zero(fractol);
     parse_args(fractol, argc, argv);
+    
     init(fractol);
+    printf("Adios");
     printf("kr: %f\n", fractol->kr);
     printf("ki: %f\n", fractol->ki);
     printf("col: %i\n", fractol->color[0]);
