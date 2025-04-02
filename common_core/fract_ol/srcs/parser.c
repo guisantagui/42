@@ -100,6 +100,20 @@ void    get_set(t_fractol *f, char **argv)
     
 }
 
+void    set_julia_cnstnts(t_fractol *f, char **argv)
+{
+    f->kr = ft_atod(argv[2]);
+    f->ki = ft_atod(argv[3]);
+    if (f->kr < -2)
+        f->kr = -2;
+    else if (f->kr > 2)
+        f->kr = 2;
+    if (f->ki < -2)
+        f->ki = -2;
+    else if (f->ki > 2)
+        f->ki = 2;
+}
+
 void    parse_args(t_fractol *f, int argc, char **argv)
 {
     int i;
@@ -110,8 +124,7 @@ void    parse_args(t_fractol *f, int argc, char **argv)
         {
             if (argc >= 5)
             {
-                f->kr = ft_atod(argv[2]);
-                f->ki = ft_atod(argv[3]);
+                set_julia_cnstnts(f, argv);
                 f->color = malloc(sizeof(int) * argc - 4);
                 f->n_cols = argc - 4;
                 if (!f->color)

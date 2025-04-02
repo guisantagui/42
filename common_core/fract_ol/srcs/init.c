@@ -25,26 +25,22 @@ void    init_mlx(t_fractol *f)
 {
     f->mlx = mlx_init();
     if (!f->mlx)
-    {
-        exit(1);
-    }
+        free_exit(f);
     f->img = malloc(sizeof(t_data));
     if (!f->img)
-    {
-        exit(1);
-    }
+        free_exit(f);
     f->img->img = mlx_new_image(f->mlx, WIDTH, HEIGHT);
     if (!f->img->img)
-    {
-        exit(1);
-    }
+        free_exit(f);
     f->img->addr = mlx_get_data_addr(f->img->img,
         &f->img->bits_per_pixel,
         &f->img->line_length,
         &f->img->endian);
+    if (!f->img->addr)
+        free_exit(f);
     f->win = mlx_new_window(f->mlx, WIDTH, HEIGHT, "Fract-ol");
     if (!f->win)
-        exit(1);
+        free_exit(f);
 }
 
 void    get_palette_monochrome(t_fractol *f)
@@ -104,7 +100,7 @@ void    init_palette(t_fractol *f)
         free(f->palette);
     f->palette = malloc(sizeof(int) * f->max_iters);
     if (!f->palette)
-        exit(1);
+        free_exit(f);
     if (f->n_cols == 1)
         get_palette_monochrome(f);
     else
