@@ -150,7 +150,7 @@ void shift_cols(t_fractol *f)
     i = 0;
     while (i < f->n_cols)
     {
-        f->color[i] = color_shift_hue(f->color[i], 0.5);
+        f->color[i] = color_shift_hue(f->color[i], 1);
         i++;
     }
 }

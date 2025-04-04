@@ -2,19 +2,12 @@
 
 void    init_zero(t_fractol *f)
 {
-    double  center;
-    double  ar;
-    double  range;
-
     f->kr = 0;
     f->ki = 0;
-    f->r_min = -2;
-    f->r_max = 2;
-    center = (f->r_min + f->r_max) / 2.0;
-    ar = (double)WIDTH / (double)HEIGHT;
-    range = (f->r_max - f->r_min);
-    f->i_max = center + range / 2.0 / ar;
-    f->i_min = center - range / 2.0 / ar;
+    f->r_min = 0;
+    f->r_max = 0;
+    f->i_max = 0;
+    f->i_min = 0;
     f->set = 0;
     f->zoom = ZOOM;
     f->max_iters = MAX_ITER;
@@ -76,15 +69,17 @@ void    get_palette_multichrome(t_fractol *f)
 	int		j;
 	int		x;
 	double	fraction;
+    int seg_size;
 
 	i = 0;
 	x = 0;
+    seg_size = f->max_iters / (f->n_cols - 1);
 	while (i < f->max_iters)
 	{
 		j = 0;
 		while ((i + j) < f->max_iters && j < (f->max_iters / (f->n_cols - 1)))
 		{
-			fraction = (double)j / (f->max_iters / (f->n_cols - 1));
+			fraction = (double)j / seg_size;
 			f->palette[i + j] = interpol_cols(f->color[x], f->color[x + 1], fraction);
 			j++;
 		}
