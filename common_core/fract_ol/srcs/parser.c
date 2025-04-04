@@ -147,8 +147,6 @@ void    set_constants(t_fractol *f, char **argv)
 void    parse_args(t_fractol *f, int argc, char **argv)
 {
     int i;
-    //set_constants(f, argv);
-    set_bounds(f, -2.0, 2.0);
     if (argc > 1)
     {
         get_set(f, argv);
@@ -159,7 +157,7 @@ void    parse_args(t_fractol *f, int argc, char **argv)
             if (argc >= 5)
             {
                 
-                set_julia_cnstnts(f, argv);
+                set_constants(f, argv);
                 f->color = malloc(sizeof(int) * argc - 4);
                 if (!f->color)
                     free_exit(f);
@@ -182,7 +180,6 @@ void    parse_args(t_fractol *f, int argc, char **argv)
                 f->color[0] = 0xFFFFFF;
                 f->n_cols = 1;
             }
-            ft_printf("n_cols: %d\n", f->n_cols);
         }
         else if (f->set == 2)
         {
@@ -196,7 +193,6 @@ void    parse_args(t_fractol *f, int argc, char **argv)
                 i = 2;
                 while (i < argc)
                 {
-                    printf("color arg %d: %s. ATOD: %d\n", i, argv[i], ft_atox(argv[i]));
                     f->color[i - 2] = ft_atox(argv[i]);
                     i++;
                 }
