@@ -12,6 +12,13 @@
 
 #include "../includes/push_swap.h"
 
+void	free_data(t_data **data)
+{
+	free_ab(&(*data)->a, &(*data)->b);
+	free(*data);
+	*data = NULL;
+}
+
 t_data	*init_data(int argc, char **argv)
 {
 	t_stack	*a_stack;
@@ -21,9 +28,10 @@ t_data	*init_data(int argc, char **argv)
 
 	is_error = 0;
 	data = malloc(sizeof(t_data));
-	a_stack = init_stack(parse_args(argc, argv), 'a', &is_error);
+	a_stack = init_stack(parse_args(argc, argv, &is_error), 'a', &is_error);
 	if (is_error == 1)
 	{
+		free_data(&data);
 		free_stack(&a_stack);
 		ft_printf("Error\n");
 	}
@@ -33,13 +41,6 @@ t_data	*init_data(int argc, char **argv)
 	data->a = a_stack;
 	data->b = b_stack;
 	return (data);
-}
-
-void	free_data(t_data **data)
-{
-	free_ab(&(*data)->a, &(*data)->b);
-	free(*data);
-	*data = NULL;
 }
 
 int	main(int argc, char **argv)

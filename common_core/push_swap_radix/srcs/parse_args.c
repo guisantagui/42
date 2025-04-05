@@ -84,19 +84,41 @@ static t_list	*arr_to_list(char **arr)
 	return (lst);
 }
 
-t_list	*parse_args(int argc, char **argv)
+static int	is_all_spaces(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (!(str[i] == ' ' || str[i] == '\t' || str[i] == '\f'
+        	|| str[i] == '\r' || str[i] == '\n' || str[i] == '\v'))
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+t_list	*parse_args(int argc, char **argv, int *is_error)
 {
 	char	**argv_split;
 	t_list	*lst;
 
 	if (argc == 1)
 		return (NULL);
-	if (argc == 2)
+	if (argc == 2 && is_all_spaces(argv[1]) == 0)
 		argv_split = split_cust(argv[1], " \t\n\r\v\f");
+	else if (argc == 2 && is_all_spaces(argv[1]) == 1)
+		*is_error = 1;
 	else
 		argv_split = argv_to_arr(argc, argv);
-	lst = arr_to_list(argv_split);
-	if (has_dups(lst))
-		error(&lst);
+	if (*is_error == 0)
+	{
+		lst = arr_to_list(argv_split);
+		if (has_dups(lst))
+			error(&lst);
+	}
+	else
+		lst = NULL;
 	return (lst);
 }
