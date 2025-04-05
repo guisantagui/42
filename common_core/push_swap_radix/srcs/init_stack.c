@@ -32,9 +32,9 @@ void	free_stack(t_stack **stack)
 {
 	if (!stack || !*stack)
 		return ;
-	if (!(*stack)->list)
+	if ((*stack)->list != NULL)
 		ft_lstclear(&(*stack)->list, free);
-	if (!(*stack)->rank)
+	if ((*stack)->rank != NULL)
 		ft_lstclear(&(*stack)->rank, free);
 	free(*stack);
 	*stack = NULL;

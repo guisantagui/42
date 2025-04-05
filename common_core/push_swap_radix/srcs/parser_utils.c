@@ -50,11 +50,12 @@ void	free_arr(char **arr)
 	if (!arr)
 		return ;
 	i = 0;
-	while (!arr[i])
+	while (arr[i])
 	{
 		free(arr[i]);
 		i++;
 	}
+	free(arr);
 }
 
 void	error(t_list **lst)
