@@ -80,6 +80,7 @@ typedef struct  s_fractol
 int julia(t_fractol *f, double z_re, double z_im);
 int mandelbrot(t_fractol *f, double c_re, double c_im);
 int burning_ship(t_fractol *f, double c_re, double c_im);
+int newton(t_fractol *f, double z_re, double z_im);
 
 // Initialization and computation
 void    init_zero(t_fractol *f);

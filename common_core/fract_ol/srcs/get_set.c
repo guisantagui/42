@@ -20,6 +20,8 @@ static void    get_set_char(t_fractol *f, char **argv)
         f->set = 2;
     else if (argv[1][0] == 'B' || argv[1][0] == '3')
         f->set = 3;
+    else if (argv[1][0] == 'N' || argv[1][0] == '4')
+        f->set = 4;
     else
         free_exit(f);
 }
@@ -32,6 +34,8 @@ static void    get_set_str(t_fractol *f, char **argv)
         f->set = 2;
     else if (ft_strncmp(argv[1], "BURNING SHIP", ft_strlen(argv[1])) == 0)
         f->set = 3;
+    else if (ft_strncmp(argv[1], "NEWTON", ft_strlen(argv[1])) == 0)
+        f->set = 4;
     else
         free_exit(f);
 }

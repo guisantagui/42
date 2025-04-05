@@ -40,6 +40,8 @@ static void    set_constants(t_fractol *f, char **argv)
         set_bounds(f, -4.0, 4.0);
     else if (f->set == 3)
         set_bounds(f, -3.0, 3.0);
+    else if (f->set == 4)
+        set_bounds(f, -2000.0, 2000.0);
 }
 
 static void    fractol_setup(t_fractol *f, int argc, char **argv)

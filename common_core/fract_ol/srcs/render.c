@@ -11,6 +11,8 @@ static int    get_fractal(t_fractol *f, double re, double im)
         n_iters = mandelbrot(f, re, im);
     else if (f->set == 3)
         n_iters = burning_ship(f, re, im);
+    else if (f->set == 4)
+        n_iters = newton(f, re, im);
     else
         n_iters = 0;
     return (n_iters);
