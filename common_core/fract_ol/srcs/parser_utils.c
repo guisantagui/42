@@ -59,3 +59,32 @@ int	ft_atoi_cust(const char *str, int *sign)
 	}
 	return (*sign * res);
 }
+
+double  ft_atod(char *str)
+{
+    double res;
+    int i;
+    double dec_div;
+    char    **split;
+    int sign;
+
+    res = 0;
+    dec_div = 1;
+    split = ft_split(str, '.');
+    sign = 1;
+    ft_printf("%s\n", split[0]);
+    ft_printf("%s\n", split[1]);
+    res = (double)ft_atoi_cust(split[0], &sign);
+    if (split[1] != NULL)
+    {
+        i = skip_spaces(split[1]);
+        while (split[1][i] && ft_isdigit(split[1][i]))
+        {
+            dec_div *= 0.1;
+            res += (split[1][i] - '0') * dec_div;
+            i++;
+        }
+    }
+    free_arr(split);
+    return (res * sign);
+}

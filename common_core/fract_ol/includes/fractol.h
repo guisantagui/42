@@ -106,11 +106,15 @@ int mouse_event(int keycode, int x, int y, t_fractol *f);
 int	key_event(int keycode, t_fractol *f);
 int exit_hook(t_fractol *fractol);
 
-// Parser
+// Parser utils
 int	ft_atoi_cust(const char *str, int *sign);
+double  ft_atod(char *str);
 void    free_arr(char **arr);
 int    skip_spaces(char *str);
 void    parse_args(t_fractol *f, int argc, char **argv);
+
+// Color set
+void    set_color(t_fractol *f, int i_o, int argc, char **argv);
 
 // Cleanup
 void    free_fractol(t_fractol *f);
