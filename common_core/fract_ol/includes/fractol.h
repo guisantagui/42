@@ -85,15 +85,19 @@ void    init_zero(t_fractol *f);
 void    init(t_fractol *f);
 void    render(t_fractol *f);
 
-// Color stuff
+// TRGB operations
+int *get_trgb(int color);
 int create_trgb(unsigned char t, unsigned char r, unsigned char g, unsigned char b);
 unsigned char	get_t(int trgb);
 unsigned char	get_r(int trgb);
 unsigned char	get_g(int trgb);
 unsigned char	get_b(int trgb);
-int add_shade(int color, double shade);
+
+// Palette
 int interpol_cols(int col_1, int col_2, double fraction);
 void    init_palette(t_fractol *f);
+
+// Color shifts
 int color_shift_hue(int color, double hue_shift);
 void shift_cols(t_fractol *f);
 
@@ -111,6 +115,9 @@ int	ft_atoi_cust(const char *str, int *sign);
 double  ft_atod(char *str);
 void    free_arr(char **arr);
 int    skip_spaces(char *str);
+
+// Parser
+void    get_set(t_fractol *f, char **argv);
 void    parse_args(t_fractol *f, int argc, char **argv);
 
 // Color set

@@ -7,7 +7,7 @@ NAMEPRINTF = $(PRINTF_PATH)/libftprintf.a
 
 # Compiler
 CC = cc
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra -DGL_SILENCE_DEPRECATION
 LDFLAGS = -L$(PRINTF_PATH) -lftprintf
 
 # Remove
@@ -47,7 +47,7 @@ all:	$(NAME)
 %.o: %.c
 	${CC} ${CFLAGS} -c $< -o $@ $(INC)
 
-$(NAME): $(OBJS) $(NAMEPRINTF) $(MLX)
+$(NAME): $(OBJS) $(NAMEPRINTF) $(NAMEMLX)
 	$(CC) $(OBJS) $(CFLAGS) $(LDFLAGS) -o $(NAME) $(INC) $(MLX_FLAGS)
 
 $(NAMEMLX):
@@ -59,11 +59,12 @@ $(NAMEPRINTF):
 clean:
 	${RM} ${OBJS}
 	@cd $(PRINTF_PATH) && make clean
-	@cd $(MLX_PATH) && make clean
+	@make -C $(MLX_PATH) clean
 
 fclean: clean
 	${RM} ${OBJS} ${NAME}
 	@cd $(PRINTF_PATH) && make fclean
+	@make -C $(MLX_PATH) clean
 
 re: fclean all
 
