@@ -51,7 +51,10 @@ int	main(int argc, char **argv)
 	else if (argc >= 2)
 	{
 		data = init_data(argc, argv);
-		sort(&data, "RS");
+		if (data->a->size >= 100)
+			sort(&data, "RS");
+		else
+			sort(&data, "QS");
 		free_data(&data);
 	}
 	return (0);
