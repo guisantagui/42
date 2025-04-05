@@ -6,9 +6,11 @@
 /*   By: gsantama <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 15:23:58 by gsantama          #+#    #+#             */
-/*   Updated: 2025/04/05 15:28:05 by gsantama         ###   ########.fr       */
+/*   Updated: 2025/04/05 16:26:22 by gsantama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "../includes/push_swap.h"
 
 static int	skip_spaces(const char *str, int *sign)
 {
@@ -17,20 +19,12 @@ static int	skip_spaces(const char *str, int *sign)
 	i = 0;
 	while (str[i] == ' ' || str[i] == '\t' || str[i] == '\f'
 		|| str[i] == '\r' || str[i] == '\n' || str[i] == '\v')
-	{
 		i++;
-		if (str[i] == '+' || str[i] == '-')
-		{
-			if (str[i] == '-')
-				*sign *= -1;
-			i++;
-		}
-		if (str[i] == '+' || str[i] == '-')
-		{
-			if (str[i] == '-')
-				sign *= -1;
-			i++;
-		}
+	if (str[i] == '+' || str[i] == '-')
+	{
+		if (str[i] == '-')
+			*sign *= -1;
+		i++;
 	}
 	return (i);
 }
