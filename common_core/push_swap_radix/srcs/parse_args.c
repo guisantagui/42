@@ -99,7 +99,7 @@ static int	is_all_spaces(char *str)
 	return (1);
 }
 
-t_list	*parse_args(int argc, char **argv, int *is_error)
+t_list	*parse_args(int argc, char **argv)
 {
 	char	**argv_split;
 	t_list	*lst;
@@ -109,16 +109,14 @@ t_list	*parse_args(int argc, char **argv, int *is_error)
 	if (argc == 2 && is_all_spaces(argv[1]) == 0)
 		argv_split = split_cust(argv[1], " \t\n\r\v\f");
 	else if (argc == 2 && is_all_spaces(argv[1]) == 1)
-		*is_error = 1;
-	else
-		argv_split = argv_to_arr(argc, argv);
-	if (*is_error == 0)
 	{
-		lst = arr_to_list(argv_split);
-		if (has_dups(lst))
-			error(&lst);
+		ft_printf("Error\n");
+		exit(1);
 	}
 	else
-		lst = NULL;
+		argv_split = argv_to_arr(argc, argv);
+	lst = arr_to_list(argv_split);
+	if (has_dups(lst))
+		error(&lst);
 	return (lst);
 }

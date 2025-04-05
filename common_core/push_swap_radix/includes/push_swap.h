@@ -59,7 +59,7 @@ int				atoi_cust(const char *str, int *is_error);
 void			free_arr(char **arr);
 void			error(t_list **lst);
 char			**split_cust(char *str, char *charset);
-t_list			*parse_args(int argc, char **argv, int *is_error);
+t_list			*parse_args(int argc, char **argv);
 
 // Stack
 t_stack			*init_stack(t_list *lst, char id, int *is_error);

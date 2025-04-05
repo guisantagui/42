@@ -27,16 +27,15 @@ t_data	*init_data(int argc, char **argv)
 	t_data	*data;
 
 	is_error = 0;
-	data = malloc(sizeof(t_data));
-	a_stack = init_stack(parse_args(argc, argv, &is_error), 'a', &is_error);
+	a_stack = init_stack(parse_args(argc, argv), 'a', &is_error);
 	if (is_error == 1)
 	{
-		free_data(&data);
 		free_stack(&a_stack);
 		ft_printf("Error\n");
 	}
 	b_stack = init_stack(NULL, 'b', &is_error);
-	if (is_error == 1)
+	data = malloc(sizeof(t_data));
+	if (is_error == 1 || data == NULL)
 		error_ab(&a_stack, &b_stack);
 	data->a = a_stack;
 	data->b = b_stack;
