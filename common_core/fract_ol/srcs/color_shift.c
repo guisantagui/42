@@ -1,9 +1,60 @@
 #include "fractol.h"
 
-int color_shift_hue(int color, double hue_shift)
+double *norm_trgb(int color)
 {
     int *col_trgb;
-    double col_hsv[3];
+    double  *col_hsv;
+    int i;
+
+    col_trgb = get_trgb(color);
+    if (!col_trgb)
+        return (NULL);
+    col_hsv = malloc(sizeof(double) * 3);
+    if (!col_hsv)
+    {
+        free (col_trgb);
+        return (NULL);
+    }
+    i = 0;
+    while (i < 3)
+    {
+        col_hsv[i] = (double)(col_trgb[i] & 0xFF) / 255.0;
+        i++;
+    }
+    free(col_trgb);
+    return (col_hsv);
+}
+
+double  *get_hsv(double *norm_trgb)
+{
+    double  *hsv;
+    double  min;
+    double  max;
+
+    max = fmax(norm_trgb[0], fmax(norm_trgb[1], norm_trgb[2]));
+    min = fmin(norm_trgb[0], fmax(norm_trgb[1], norm_trgb[2]));
+    hsv = malloc(sizeof(double) * 3);
+    if (!hsv)
+        return (NULL);
+    if (max == 0)
+        hsv[1] = 0;
+    else
+        hsv[1] = (max - min) / max;
+    hsv[2] = max;
+    if ((max - min) < 0.00001)
+        hsv[0] = 0.0;
+    else if (max == norm_trgb[2])
+        hsv[0] = (norm_trgb[1] - norm_trgb[0]) / (max - min);
+    else if (max == norm_trgb[1])
+        hsv[0] = 2.0 + (norm_trgb[0] - norm_trgb[2]) / (max - min);
+    else
+        hsv[0] = 4.0 + (norm_trgb[2] - norm_trgb[1]) / (max - min);
+    return (hsv);
+}
+
+int color_shift_hue(int color, double hue_shift)
+{
+    double *col_hsv;
     int i;
     double min;
     double max;
@@ -13,13 +64,7 @@ int color_shift_hue(int color, double hue_shift)
     double v;
     int shift_col;
 
-    col_trgb = get_trgb(color);
-    i = 0;
-    while (i < 3)
-    {
-        col_hsv[i] = (double)(col_trgb[i] & 0xFF) / 255.0;
-        i++;
-    }
+    col_hsv = norm_trgb(color);
     max = fmax(col_hsv[0], fmax(col_hsv[1], col_hsv[2]));
     min = fmin(col_hsv[0], fmin(col_hsv[1], col_hsv[2]));
     delta = max - min;
@@ -63,8 +108,8 @@ int color_shift_hue(int color, double hue_shift)
             case 5: col_hsv[2] = v; col_hsv[1] = p; col_hsv[0] = q; break;
         }
     }
-    shift_col = create_trgb(col_trgb[3], (int)(col_hsv[2] * 255), (int)(col_hsv[1] * 255), (int)(col_hsv[0] * 255));
-    free(col_trgb);
+    free(col_hsv);
+    shift_col = create_trgb(255, (int)(col_hsv[2] * 255), (int)(col_hsv[1] * 255), (int)(col_hsv[0] * 255));
     return (shift_col);
 }
 
