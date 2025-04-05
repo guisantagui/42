@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_list_ranks.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gsantama <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/05 15:01:45 by gsantama          #+#    #+#             */
+/*   Updated: 2025/04/05 15:04:23 by gsantama         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/push_swap.h"
 
 static int	*lst_to_arr(t_list *lst, int size, int *is_error)
 {
 	int		*values;
-	int	i;
+	int		i;
 
 	values = malloc(sizeof(int) * size);
 	if (!values)
@@ -50,10 +62,10 @@ static void	free_aux(t_list **ranks, int *arr_sort)
 	free(arr_sort);
 }
 
-static t_list *map_ranks(t_list *lst, int size, int *arr_sort, int *is_error)
+static t_list	*map_ranks(t_list *lst, int size, int *arr_sort, int *is_error)
 {
 	t_list	*ranks;
-	int	i;
+	int		i;
 
 	ranks = NULL;
 	while (lst)
@@ -77,18 +89,17 @@ static t_list *map_ranks(t_list *lst, int size, int *arr_sort, int *is_error)
 	return (ranks);
 }
 
-t_list *get_list_ranks(t_list *lst, int size, int *is_error)
+t_list	*get_list_ranks(t_list *lst, int size, int *is_error)
 {
 	t_list	*ranks;
-	int	*arr_sort;
+	int		*arr_sort;
 
 	ranks = NULL;
 	arr_sort = lst_to_arr(lst, size, is_error);
 	if (*is_error == 1)
 		return (NULL);
-
 	ranks = map_ranks(lst, size, arr_sort, is_error);
-    if (*is_error == 0)
-        free(arr_sort);
+	if (*is_error == 0)
+		free(arr_sort);
 	return (ranks);
 }

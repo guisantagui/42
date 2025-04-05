@@ -6,7 +6,7 @@
 /*   By: gsantama <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 19:19:12 by gsantama          #+#    #+#             */
-/*   Updated: 2025/03/17 19:23:17 by gsantama         ###   ########.fr       */
+/*   Updated: 2025/04/05 15:07:44 by gsantama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static t_list	*arr_to_list(char **arr)
 	int		i;
 	t_list	*lst;
 	int		len;
-	int	*is_error;
+	int		*is_error;
 
 	i = 0;
 	lst = NULL;

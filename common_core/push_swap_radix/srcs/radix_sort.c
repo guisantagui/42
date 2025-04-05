@@ -1,19 +1,31 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   radix_sort.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gsantama <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/05 15:33:12 by gsantama          #+#    #+#             */
+/*   Updated: 2025/04/05 15:37:44 by gsantama         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/push_swap.h"
 
-static int count_bits(int n)
+static int	count_bits(int n)
 {
-    int bits;
-    if (n == 0)
-        return (1);
+	int	bits;
 
-    bits = 0;
-    while (n > 0) {
-        bits++;
-        n >>= 1;
-    }
-    return (bits);
+	if (n == 0)
+		return (1);
+	bits = 0;
+	while (n > 0)
+	{
+		bits++;
+		n >>= 1;
+	}
+	return (bits);
 }
-
 
 static void	sort_b(t_stack **a, t_stack **b, int max_bits, int bit)
 {
@@ -28,36 +40,36 @@ static void	sort_b(t_stack **a, t_stack **b, int max_bits, int bit)
 			push(b, a);
 	}
 	if (is_sorted((*a)->rank, 0, (*a)->size))
-    {
+	{
 		while ((*b)->size != 0)
 			push(b, a);
-    }
+	}
 }
 
-void    radix_sort(t_stack **a, t_stack **b)
+void	radix_sort(t_stack **a, t_stack **b)
 {
-    int max_bits;
-    int bit;
-    int a_size;
-    int j;
+	int	max_bits;
+	int	bit;
+	int	a_size;
+	int	j;
 
-    max_bits = count_bits(find_max((*a)->rank, (*a)->size));
-    bit = 0;
-    while (bit < max_bits)
-    {
-        a_size = (*a)->size;
-        j = 0;
-        while (j < a_size && !is_sorted((*a)->rank, 0, (*a)->size))
-        {
-            if ((*(int *)(*a)->rank->content & (1 << bit)) == 0)
-                push(a, b);
-            else
-                rotate(a);
-            j++;
-        }
-        bit++;
-        sort_b(a, b, max_bits, bit);
-    }
-    while ((*b)->size != 0)
-        push(b, a);
+	max_bits = count_bits(find_max((*a)->rank, (*a)->size));
+	bit = 0;
+	while (bit < max_bits)
+	{
+		a_size = (*a)->size;
+		j = 0;
+		while (j < a_size && !is_sorted((*a)->rank, 0, (*a)->size))
+		{
+			if ((*(int *)(*a)->rank->content & (1 << bit)) == 0)
+				push(a, b);
+			else
+				rotate(a);
+			j++;
+		}
+		bit++;
+		sort_b(a, b, max_bits, bit);
+	}
+	while ((*b)->size != 0)
+		push(b, a);
 }

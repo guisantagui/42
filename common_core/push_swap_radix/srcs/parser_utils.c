@@ -6,7 +6,7 @@
 /*   By: gsantama <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 21:02:30 by gsantama          #+#    #+#             */
-/*   Updated: 2025/03/17 21:04:24 by gsantama         ###   ########.fr       */
+/*   Updated: 2025/04/05 15:29:28 by gsantama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,38 +55,6 @@ void	free_arr(char **arr)
 		free(arr[i]);
 		i++;
 	}
-}
-
-int	atoi_cust(const char *str, int *is_error)
-{
-	int	i;
-	long	res;
-	int	sign;
-
-	i = 0;
-	res = 0;
-	sign = 1;
-	while (str[i] == ' ' || str[i] == '\t' || str[i] == '\f'
-		|| str[i] == '\r' || str[i] == '\n' || str[i] == '\v')
-		i++;
-	if (str[i] == '+' || str[i] == '-')
-	{
-		if (str[i] == '-')
-			sign *= -1;
-		i++;
-	}
-	while ((str[i] && ft_isdigit(str[i])) && *is_error == 0)
-	{
-		if (res > (INT_MAX / 10) || (res == INT_MAX / 10 && (str[i] - '0') > (INT_MAX % 10)))
-		{
-			*is_error = 1;
-			return (0);
-		}
-		res *= 10;
-		res += str[i] - '0';
-		i++;
-	}
-	return ((int)(sign * res));
 }
 
 void	error(t_list **lst)

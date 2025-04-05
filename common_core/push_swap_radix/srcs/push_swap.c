@@ -6,7 +6,7 @@
 /*   By: gsantama <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 19:23:48 by gsantama          #+#    #+#             */
-/*   Updated: 2025/03/17 21:07:27 by gsantama         ###   ########.fr       */
+/*   Updated: 2025/04/05 15:30:35 by gsantama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_data	*init_data(int argc, char **argv)
 {
 	t_stack	*a_stack;
 	t_stack	*b_stack;
-	int	is_error;
+	int		is_error;
 	t_data	*data;
 
 	is_error = 0;

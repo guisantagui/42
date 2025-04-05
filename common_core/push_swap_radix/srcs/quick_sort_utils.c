@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   quick_sort.c                                       :+:      :+:    :+:   */
+/*   quick_sort_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gsantama <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 20:41:05 by gsantama          #+#    #+#             */
-/*   Updated: 2025/03/17 20:54:19 by gsantama         ###   ########.fr       */
+/*   Updated: 2025/04/05 15:32:24 by gsantama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,9 @@ t_stack_state	init_state(t_stack **a, t_stack **b, int len)
 t_stack_state	do_partition(t_stack **a, t_stack **b, int len,
 		int reverse)
 {
-    t_stack_state	state;
+	t_stack_state	state;
 
-    state = init_state(a, b, len);
+	state = init_state(a, b, len);
 	while (len > 0)
 	{
 		if ((!reverse && (*(int *)(*a)->rank->content < state.pivot)) ||
@@ -100,7 +100,7 @@ t_stack_state	do_partition(t_stack **a, t_stack **b, int len,
 		}
 		len--;
 	}
-    return (state);
+	return (state);
 }
 
 void	reset_stacks(t_stack **a, t_stack **b, t_stack_state state)
