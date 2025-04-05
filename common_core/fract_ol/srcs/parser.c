@@ -1,6 +1,6 @@
 #include "fractol.h"
 
-void    set_julia_cnstnts(t_fractol *f, char **argv)
+static void    set_julia_cnstnts(t_fractol *f, char **argv)
 {
     f->kr = ft_atod(argv[2]);
     f->ki = ft_atod(argv[3]);
@@ -14,7 +14,7 @@ void    set_julia_cnstnts(t_fractol *f, char **argv)
         f->ki = 2;
 }
 
-void    set_bounds(t_fractol *f, double min, double max)
+static void    set_bounds(t_fractol *f, double min, double max)
 {
     double  center;
     double  ar;
@@ -29,7 +29,7 @@ void    set_bounds(t_fractol *f, double min, double max)
     f->i_min = center - range / 2 / ar;
 }
 
-void    set_constants(t_fractol *f, char **argv)
+static void    set_constants(t_fractol *f, char **argv)
 {
     if (f->set == 1)
     {
@@ -38,9 +38,11 @@ void    set_constants(t_fractol *f, char **argv)
     }
     else if (f->set == 2)
         set_bounds(f, -4.0, 4.0);
+    else if (f->set == 3)
+        set_bounds(f, -3.0, 3.0);
 }
 
-void    fractol_setup(t_fractol *f, int argc, char **argv)
+static void    fractol_setup(t_fractol *f, int argc, char **argv)
 {
     int i_o;
 
@@ -57,6 +59,7 @@ void    fractol_setup(t_fractol *f, int argc, char **argv)
     }
     else if (argc == i_o)
     {
+        set_constants(f, argv);
         f->color = malloc(sizeof(int));
         if (!f->color)
             free_exit(f);

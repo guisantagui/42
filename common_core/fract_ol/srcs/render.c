@@ -9,6 +9,8 @@ static int    get_fractal(t_fractol *f, double re, double im)
         n_iters = julia(f, re, im);
     else if (f->set == 2)
         n_iters = mandelbrot(f, re, im);
+    else if (f->set == 3)
+        n_iters = burning_ship(f, re, im);
     else
         n_iters = 0;
     return (n_iters);
@@ -64,6 +66,7 @@ void render(t_fractol *f)
             real = f->r_min + (double)x * (f->r_max - f->r_min)/WIDTH;
             imag = f->i_max + (double)y * (f->i_min - f->i_max)/HEIGHT;
             int iterations = get_fractal(f, real, imag);
+            //ft_printf("%d\n", iterations);
             color = f->palette[iterations];
             my_mlx_pixel_put(f->img, x, y, color);
             x++;

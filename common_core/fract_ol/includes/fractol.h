@@ -9,7 +9,7 @@
 
 # define WIDTH  1024
 # define HEIGHT 768
-# define MAX_ITER 60
+# define MAX_ITER 64
 # define ZOOM 1.0
 # define MOVE_X 0.0
 # define MOVE_Y 0.0
@@ -79,6 +79,7 @@ typedef struct  s_fractol
 // Sets
 int julia(t_fractol *f, double z_re, double z_im);
 int mandelbrot(t_fractol *f, double c_re, double c_im);
+int burning_ship(t_fractol *f, double c_re, double c_im);
 
 // Initialization and computation
 void    init_zero(t_fractol *f);
