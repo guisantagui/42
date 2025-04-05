@@ -59,6 +59,7 @@ $(NAMEPRINTF):
 clean:
 	${RM} ${OBJS}
 	@cd $(PRINTF_PATH) && make clean
+	@cd $(MLX_PATH) && make clean
 
 fclean: clean
 	${RM} ${OBJS} ${NAME}

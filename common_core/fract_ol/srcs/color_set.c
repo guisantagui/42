@@ -1,8 +1,28 @@
 #include "fractol.h"
 
-static int ft_atox_aux(char *str, char *digits, int *n_digs)
+static int ft_atox_aux(char *str, char *digits, int *i, int *n_digs)
 {
-    
+    int res;
+    int j;
+
+    res = 0;
+    while (str[*i] && ft_strchr(digits, (int)str[*i]) != NULL)
+    {
+        j = 0;
+        res *= 16;
+        while (digits[j])
+        {
+            if (ft_toupper(str[*i]) == digits[j])
+            {
+                res += j;
+                break;
+            }
+            j++;
+        }
+        (*i)++;
+        (*n_digs)++;
+    }
+    return (res);
 }
 
 
@@ -11,29 +31,12 @@ static int ft_atox(char *str)
     int res;
     char digits[17];
     int i;
-    int j;
     int n_digs;
 
-    res = 0;
     ft_strlcpy(digits, "0123456789ABCDEF", 17);
     i = skip_spaces(str);
     n_digs = 0;
-    while (str[i] && ft_strchr(digits, (int)str[i]) != NULL)
-    {
-        j = 0;
-        res *= 16;
-        while (digits[j])
-        {
-            if (ft_toupper(str[i]) == digits[j])
-            {
-                res += j;
-                break;
-            }
-            j++;
-        }
-        i++;
-        n_digs++;
-    }
+    res = ft_atox_aux(str, digits, &i, &n_digs);
     if (n_digs == 6 && str[i] == '\0')
         return (res);
     else
