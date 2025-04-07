@@ -72,8 +72,6 @@ double  ft_atod(char *str)
     dec_div = 1;
     split = ft_split(str, '.');
     sign = 1;
-    //ft_printf("%s\n", split[0]);
-    //ft_printf("%s\n", split[1]);
     res = (double)ft_atoi_cust(split[0], &sign);
     if (split[1] != NULL)
     {

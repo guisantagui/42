@@ -1,4 +1,5 @@
 #include "fractol.h"
+#include "keys.h"
 
 int mouse_event(int keycode, int x, int y, t_fractol *f)
 {
@@ -18,9 +19,54 @@ int mouse_event(int keycode, int x, int y, t_fractol *f)
     }
     else if (keycode == MOUSE_WHEEL_DOWN)
         zoom(f, 2);
+	else if (keycode == MOUSE_LEFT_CLICK)
+	{
+		if (f->set == 1)
+			julia_shift(x, y, f);
+	}
     init_palette(f);
     render(f);
     return (0);
+}
+
+static void    reset_constants(t_fractol *f)
+{
+    if (f->set == 1)
+    {
+        set_bounds(f, -2.0, 2.0, 0);
+        f->kr = -0.8;
+		f->ki = 0.156;
+    }
+    else if (f->set == 2)
+        set_bounds(f, -4.0, 4.0, 0);
+    else if (f->set == 3)
+        set_bounds(f, -3.0, 3.0, 0);
+    else if (f->set == 4)
+        set_bounds(f, -2000.0, 2000.0, 0);
+    else if (f->set == 5)
+        set_bounds(f, -1., 1., PI);
+	f->max_iters = MAX_ITER;
+	init_palette(f);
+	f->zoom = ZOOM;
+}
+
+int	key_event_set_set(int keycode, t_fractol *f)
+{
+	if (keycode == KEY_ONE && f->set != 1)
+		f->set = 1;
+	else if (keycode == KEY_TWO && f->set != 2)
+		f->set = 2;
+	else if (keycode == KEY_THREE && f->set != 3)
+		f->set = 3;
+	else if (keycode == KEY_FOUR && f->set != 4)
+		f->set = 4;
+	else if (keycode == KEY_FIVE && f->set != 5)
+		f->set = 5;
+	else
+		return (1);
+	reset_constants(f);
+	render (f);
+	return (0);
 }
 
 int	key_event(int keycode, t_fractol *f)
@@ -46,8 +92,8 @@ int	key_event(int keycode, t_fractol *f)
 		move(f, 0.2, 'R');
 	else if (keycode == KEY_SPACE)
 		shift_cols(f);
-	//else if (!key_event_extend(keycode, mlx))
-	//	return (1);
+	else if (!key_event_set_set(keycode, f))
+		return (1);
 	else
 		return (1);
     init_palette(f);

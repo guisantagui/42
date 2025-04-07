@@ -14,7 +14,7 @@ static void    set_julia_cnstnts(t_fractol *f, char **argv)
         f->ki = 2;
 }
 
-static void    set_bounds(t_fractol *f, double min, double max)
+void    set_bounds(t_fractol *f, double min, double max, double i_offset)
 {
     double  center;
     double  ar;
@@ -25,23 +25,25 @@ static void    set_bounds(t_fractol *f, double min, double max)
     center = (f->r_min + f->r_max) / 2;
     ar = (double)WIDTH / (double)HEIGHT;
     range = (f->r_max - f->r_min);
-    f->i_max = center + range / 2 / ar;
-    f->i_min = center - range / 2 / ar;
+    f->i_max = (center + i_offset) + range / 2 / ar;
+    f->i_min = (center + i_offset) - range / 2 / ar;
 }
 
 static void    set_constants(t_fractol *f, char **argv)
 {
     if (f->set == 1)
     {
-        set_bounds(f, -2.0, 2.0);
+        set_bounds(f, -2.0, 2.0, 0);
         set_julia_cnstnts(f, argv);
     }
     else if (f->set == 2)
-        set_bounds(f, -4.0, 4.0);
+        set_bounds(f, -4.0, 4.0, 0);
     else if (f->set == 3)
-        set_bounds(f, -3.0, 3.0);
+        set_bounds(f, -3.0, 3.0, 0);
     else if (f->set == 4)
-        set_bounds(f, -2000.0, 2000.0);
+        set_bounds(f, -2000.0, 2000.0, 0);
+    else if (f->set == 5)
+        set_bounds(f, -1., 1., PI);
 }
 
 static void    fractol_setup(t_fractol *f, int argc, char **argv)

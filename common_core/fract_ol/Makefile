@@ -21,18 +21,20 @@ MLX			= $(MLX_PATH)$(NAMEMLX)
 # Detect OS
 UNAME := $(shell uname)
 
-# OS-Specific Configurations
-ifeq ($(UNAME), Darwin)  # macOS
-    MLX_FLAGS = -Lmlx -lmlx -framework OpenGL -framework AppKit
-else  # Linux
-    MLX_FLAGS = -Lmlx -lmlx -lXext -lX11 -lm
-endif
-
 # Includes
 INC	=	-I ./includes \
 		-I ./ft_printf \
 		-I ./ft_printf/libft \
 		-I ./mlx
+
+# OS-Specific Configurations
+ifeq ($(UNAME), Darwin)  # macOS
+    MLX_FLAGS = -Lmlx -lmlx -framework OpenGL -framework AppKit
+	INC += -I ./keys_mac
+else  # Linux
+    MLX_FLAGS = -Lmlx -lmlx -lXext -lX11 -lm
+	INC += -I ./keys_linux
+endif
 
 # Sources
 SRCS_PATH = ./srcs
