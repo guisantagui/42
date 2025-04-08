@@ -92,10 +92,10 @@ void    get_palette_multichrome(t_fractol *f)
 	i = 0;
 	x = 0;
     seg_size = f->max_iters / (f->n_cols - 1);
-	while (i < f->max_iters)
+	while (i < (f->max_iters - 1))
 	{
 		j = 0;
-		while ((i + j) < f->max_iters && j < (f->max_iters / (f->n_cols - 1)))
+		while ((i + j) < f->max_iters && j < seg_size && x < f->n_cols)
 		{
 			fraction = (double)j / seg_size;
 			f->palette[i + j] = interpol_cols(f->color[x], f->color[x + 1], fraction);
