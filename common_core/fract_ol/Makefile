@@ -30,12 +30,14 @@ NAMEMLX = libmlx.a
 
 # OS-Specific Configurations
 ifeq ($(UNAME), Darwin)  # macOS
+    $(info macOS detected)
     MLX_PATH = ./mlx_opengl/
     MLX      = $(MLX_PATH)$(NAMEMLX)
     MLX_FLAGS = -L$(MLX_PATH) -lmlx -framework OpenGL -framework AppKit
     INC += -I ./keys_mac \
 	   -I ./mlx_opengl
 else  # Linux
+    $(info Linux detected)
     MLX_PATH = ./mlx_linux/
     MLX      = $(MLX_PATH)$(NAMEMLX)
     MLX_FLAGS = -L$(MLX_PATH) -lmlx -lXext -lX11 -lm
