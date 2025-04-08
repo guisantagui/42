@@ -6,7 +6,7 @@
 /*   By: gsantama <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 19:19:12 by gsantama          #+#    #+#             */
-/*   Updated: 2025/04/05 15:07:44 by gsantama         ###   ########.fr       */
+/*   Updated: 2025/04/08 20:03:50 by gsantama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ static int	is_all_spaces(char *str)
 	while (str[i])
 	{
 		if (!(str[i] == ' ' || str[i] == '\t' || str[i] == '\f'
-        	|| str[i] == '\r' || str[i] == '\n' || str[i] == '\v'))
+				|| str[i] == '\r' || str[i] == '\n' || str[i] == '\v'))
 			return (0);
 		i++;
 	}
