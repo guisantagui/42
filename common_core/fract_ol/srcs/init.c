@@ -2,6 +2,9 @@
 
 void    init_zero(t_fractol *f)
 {
+    f->mlx = NULL;
+    f->img = NULL;
+    f->win = NULL;
     f->kr = 0;
     f->ki = 0;
     f->r_min = 0;
@@ -18,22 +21,37 @@ void    init_mlx(t_fractol *f)
 {
     f->mlx = mlx_init();
     if (!f->mlx)
+    {
+        ft_printf("mlx init failed\n");
         free_exit(f);
+    }
     f->img = malloc(sizeof(t_data));
     if (!f->img)
+    {
+        ft_printf("img alloc failed\n");
         free_exit(f);
+    }
     f->img->img = mlx_new_image(f->mlx, WIDTH, HEIGHT);
     if (!f->img->img)
+    {
+        ft_printf("img init failed\n");
         free_exit(f);
+    }
     f->img->addr = mlx_get_data_addr(f->img->img,
         &f->img->bits_per_pixel,
         &f->img->line_length,
         &f->img->endian);
     if (!f->img->addr)
+    {
+        ft_printf("addr init failed\n");
         free_exit(f);
+    }
     f->win = mlx_new_window(f->mlx, WIDTH, HEIGHT, "Fract-ol");
     if (!f->win)
+    {
+        ft_printf("win init failed\n");
         free_exit(f);
+    }
 }
 
 void    get_palette_monochrome(t_fractol *f)
@@ -105,5 +123,6 @@ void    init_palette(t_fractol *f)
 void    init(t_fractol *f)
 {
     init_palette(f);
+    ft_printf("Palette initiated\n");
     init_mlx(f);
 }

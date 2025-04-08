@@ -44,7 +44,9 @@ static void    reset_constants(t_fractol *f)
     else if (f->set == 4)
         set_bounds(f, -2000.0, 2000.0, 0);
     else if (f->set == 5)
+	{
         set_bounds(f, -1., 1., PI);
+	}
 	f->max_iters = MAX_ITER;
 	init_palette(f);
 	f->zoom = ZOOM;

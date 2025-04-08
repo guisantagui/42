@@ -24,17 +24,28 @@ UNAME := $(shell uname)
 # Includes
 INC	=	-I ./includes \
 		-I ./ft_printf \
-		-I ./ft_printf/libft \
-		-I ./mlx
+		-I ./ft_printf/libft
+
+NAMEMLX = libmlx.a
 
 # OS-Specific Configurations
 ifeq ($(UNAME), Darwin)  # macOS
-    MLX_FLAGS = -Lmlx -lmlx -framework OpenGL -framework AppKit
-	INC += -I ./keys_mac
+    MLX_PATH = ./mlx_opengl/
+    MLX      = $(MLX_PATH)$(NAMEMLX)
+    MLX_FLAGS = -L$(MLX_PATH) -lmlx -framework OpenGL -framework AppKit
+    INC += -I ./keys_mac \
+	   -I ./mlx_opengl
 else  # Linux
-    MLX_FLAGS = -Lmlx -lmlx -lXext -lX11 -lm
-	INC += -I ./keys_linux
+    MLX_PATH = ./mlx_linux/
+    MLX      = $(MLX_PATH)$(NAMEMLX)
+    MLX_FLAGS = -L$(MLX_PATH) -lmlx -lXext -lX11 -lm
+    INC += -I ./keys_linux \
+	   -I ./mlx_linux
 endif
+
+# Minilibx
+NAMEMLX = libmlx.a
+MLX                     = $(MLX_PATH)$(NAMEMLX)
 
 # Sources
 SRCS_PATH = ./srcs
