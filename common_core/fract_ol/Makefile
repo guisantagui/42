@@ -1,5 +1,5 @@
 # Name of the program
-NAME = fract_ol
+NAME = fractol
 
 # Name of libft (with ft_printf)
 PRINTF_PATH = ./ft_printf

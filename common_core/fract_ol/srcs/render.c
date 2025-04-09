@@ -46,6 +46,8 @@ void render(t_fractol *f)
             real = f->r_min + (double)x * (f->r_max - f->r_min)/WIDTH;
             imag = f->i_max + (double)y * (f->i_min - f->i_max)/HEIGHT;
             int iterations = get_fractal(f, real, imag);
+            //if (iterations >= (f->max_iters - 4))
+            //    ft_printf("iterations: %d\n", iterations);
             color = f->palette[iterations];
             my_mlx_pixel_put(f->img, x, y, color);
             x++;

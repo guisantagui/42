@@ -16,6 +16,8 @@ void    free_fractol(t_fractol *f)
             //    free(f->img->addr);
             if (f->img->img != NULL)
                 mlx_destroy_image(f->mlx, f->img->img);
+            if (f->img != NULL)
+                free(f->img);
         }
         free(f);
     }

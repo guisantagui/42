@@ -16,6 +16,7 @@ void    zoom(t_fractol *f, double zoom)
 	f->max_iters = MAX_ITER - 10 * log2(f->zoom);
 	if (f->max_iters < MAX_ITER)
 		f->max_iters = MAX_ITER;
+	//ft_printf("max_iters (from zoom): %d\n", f->max_iters);
 }
 
 void	move(t_fractol *f, double distance, char direction)
