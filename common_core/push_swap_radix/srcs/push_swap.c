@@ -27,7 +27,7 @@ t_data	*init_data(int argc, char **argv)
 	t_data	*data;
 
 	is_error = 0;
-	a_stack = init_stack(parse_args(argc, argv), 'a', &is_error);
+	a_stack = init_stack(parse_args(argc, argv, &is_error), 'a', &is_error);
 	if (is_error == 1)
 	{
 		free_stack(&a_stack);

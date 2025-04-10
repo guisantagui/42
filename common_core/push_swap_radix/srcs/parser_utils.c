@@ -15,14 +15,18 @@
 int	is_number(char *str)
 {
 	int	i;
+	int	nums_start;
 
 	i = 0;
+	nums_start = 0;
 	while (str[i])
 	{
 		while (str[i] == ' ' || str[i] == '\t' || str[i] == '\f'
 			|| str[i] == '\r' || str[i] == '\n' || str[i] == '\v')
 			i++;
-		if (str[i] == '+' || str[i] == '-')
+		if (ft_isdigit(str[i]))
+			nums_start = 1;
+		if ((str[i] == '+' || str[i] == '-') && nums_start == 0)
 			i++;
 		if (str[i] == '\0')
 			return (0);

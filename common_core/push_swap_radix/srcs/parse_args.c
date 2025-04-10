@@ -57,17 +57,15 @@ static void	numstr_to_node(char *numstr, t_list **lst, int *is_error)
 	ft_lstadd_back(lst, node);
 }
 
-static t_list	*arr_to_list(char **arr)
+static t_list	*arr_to_list(char **arr, int *is_error)
 {
 	int		i;
 	t_list	*lst;
 	int		len;
-	int		*is_error;
 
 	i = 0;
 	lst = NULL;
 	len = arr_len(arr);
-	is_error = malloc(sizeof(int));
 	*is_error = 0;
 	while (i < len && *is_error == 0)
 	{
@@ -80,7 +78,7 @@ static t_list	*arr_to_list(char **arr)
 	free_arr(arr);
 	if (*is_error)
 		error(&lst);
-	free(is_error);
+	//free(is_error);
 	return (lst);
 }
 
@@ -99,7 +97,7 @@ static int	is_all_spaces(char *str)
 	return (1);
 }
 
-t_list	*parse_args(int argc, char **argv)
+t_list	*parse_args(int argc, char **argv, int *is_error)
 {
 	char	**argv_split;
 	t_list	*lst;
@@ -107,7 +105,9 @@ t_list	*parse_args(int argc, char **argv)
 	if (argc == 1)
 		return (NULL);
 	if (argc == 2 && is_all_spaces(argv[1]) == 0)
+	{
 		argv_split = split_cust(argv[1], " \t\n\r\v\f");
+	}
 	else if (argc == 2 && is_all_spaces(argv[1]) == 1)
 	{
 		ft_printf("Error\n");
@@ -115,7 +115,7 @@ t_list	*parse_args(int argc, char **argv)
 	}
 	else
 		argv_split = argv_to_arr(argc, argv);
-	lst = arr_to_list(argv_split);
+	lst = arr_to_list(argv_split, is_error);
 	if (has_dups(lst))
 		error(&lst);
 	return (lst);
