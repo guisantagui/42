@@ -49,13 +49,13 @@ void	free_ab(t_stack **a, t_stack **b)
 void	error_ab(t_stack **a, t_stack **b)
 {
 	free_ab(a, b);
-	ft_printf("Error\n");
+	write(2, "Error\n", 6);
 	exit(1);
 }
 
 void	error_stack(t_stack **s)
 {
 	free_stack(s);
-	ft_printf("Error\n");
+	write(2, "Error\n", 6);
 	exit(1);
 }

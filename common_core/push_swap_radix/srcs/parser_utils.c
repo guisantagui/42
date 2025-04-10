@@ -21,8 +21,8 @@ int	is_number(char *str)
 	nums_start = 0;
 	while (str[i])
 	{
-		while (str[i] == ' ' || str[i] == '\t' || str[i] == '\f'
-			|| str[i] == '\r' || str[i] == '\n' || str[i] == '\v')
+		while ((str[i] == ' ' || str[i] == '\t' || str[i] == '\f'
+			|| str[i] == '\r' || str[i] == '\n' || str[i] == '\v') && nums_start == 0)
 			i++;
 		if (ft_isdigit(str[i]))
 			nums_start = 1;
@@ -66,6 +66,6 @@ void	error(t_list **lst)
 {
 	if (lst != NULL || *lst != NULL)
 		ft_lstclear(lst, free);
-	ft_printf("Error\n");
+	write(2, "Error\n", 6);
 	exit(1);
 }

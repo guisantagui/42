@@ -31,7 +31,7 @@ t_data	*init_data(int argc, char **argv)
 	if (is_error == 1)
 	{
 		free_stack(&a_stack);
-		ft_printf("Error\n");
+		write(2, "Error\n", 6);
 	}
 	b_stack = init_stack(NULL, 'b', &is_error);
 	data = malloc(sizeof(t_data));

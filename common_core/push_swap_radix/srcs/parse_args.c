@@ -47,8 +47,13 @@ static void	numstr_to_node(char *numstr, t_list **lst, int *is_error)
 		return ;
 	}
 	*num = atoi_cust(numstr, is_error);
+	if (*is_error == 1)
+	{
+		free(num);
+		return ;
+	}
 	node = ft_lstnew(num);
-	if (!node || *is_error == 1)
+	if (!node)
 	{
 		*is_error = 1;
 		free(num);
@@ -78,7 +83,6 @@ static t_list	*arr_to_list(char **arr, int *is_error)
 	free_arr(arr);
 	if (*is_error)
 		error(&lst);
-	//free(is_error);
 	return (lst);
 }
 
@@ -110,13 +114,13 @@ t_list	*parse_args(int argc, char **argv, int *is_error)
 	}
 	else if (argc == 2 && is_all_spaces(argv[1]) == 1)
 	{
-		ft_printf("Error\n");
+		write(2, "Error\n", 6);
 		exit(1);
 	}
 	else
 		argv_split = argv_to_arr(argc, argv);
 	lst = arr_to_list(argv_split, is_error);
-	if (has_dups(lst))
+	if (has_dups(lst) || *is_error == 1)
 		error(&lst);
 	return (lst);
 }
