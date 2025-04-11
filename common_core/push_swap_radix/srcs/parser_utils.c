@@ -6,7 +6,7 @@
 /*   By: gsantama <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 21:02:30 by gsantama          #+#    #+#             */
-/*   Updated: 2025/04/08 20:02:38 by gsantama         ###   ########.fr       */
+/*   Updated: 2025/04/11 20:16:29 by gsantama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ int	is_number(char *str)
 	while (str[i])
 	{
 		while ((str[i] == ' ' || str[i] == '\t' || str[i] == '\f'
-			|| str[i] == '\r' || str[i] == '\n' || str[i] == '\v') && nums_start == 0)
+				|| str[i] == '\r' || str[i] == '\n' || str[i] == '\v')
+			&& nums_start == 0)
 			i++;
 		if (ft_isdigit(str[i]))
 			nums_start = 1;

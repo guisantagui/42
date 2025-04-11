@@ -6,7 +6,7 @@
 /*   By: gsantama <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 15:23:58 by gsantama          #+#    #+#             */
-/*   Updated: 2025/04/05 16:26:22 by gsantama         ###   ########.fr       */
+/*   Updated: 2025/04/11 20:18:09 by gsantama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ static int	surpasses_int_lims(int res, char c, int sign)
 			return (1);
 	}
 	return (0);
-
 }
 
 int	atoi_cust(const char *str, int *is_error)
