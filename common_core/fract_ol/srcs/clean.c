@@ -29,6 +29,11 @@ void	free_fractol(t_fractol *f)
 			if (f->img != NULL)
 				free(f->img);
 		}
+		if (f->mlx != NULL)
+		{
+			mlx_destroy_display(f->mlx);
+			free(f->mlx);
+		}
 		free(f);
 	}
 }

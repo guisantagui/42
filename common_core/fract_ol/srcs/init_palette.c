@@ -6,7 +6,7 @@
 /*   By: gsantama <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 20:54:37 by gsantama          #+#    #+#             */
-/*   Updated: 2025/04/09 20:56:42 by gsantama         ###   ########.fr       */
+/*   Updated: 2025/04/14 18:49:58 by gsantama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ static void	get_palette_multichrome(t_fractol *f)
 		while ((i + j) < f->max_iters && j < seg_size)
 		{
 			fraction = (double)j / seg_size;
-			f->palette[i + j] = interpol_cols(f->color[x], f->color[x + 1], fraction);
+			f->palette[i + j] = interpol_cols(f->color[x],
+					f->color[x + 1], fraction);
 			j++;
 		}
 		x++;
