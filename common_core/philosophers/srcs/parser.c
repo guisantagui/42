@@ -62,7 +62,10 @@ t_table init_table(int argc, char **argv)
         if (table.n_philo < 0 || table.t_to_die < 0
             || table.t_to_eat < 0 || table.t_to_sleep < 0)
             error("Invalid argument(s)\n");
-        
+        if (table.n_philo < 1 || table.n_philo > 250)
+            error("Number of philosophers has to be between 1 and 250\n");
+        if (table.t_to_sleep > table.t_to_die)
+            error("Time to sleep can't be larger than time to die");
         if (argc == 6)
         {
 			table.n_t_each_philo_eat = ft_atoi(argv[5]);
