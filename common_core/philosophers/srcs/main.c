@@ -14,18 +14,16 @@
 
 int	main(int argc, char **argv)
 {
-	t_table	table;
-	//int	n_philo;
-	//int	t_to_die;
-	//int	t_to_eat;
-	//int	t_to_sleep;
-	//int	n_t_each_philo_eat;
-	table = init_table(argc, argv);
-	ft_printf("Number of philosophers: %d\n", table.n_philo);
-	ft_printf("Time to die: %d\n", table.t_to_die);
-	ft_printf("Time to eat: %d\n", table.t_to_eat);
-	ft_printf("Time to sleep: %d\n", table.t_to_sleep);
+	t_table_info	table_info;
+	t_table	*table;
+
+	table_info = get_table_info(argc, argv);
+	ft_printf("Number of philosophers: %d\n", table_info.n_philo);
+	ft_printf("Time to die: %d\n", table_info.t_to_die);
+	ft_printf("Time to eat: %d\n", table_info.t_to_eat);
+	ft_printf("Time to sleep: %d\n", table_info.t_to_sleep);
 	if (argc == 6)
-		ft_printf("Number of times each philosopher has to eat: %d\n", table.n_t_each_philo_eat);
+		ft_printf("Number of times each philosopher has to eat: %d\n", table_info.n_t_each_philo_eat);
+	table = malloc(sizeof(t_table));
 	return (0);
 }
