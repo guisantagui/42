@@ -9,6 +9,12 @@
 # include <stdlib.h>
 # include <pthread.h>
 
+typedef struct s_ref
+{
+	int		ref_count;
+	void	*data;
+}	t_ref;
+
 typedef struct s_table_info
 {
     int n_philo;
