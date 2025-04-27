@@ -17,6 +17,7 @@ static void fill_table(t_table *table, t_table_info table_info)
         table->philos[i].times_eaten = 0;
         i++;
     }
+    table->any_deads = 0;
     table->any_deads_mutex_state = pthread_mutex_init(&table->any_deads_mutex, NULL);
     if (table->any_deads_mutex_state != 0)
         clean_table(table, "Error: any deads mutex init failed\n", 1);
