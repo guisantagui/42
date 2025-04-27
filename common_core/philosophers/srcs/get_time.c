@@ -19,18 +19,32 @@ void    get_time_since_eat(t_philo_arg *philo)
     right_fork = (philo->id + 1) % philo->table->table_info.n_philo;
     while (1)
     {
-        if (check_deaths(philo) == 1)
+        //pthread_mutex_lock(&philo->table->any_dead_mutex);
+        if (philo->table->any_dead == 1)
+        {
+            //pthread_mutex_unlock(&philo->table->any_dead_mutex);
             break;
+        }
+        //pthread_mutex_unlock(&philo->table->any_dead_mutex);
         philo->time_since_eat += get_time() - philo->time_last_eat;
         usleep(10000);
-        if (check_deaths(philo) == 1)
+        /*
+        pthread_mutex_lock(&philo->table->any_dead_mutex);
+        
+        if (philo->table->any_dead == 1)
+        {
+            pthread_mutex_unlock(&philo->table->any_dead_mutex);
             break;
+        }
+        pthread_mutex_unlock(&philo->table->any_dead_mutex);
+        */
         if (philo->time_since_eat >= (long)philo->table->table_info.t_to_die)
         {
+            printf("Philo %d:: Time since eat: %ld. Time to die: %d\n", philo->id, philo->time_since_eat, philo->table->table_info.t_to_die);
             philo->table->philos[philo->id].is_dead = 1;
-            pthread_mutex_lock(&philo->table->any_dead_mutex);
+            //pthread_mutex_lock(&philo->table->any_dead_mutex);
             philo->table->any_dead = 1;
-            pthread_mutex_unlock(&philo->table->any_dead_mutex);
+            //pthread_mutex_unlock(&philo->table->any_dead_mutex);
             break;
         }
         if (philo->table->forks[left_fork].is_locked == 0 && philo->table->forks[right_fork].is_locked == 0)

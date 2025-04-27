@@ -1,5 +1,5 @@
 #include "philo.h"
-
+/*
 int  check_deaths(t_philo_arg *philo)
 {
     int deaths;
@@ -9,3 +9,4 @@ int  check_deaths(t_philo_arg *philo)
     pthread_mutex_unlock(&philo->table->any_dead_mutex);
     return (deaths);
 }
+*/
