@@ -17,15 +17,18 @@ void    get_time_since_eat(t_philo_arg *philo)
 
     left_fork = philo->id;
     right_fork = (philo->id + 1) % philo->table->table_info.n_philo;
-    //printf("Left fork locked: %d\n", philo->table->forks[left_fork].is_locked);
-    //printf("Right fork locked: %d\n", philo->table->forks[right_fork].is_locked);
     while (1)
     {
+        if (philo->table->any_dead == 1)
+            break;
         philo->time_since_eat += get_time() - philo->time_last_eat;
         usleep(10000);
         if (philo->time_since_eat >= (long)philo->table->table_info.t_to_die)
         {
             philo->table->philos[philo->id].is_dead = 1;
+            pthread_mutex_lock(&philo->table->any_dead_mutex);
+            philo->table->any_dead = 1;
+            pthread_mutex_unlock(&philo->table->any_dead_mutex);
             break;
         }
         if (philo->table->forks[left_fork].is_locked == 0 && philo->table->forks[right_fork].is_locked == 0)

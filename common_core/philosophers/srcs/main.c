@@ -20,14 +20,14 @@ int	main(int argc, char **argv)
 	int		i;
 
 	table_info = get_table_info(argc, argv);
-	ft_printf("Number of philosophers: %d\n", table_info.n_philo);
-	ft_printf("Time to die: %d\n", table_info.t_to_die);
-	ft_printf("Time to eat: %d\n", table_info.t_to_eat);
-	ft_printf("Time to sleep: %d\n", table_info.t_to_sleep);
-	if (argc == 6)
-		ft_printf("Number of times each philosopher has to eat: %d\n", table_info.n_t_each_philo_eat);
+	//ft_printf("Number of philosophers: %d\n", table_info.n_philo);
+	//ft_printf("Time to die: %d\n", table_info.t_to_die);
+	//ft_printf("Time to eat: %d\n", table_info.t_to_eat);
+	//ft_printf("Time to sleep: %d\n", table_info.t_to_sleep);
+	//if (argc == 6)
+	//	ft_printf("Number of times each philosopher has to eat: %d\n", table_info.n_t_each_philo_eat);
 	table = init_table(table_info);
-	ft_printf("Action: %d\n", table->philos[0].action);
+	//ft_printf("Action: %d\n", table->philos[0].action);
 	philos = malloc(sizeof(t_philo_arg) * table_info.n_philo);
 	if (!philos)
 		clean_table(table, "Error: philosophers allocation failed\n", 1);
@@ -47,7 +47,7 @@ int	main(int argc, char **argv)
 		pthread_join(table->philos[i].philo, NULL);
 		i++;
 	}
-	clean_table(table, "", 0);
+	//clean_table(table, "", 0);
 	free(philos);
 	return (0);
 }

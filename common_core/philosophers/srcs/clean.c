@@ -25,6 +25,8 @@ void    clean_table(t_table *table, char *msg, int end_prog)
         }
         if (table->philos != NULL)
             free(table->philos);
+        if (table->any_dead_mutex_state == 0)
+            pthread_mutex_destroy(&table->any_dead_mutex);
         free(table);
     }
     ft_printf(msg);
