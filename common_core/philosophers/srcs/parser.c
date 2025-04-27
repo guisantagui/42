@@ -1,17 +1,5 @@
 #include "philo.h"
 
-void    free_table(t_table_info *table_info, char *msg)
-{
-    free(table_info);
-    ft_printf(msg);
-    exit(1);
-}
-
-void    error(char *msg)
-{
-    ft_printf(msg);
-    exit(1);
-}
 /*
 t_table *init_table(int argc, char **argv)
 {
@@ -57,8 +45,6 @@ static void    check_table(t_table_info table_info)
         error("Error: Number of philosophers has to be between 1 and 250\n");
     if (table_info.t_to_sleep > table_info.t_to_die)
         error("Error: Time to sleep can't be larger than time to die");
-    if (table_info.t_to_eat > table_info.t_to_die)
-        error("Error: Time to eat can't be larger than time to die");
 }
 
 t_table_info get_table_info(int argc, char **argv)
