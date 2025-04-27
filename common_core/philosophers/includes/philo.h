@@ -78,6 +78,9 @@ void    routine(void *arg);
 long    get_time(void);
 void    get_time_since_eat(t_philo_arg *philo);
 
+// Death check
+int  check_deaths(t_philo_arg *philo);
+
 // Error handling
 void    clean_table(t_table *table, char *msg, int end_prog);
 void    error(char *msg);

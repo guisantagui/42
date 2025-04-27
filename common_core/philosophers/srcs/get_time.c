@@ -19,10 +19,12 @@ void    get_time_since_eat(t_philo_arg *philo)
     right_fork = (philo->id + 1) % philo->table->table_info.n_philo;
     while (1)
     {
-        if (philo->table->any_dead == 1)
+        if (check_deaths(philo) == 1)
             break;
         philo->time_since_eat += get_time() - philo->time_last_eat;
         usleep(10000);
+        if (check_deaths(philo) == 1)
+            break;
         if (philo->time_since_eat >= (long)philo->table->table_info.t_to_die)
         {
             philo->table->philos[philo->id].is_dead = 1;
