@@ -20,7 +20,6 @@ void    clean_table(t_table *table, char *msg, int end_prog)
         while (i < table->table_info.n_philo)
         {
             clean_fork(&table->forks[i]);
-            
             i++;
         }
         if (table->philos != NULL)

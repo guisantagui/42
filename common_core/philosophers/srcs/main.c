@@ -47,7 +47,7 @@ int	main(int argc, char **argv)
 		pthread_join(table->philos[i].philo, NULL);
 		i++;
 	}
-	clean_table(table, "", 0);
+	//clean_table(table, "", 0);
 	free(philos);
 	return (0);
 }
