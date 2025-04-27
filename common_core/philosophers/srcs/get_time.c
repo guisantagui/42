@@ -24,6 +24,9 @@ void    get_time_since_eat(t_philo_arg *philo)
         if (philo->time_since_eat >= (long)philo->table->table_info.t_to_die)
         {
             philo->table->philos[philo->id].is_dead = 1;
+            pthread_mutex_lock(&philo->table->any_deads_mutex);
+            philo->table->any_deads = 1;
+            pthread_mutex_unlock(&philo->table->any_deads_mutex);
             break;
         }
         if (philo->table->forks[left_fork].is_locked == 0 && philo->table->forks[right_fork].is_locked == 0)
