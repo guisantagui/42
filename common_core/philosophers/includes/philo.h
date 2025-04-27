@@ -46,6 +46,9 @@ typedef struct s_table
 	t_fork *forks;
 	t_philo	*philos;
 	t_table_info table_info;
+	int	any_deads;
+	pthread_mutex_t any_deads_mutex;
+	int	any_deads_mutex_state;
 	long	start_time;
 }	t_table;
 

@@ -9,8 +9,10 @@ void take_forks(t_philo *philo, t_table *table)
     right_fork = (philo->id + 1) % table->table_info.n_philo;
     pthread_mutex_lock(&table->forks[left_fork].fork);
     table->forks[left_fork].is_locked = 1;
+    //printf("%ld: %d has taken the left fork\n", get_time() - table->start_time, philo->id);
     pthread_mutex_lock(&table->forks[right_fork].fork);
     table->forks[right_fork].is_locked = 1;
+    //printf("%ld: %d has taken the right fork\n", get_time() - table->start_time, philo->id);
     philo->action = EAT;
 }
 

@@ -20,6 +20,11 @@ static void philo_sleep(t_philo_arg *philo)
     philo->time_since_eat += philo->table->table_info.t_to_sleep;
 }
 
+static void philo_think(t_philo_arg *philo)
+{
+    printf("%ld: %d is thinking\n", get_time() - philo->table->start_time, philo->id);
+}
+
 void    routine(void *arg)
 {
     t_philo_arg *philo;
@@ -42,7 +47,7 @@ void    routine(void *arg)
         {
             philo_eat(philo);
             philo_sleep(philo);
-            printf("%ld: %d is thinking\n", get_time() - philo->table->start_time, philo->id);
+            philo_think(philo);
         }
     }
 }

@@ -17,8 +17,6 @@ void    get_time_since_eat(t_philo_arg *philo)
 
     left_fork = philo->id;
     right_fork = (philo->id + 1) % philo->table->table_info.n_philo;
-    //printf("Left fork locked: %d\n", philo->table->forks[left_fork].is_locked);
-    //printf("Right fork locked: %d\n", philo->table->forks[right_fork].is_locked);
     while (1)
     {
         philo->time_since_eat += get_time() - philo->time_last_eat;
